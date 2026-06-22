@@ -1,0 +1,195 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   Menara Mall — Design System
+   A modern Moroccan-luxury palette: warm ivory, sand & clay, muted gold,
+   deep charcoal, with an optional palm-green accent.
+   ========================================================================== */
+
+@theme {
+  /* Color tokens ----------------------------------------------------------- */
+  --color-ivory: #f7f1e8;
+  --color-ivory-deep: #efe6d6;
+  --color-cream: #fbf7f0;
+  --color-sand: #d8b98a;
+  --color-sand-soft: #e7d3b3;
+  --color-clay: #b76e4c;
+  --color-clay-deep: #9c5a3c;
+  --color-gold: #b89b5e;
+  --color-gold-soft: #cdb682;
+  --color-charcoal: #171717;
+  --color-charcoal-soft: #2c2a27;
+  --color-stone: #8b8178;
+  --color-stone-soft: #a89e93;
+  --color-palm: #1f5c4a;
+  --color-palm-soft: #2f7a63;
+
+  /* Typography ------------------------------------------------------------- */
+  --font-display: var(--font-cormorant), ui-serif, Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Editorial type scale (fluid) ------------------------------------------ */
+  --text-display: clamp(2.75rem, 7vw, 6.5rem);
+  --text-display--line-height: 0.96;
+  --text-hero: clamp(2.25rem, 5.2vw, 4.75rem);
+  --text-hero--line-height: 1.02;
+  --text-title: clamp(1.9rem, 3.6vw, 3.25rem);
+  --text-title--line-height: 1.06;
+
+  /* Radii ------------------------------------------------------------------ */
+  --radius-xl2: 1.75rem;
+
+  /* Easing ----------------------------------------------------------------- */
+  --ease-luxe: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ----------------------------------------------------------------------------
+   Base layer
+   -------------------------------------------------------------------------- */
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Headlines default to the editorial serif */
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background-color: var(--color-gold);
+    color: #fff;
+  }
+
+  /* Visible, elegant focus ring for keyboard users */
+  :focus-visible {
+    outline: 2px solid var(--color-clay);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* RTL support hook for Arabic locale */
+  [dir="rtl"] body {
+    font-feature-settings: normal;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Components / utilities
+   -------------------------------------------------------------------------- */
+@layer utilities {
+  /* Eyebrow / section label */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+
+  /* Subtle zellige geometric texture, used minimally as a wash */
+  .zellige {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23b89b5e' stroke-width='1' stroke-opacity='0.5'%3E%3Cpath d='M30 0l30 30-30 30L0 30z'/%3E%3Cpath d='M30 12l18 18-18 18-18-18z'/%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 60px 60px;
+  }
+
+  /* Thin luxe divider */
+  .rule-gold {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      color-mix(in srgb, var(--color-gold) 70%, transparent),
+      transparent
+    );
+  }
+
+  /* Card hover elevation */
+  .lift {
+    transition: transform 0.55s var(--ease-luxe), box-shadow 0.55s var(--ease-luxe);
+  }
+  .lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 28px 60px -28px rgba(23, 23, 23, 0.34);
+  }
+
+  /* Underline-on-hover link */
+  .link-underline {
+    background-image: linear-gradient(var(--color-clay), var(--color-clay));
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.45s var(--ease-luxe);
+  }
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Keyframes — used sparingly
+   -------------------------------------------------------------------------- */
+@keyframes kenburns {
+  from { transform: scale(1.06); }
+  to { transform: scale(1.16); }
+}
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+@keyframes floatUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-kenburns {
+  animation: kenburns 24s ease-in-out infinite alternate;
+}
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-ivory-deep);
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
+  );
+  animation: shimmer 1.6s infinite;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-kenburns {
+    animation: none;
+  }
+}
