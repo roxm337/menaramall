@@ -19,8 +19,12 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
   const results = useMemo(() => searchAll(q).slice(0, 6), [q]);
 
   useEffect(() => {
-    if (open) setTimeout(() => inputRef.current?.focus(), 60);
-    else setQ("");
+    if (open) {
+      setTimeout(() => inputRef.current?.focus(), 60);
+    } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- reset query when the overlay is dismissed
+      setQ("");
+    }
   }, [open]);
 
   useEffect(() => {

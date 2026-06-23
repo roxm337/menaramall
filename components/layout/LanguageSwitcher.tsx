@@ -12,14 +12,25 @@ import { Icon } from "@/components/ui/Icon";
  * routing (e.g. /fr, /ar) is the next integration step with next-intl.
  */
 export function LanguageSwitcher({ tone = "dark" }: { tone?: "dark" | "light" }) {
+  type Code = (typeof locales)[number]["code"];
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState<(typeof locales)[number]["code"]>("en");
+  const [active, setActive] = useState<Code>("en");
   const ref = useRef<HTMLDivElement>(null);
 
+  // Restore the persisted preference once on mount (client-only API).
   useEffect(() => {
-    const saved = localStorage.getItem("mm-locale") as typeof active | null;
+    const saved = localStorage.getItem("mm-locale") as Code | null;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing from a browser-only store on mount
     if (saved) setActive(saved);
   }, []);
+
+  // Apply + persist the active locale. DOM/document writes belong in an effect.
+  useEffect(() => {
+    const dir = locales.find((l) => l.code === active)?.dir ?? "ltr";
+    document.documentElement.lang = active;
+    document.documentElement.dir = dir;
+    localStorage.setItem("mm-locale", active);
+  }, [active]);
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
@@ -29,12 +40,9 @@ export function LanguageSwitcher({ tone = "dark" }: { tone?: "dark" | "light" })
     return () => document.removeEventListener("mousedown", onClick);
   }, []);
 
-  const choose = (code: (typeof locales)[number]["code"], dir: string) => {
+  const choose = (code: Code) => {
     setActive(code);
     setOpen(false);
-    localStorage.setItem("mm-locale", code);
-    document.documentElement.lang = code;
-    document.documentElement.dir = dir;
   };
 
   return (
@@ -66,7 +74,7 @@ export function LanguageSwitcher({ tone = "dark" }: { tone?: "dark" | "light" })
               <button
                 role="option"
                 aria-selected={active === l.code}
-                onClick={() => choose(l.code, l.dir)}
+                onClick={() => choose(l.code)}
                 className={cn(
                   "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm transition-colors hover:bg-ivory",
                   active === l.code ? "text-clay" : "text-charcoal",

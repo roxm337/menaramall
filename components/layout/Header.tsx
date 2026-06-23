@@ -26,8 +26,6 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => setMenuOpen(false), [pathname]);
-
   const transparent = isHome && !scrolled && !menuOpen;
   const tone = transparent ? "light" : "dark";
 
@@ -120,6 +118,7 @@ export function Header() {
                   >
                     <Link
                       href={item.href}
+                      onClick={() => setMenuOpen(false)}
                       className="flex items-center justify-between border-b border-charcoal/8 py-4 font-display text-3xl text-charcoal"
                     >
                       {item.label}
