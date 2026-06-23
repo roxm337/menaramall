@@ -168,7 +168,12 @@ export default async function ShopDetailPage({
                   )}
 
                   <div className="mt-5">
-                    <Button href="/visit" variant="primary" icon="map-pin" className="w-full">
+                    <Button
+                      href={`https://www.google.com/maps/dir/?api=1&destination=${site.geo.lat},${site.geo.lng}`}
+                      variant="primary"
+                      icon="map-pin"
+                      className="w-full"
+                    >
                       Get directions
                     </Button>
                   </div>

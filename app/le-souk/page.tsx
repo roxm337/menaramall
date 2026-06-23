@@ -117,7 +117,7 @@ export default function LeSoukPage() {
               made by hand, made with heart.
             </p>
             <div className="mt-8 flex justify-center gap-3">
-              <Button href="/visit" variant="gold" icon="map-pin">Find Le Souk</Button>
+              <Button href="/contact" variant="gold" icon="mail">Contact us</Button>
             </div>
           </Reveal>
         </Container>

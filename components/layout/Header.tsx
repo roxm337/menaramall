@@ -78,8 +78,8 @@ export function Header() {
               <LanguageSwitcher tone={tone} />
             </div>
             <div className="hidden lg:block">
-              <Button href="/visit" variant={transparent ? "light" : "primary"} size="sm" icon="map-pin">
-                Plan Your Visit
+              <Button href="/contact" variant={transparent ? "light" : "primary"} size="sm" icon="mail">
+                Contact
               </Button>
             </div>
             <button
@@ -129,8 +129,8 @@ export function Header() {
               </nav>
 
               <div className="mt-8 grid grid-cols-2 gap-3">
-                <Button href="/visit" variant="primary" icon="map-pin" className="w-full">
-                  Plan Visit
+                <Button href="/contact" variant="primary" icon="mail" className="w-full">
+                  Contact
                 </Button>
                 <Button
                   variant="outline"

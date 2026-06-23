@@ -58,7 +58,7 @@ export default function ServicesPage() {
                 </p>
               </div>
               <div className="flex gap-3">
-                <Button href="/visit" variant="gold" icon="map-pin">Plan your visit</Button>
+                <Button href="/shops" variant="gold" icon="bag">Browse shops</Button>
                 <Button href="/contact" variant="light" icon="phone">Contact us</Button>
               </div>
             </div>

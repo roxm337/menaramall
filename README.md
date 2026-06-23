@@ -71,33 +71,26 @@ lib/
 ## How to update content
 
 All content is plain, typed TypeScript in **`lib/data/`**. No database is required for the
-sample site — edit a file, save, and the change appears. The data shapes match the CMS models
-in `lib/types.ts`, so these arrays can later be replaced by a headless CMS (Sanity, Contentful,
-Strapi…) without touching components.
+sample site — edit a file, save, and the change appears.
 
-### Add or edit a shop — `lib/data/brands.ts`
-Add an object to the `brands` array:
+### Source-backed local API
+The official Menara Mall source payloads are snapshotted in `lib/data/source-api.ts`.
+The project serves them through local API routes, so runtime code does **not** depend on
+`https://www.menaramall.com/api/*`.
 
-```ts
-{
-  id: "b-newbrand",
-  name: "New Brand",
-  slug: "new-brand",            // becomes /shops/new-brand
-  monogram: "NB",               // shown on the placeholder logo
-  category: "Fashion",          // see BrandCategory in lib/types.ts
-  floor: "First Floor",
-  locationLabel: "First Floor · East Wing",
-  description: "Premium, on-brand description…",
-  openingHours: std,            // reuse `std` / `grocery`, or supply 7 entries (Mon→Sun)
-  featured: true,               // optional: surfaces on home + /shops featured strip
-  tags: ["Womenswear"],
-  heroArt: "Art-direction note for the hero image",
-}
+Local endpoints:
+
+```txt
+/api/shopping
+/api/shopping/categories
+/api/restaurant
+/api/kidzo
+/api/souk
 ```
 
-### Add or edit a restaurant/café — `lib/data/restaurants.ts`
-Same pattern. Routes to `/dining/[slug]`. Use `type` (`Restaurant | Café | Fast Food | Dessert`)
-and `tags` like `"Family-friendly"`, `"Terrace"` (these drive the dining filters).
+`lib/data/brands.ts` and `lib/data/restaurants.ts` derive typed UI models from
+`source-api.ts`. To update shops, restaurants, Kidzo, or Souk entries, refresh the matching
+array in `source-api.ts`; the pages and local API routes will use the new local data.
 
 ### Add or edit an event — `lib/data/events.ts`
 Routes to `/events/[slug]`. Upcoming vs. past is computed automatically from `date` (and optional

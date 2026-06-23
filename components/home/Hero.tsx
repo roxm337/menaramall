@@ -15,7 +15,7 @@ const quickLinks: { label: string; href: string; icon: IconName }[] = [
   { label: "Shop", href: "/shops", icon: "bag" },
   { label: "Dine", href: "/dining", icon: "utensils" },
   { label: "Play", href: "/entertainment", icon: "play" },
-  { label: "Visit", href: "/visit", icon: "map-pin" },
+  { label: "Events", href: "/events", icon: "calendar" },
 ];
 
 export function Hero() {
@@ -84,8 +84,8 @@ export function Hero() {
             <Button href="/shops" variant="gold" size="lg" icon="arrow-right">
               Explore Shops
             </Button>
-            <Button href="/visit" variant="light" size="lg" icon="map-pin">
-              Plan Your Visit
+            <Button href="/contact" variant="light" size="lg" icon="mail">
+              Contact Us
             </Button>
             <span className="mt-1 inline-flex items-center sm:ml-4 sm:mt-0">
               <span className="rounded-full bg-white/10 px-4 py-2 backdrop-blur-sm">

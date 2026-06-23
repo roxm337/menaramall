@@ -75,7 +75,6 @@ export const primaryNav = [
   { label: "Entertainment", href: "/entertainment" },
   { label: "Le Souk", href: "/le-souk" },
   { label: "Events", href: "/events" },
-  { label: "Visit", href: "/visit" },
 ] as const;
 
 export const footerNav = {
@@ -88,7 +87,6 @@ export const footerNav = {
     { label: "Offers", href: "/offers" },
   ],
   visit: [
-    { label: "Plan Your Visit", href: "/visit" },
     { label: "Services", href: "/services" },
     { label: "Search", href: "/search" },
     { label: "Contact", href: "/contact" },

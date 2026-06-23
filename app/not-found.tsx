@@ -6,7 +6,7 @@ const links: { label: string; href: string; icon: IconName }[] = [
   { label: "Shops", href: "/shops", icon: "bag" },
   { label: "Dining", href: "/dining", icon: "utensils" },
   { label: "Events", href: "/events", icon: "calendar" },
-  { label: "Visit", href: "/visit", icon: "map-pin" },
+  { label: "Services", href: "/services", icon: "info" },
 ];
 
 export default function NotFound() {

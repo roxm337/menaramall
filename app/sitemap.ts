@@ -16,7 +16,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/le-souk",
     "/events",
     "/offers",
-    "/visit",
     "/services",
     "/leasing",
     "/contact",

@@ -142,7 +142,7 @@ export default function EntertainmentPage() {
               we&rsquo;d love to help.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Button href="/visit" variant="gold" icon="map-pin">Plan your visit</Button>
+              <Button href="/contact" variant="gold" icon="mail">Contact us</Button>
               <Button href="/contact" variant="light" icon="ticket">Make an inquiry</Button>
             </div>
           </Reveal>

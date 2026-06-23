@@ -9,7 +9,7 @@ const items: { label: string; href: string; icon: IconName }[] = [
   { label: "Shop", href: "/shops", icon: "bag" },
   { label: "Dine", href: "/dining", icon: "utensils" },
   { label: "Play", href: "/entertainment", icon: "play" },
-  { label: "Visit", href: "/visit", icon: "map-pin" },
+  { label: "Events", href: "/events", icon: "calendar" },
 ];
 
 /** Sticky bottom quick-navigation for mobile. */

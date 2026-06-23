@@ -61,13 +61,6 @@ const experiences: Experience[] = [
   },
 ];
 
-const visitFacts: { icon: IconName; label: string; value: string }[] = [
-  { icon: "clock", label: "Open daily", value: "10:00 – 22:00" },
-  { icon: "utensils", label: "Dining & Kidzo", value: "Until 00:00 / 01:00" },
-  { icon: "map-pin", label: "Location", value: "Avenue Mohamed VI" },
-  { icon: "bag", label: "Directory", value: "+50 boutiques" },
-];
-
 export default function HomePage() {
   const featuredBrands = brands.filter((b) => b.featured).slice(0, 6);
   const featuredDining = restaurants.filter((r) => r.featured).slice(0, 3);
@@ -102,7 +95,7 @@ export default function HomePage() {
             eyebrow="Four ways to experience"
             title="Everything Marrakech loves, under one roof"
             lede="Shopping, restaurants et cafés, Kidzo, Le Souq Al Madinah and essential services in one climate-controlled destination."
-            action={<Button href="/visit" variant="outline" icon="arrow-right">Plan your visit</Button>}
+            action={<Button href="/shops" variant="outline" icon="arrow-right">Browse directory</Button>}
           />
           <RevealGroup className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {experiences.map((exp) => (
@@ -256,44 +249,6 @@ export default function HomePage() {
               <RevealItem key={o.id}><OfferCard offer={o} /></RevealItem>
             ))}
           </RevealGroup>
-        </Container>
-      </section>
-
-      {/* Visit information */}
-      <section className="bg-palm py-24 text-ivory">
-        <Container>
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <Reveal>
-              <p className="eyebrow text-gold-soft">Plan your visit</p>
-              <h2 className="mt-4 text-balance text-white" style={{ fontSize: "var(--text-title)" }}>
-                Everything you need for a smooth visit
-              </h2>
-              <p className="mt-5 max-w-lg text-white/75">
-                Find opening hours, parking, directions and services — all in one place.
-                Menara Mall sits on Avenue Mohamed VI, minutes from the heart of
-                Marrakech and its leading hotels.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button href="/visit" variant="light" icon="map-pin">Directions & parking</Button>
-                <Button href="/services" variant="ghost" icon="info" className="!text-white hover:!bg-white/10">
-                  Visitor services
-                </Button>
-              </div>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <dl className="grid grid-cols-2 gap-4">
-                {visitFacts.map((f) => (
-                  <div key={f.label} className="rounded-2xl bg-white/8 p-5 ring-1 ring-white/10">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-gold-soft">
-                      <Icon name={f.icon} size={19} />
-                    </span>
-                    <dt className="mt-4 text-xs uppercase tracking-widest text-white/50">{f.label}</dt>
-                    <dd className="mt-1 font-display text-xl text-white">{f.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </Reveal>
-          </div>
         </Container>
       </section>
 
