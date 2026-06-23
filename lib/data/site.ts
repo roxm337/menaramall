@@ -3,11 +3,9 @@ import type { OpeningHours } from "@/lib/types";
 /**
  * Global site configuration.
  *
- * NOTE FOR THE MENARA MALL TEAM — verify before launch:
- *  • exact street address & postal code
- *  • official phone / email
- *  • social handles
- *  • public trading hours (incl. Ramadan & public-holiday variations)
+ * Official public information is sourced from https://www.menaramall.com/.
+ * Some operational details, such as phone number, unit locations, parking rates
+ * and Ramadan/public-holiday variations, are not currently published there.
  */
 export const site = {
   name: "Menara Mall",
@@ -16,39 +14,59 @@ export const site = {
   country: "Morocco",
   tagline: "Experience Marrakech in One Destination",
   description:
-    "A premium lifestyle destination on Avenue Mohammed VI — shopping, dining, family entertainment and Moroccan discovery in the heart of Marrakech.",
-  url: "https://www.menaramall.ma",
-  // [VERIFY] address
+    "A lifestyle destination on Avenue Mohamed VI — shopping, dining, Kidzo, Le Souq Al Madinah and visitor experiences in Marrakech.",
+  url: "https://www.menaramall.com",
   address: {
-    street: "Avenue Mohammed VI",
-    district: "Hivernage",
+    street: "Avenue Mohamed VI",
+    district: "",
     city: "Marrakech",
-    postalCode: "40000",
+    postalCode: "",
     country: "Morocco",
   },
-  geo: { lat: 31.6225, lng: -8.0228 }, // [VERIFY] approximate
-  // [VERIFY] contact details
-  phone: "+212 5 24 00 00 00",
-  email: "hello@menaramall.ma",
-  leasingEmail: "leasing@menaramall.ma",
-  eventsEmail: "events@menaramall.ma",
+  geo: { lat: 31.6186366, lng: -8.0092535 },
+  phone: "" as string,
+  email: "info@menaramall.com",
+  leasingEmail: "info@menaramall.com",
+  eventsEmail: "info@menaramall.com",
   social: {
-    instagram: "https://instagram.com/menaramall",
-    facebook: "https://facebook.com/menaramall",
-    tiktok: "https://tiktok.com/@menaramall",
-    youtube: "https://youtube.com/@menaramall",
+    instagram: "https://instagram.com",
+    facebook: "https://facebook.com",
+    tiktok: "",
+    youtube: "",
   },
 } as const;
 
-/** Standard mall trading hours (Mon-first). [VERIFY] with management. */
+/** Shops trading hours from the official footer (Mon-first). */
 export const mallHours: OpeningHours = [
   { open: "10:00", close: "22:00" }, // Mon
   { open: "10:00", close: "22:00" }, // Tue
   { open: "10:00", close: "22:00" }, // Wed
   { open: "10:00", close: "22:00" }, // Thu
-  { open: "10:00", close: "23:00" }, // Fri
-  { open: "10:00", close: "23:00" }, // Sat
+  { open: "10:00", close: "22:00" }, // Fri
+  { open: "10:00", close: "22:00" }, // Sat
   { open: "10:00", close: "22:00" }, // Sun
+];
+
+/** Food Court & Kidzo hours from the official footer (Mon-first). */
+export const foodCourtHours: OpeningHours = [
+  { open: "10:00", close: "00:00" },
+  { open: "10:00", close: "00:00" },
+  { open: "10:00", close: "00:00" },
+  { open: "10:00", close: "00:00" },
+  { open: "10:00", close: "01:00" },
+  { open: "10:00", close: "01:00" },
+  { open: "10:00", close: "00:00" },
+];
+
+/** Carrefour Market hours from the official footer (Mon-first). */
+export const carrefourHours: OpeningHours = [
+  { open: "09:00", close: "23:00" },
+  { open: "09:00", close: "23:00" },
+  { open: "09:00", close: "23:00" },
+  { open: "09:00", close: "23:00" },
+  { open: "09:00", close: "23:00" },
+  { open: "09:00", close: "23:00" },
+  { open: "09:00", close: "23:00" },
 ];
 
 export const primaryNav = [

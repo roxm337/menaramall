@@ -8,6 +8,7 @@ export interface Experience {
   href: string;
   icon: IconName;
   art: string;
+  imageSrc?: string;
   tone?: "sand" | "clay" | "palm" | "charcoal" | "gold";
 }
 
@@ -19,6 +20,7 @@ export function ExperienceCard({ exp, large = false }: { exp: Experience; large?
     >
       <ArtImage
         art={exp.art}
+        src={exp.imageSrc}
         tone={exp.tone}
         ratio={large ? "wide" : "portrait"}
         rounded={false}

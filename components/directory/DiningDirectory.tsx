@@ -9,7 +9,7 @@ import { CardSkeletonGrid } from "@/components/ui/Skeleton";
 import { cn } from "@/lib/utils";
 import { SearchField, ChipFilter, ResultsBar } from "./FilterControls";
 
-const TAGS = ["Family-friendly", "Terrace", "Coffee", "Sharing"] as const;
+const TAGS = ["Food Court", "Fast Food", "Café", "Dessert"] as const;
 
 export function DiningDirectory({
   restaurants,

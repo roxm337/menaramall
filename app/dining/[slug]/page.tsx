@@ -75,7 +75,7 @@ export default async function RestaurantDetailPage({
 
       {/* Hero */}
       <section className="relative isolate overflow-hidden bg-charcoal pt-[var(--header-h,4.5rem)]">
-        <ArtImage art={r.heroArt} ratio="hero" rounded={false} className="!absolute inset-0 h-full w-full !rounded-none" />
+        <ArtImage art={r.heroArt} src={r.imageSrc} ratio="hero" rounded={false} className="!absolute inset-0 h-full w-full !rounded-none" />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/45 to-charcoal/30" />
         <Container className="relative z-10 flex min-h-[46vh] flex-col justify-end py-12">
           <div className="mb-6 [&_*]:!text-white/70 [&_a:hover]:!text-white">
@@ -111,9 +111,6 @@ export default async function RestaurantDetailPage({
               <Reveal className="mt-12">
                 <h3 className="mb-5 text-2xl text-charcoal">Gallery</h3>
                 <Gallery items={gallery} tone="clay" />
-                <p className="mt-3 text-xs text-stone/70">
-                  Imagery shown is art-directed placeholder — to be replaced with venue photography. [VERIFY]
-                </p>
               </Reveal>
               <Reveal className="mt-12">
                 <h3 className="mb-5 text-2xl text-charcoal">Find it in the mall</h3>

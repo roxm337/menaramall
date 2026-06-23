@@ -9,6 +9,7 @@ export interface SearchResult {
   subtitle: string;
   href: string;
   art: string;
+  imageSrc?: string;
 }
 
 /** Lightweight, dependency-free relevance search across all content types. */
@@ -29,6 +30,7 @@ export function searchAll(query: string): SearchResult[] {
         subtitle: `${b.category} · ${b.floor}`,
         href: `/shops/${b.slug}`,
         art: b.heroArt,
+        imageSrc: b.imageSrc,
       });
   }
   for (const r of restaurants) {
@@ -39,6 +41,7 @@ export function searchAll(query: string): SearchResult[] {
         subtitle: `${r.cuisine} · ${r.floor}`,
         href: `/dining/${r.slug}`,
         art: r.heroArt,
+        imageSrc: r.imageSrc,
       });
   }
   for (const e of events) {

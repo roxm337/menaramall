@@ -6,8 +6,10 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { OpenBadge } from "@/components/ui/OpeningHours";
+import { ArtImage } from "@/components/ui/ArtImage";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { mallHours } from "@/lib/data/site";
+import { officialMedia } from "@/lib/data/official-media";
 
 const quickLinks: { label: string; href: string; icon: IconName }[] = [
   { label: "Shop", href: "/shops", icon: "bag" },
@@ -31,11 +33,12 @@ export function Hero() {
       {/* Cinematic background plate with slow ken-burns + scroll parallax */}
       <motion.div style={{ y }} className="absolute inset-0">
         <div className="absolute inset-0 animate-kenburns">
-          <div className="absolute inset-0 bg-[linear-gradient(135deg,#9c5a3c,#b76e4c_40%,#1f5c4a_120%)]" />
-          <div className="zellige absolute inset-0 opacity-[0.14] mix-blend-overlay" />
-          <div
-            className="absolute inset-0 opacity-40 mix-blend-soft-light"
-            style={{ backgroundImage: "radial-gradient(120% 90% at 70% 0%, rgba(255,255,255,0.85), transparent 55%)" }}
+          <ArtImage
+            art="Menara Mall Marrakech official hero photography"
+            src={officialMedia.homeHero}
+            ratio="hero"
+            rounded={false}
+            className="!absolute inset-0 h-full w-full !rounded-none"
           />
         </div>
       </motion.div>
@@ -49,7 +52,7 @@ export function Hero() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="eyebrow text-gold-soft"
           >
-            Marrakech · Avenue Mohammed VI
+            Marrakech · Avenue Mohamed VI
           </motion.p>
 
           <motion.h1

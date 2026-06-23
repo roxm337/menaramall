@@ -18,7 +18,7 @@ const socials: { name: IconName; href: string; label: string }[] = [
   { name: "facebook", href: site.social.facebook, label: "Facebook" },
   { name: "tiktok", href: site.social.tiktok, label: "TikTok" },
   { name: "youtube", href: site.social.youtube, label: "YouTube" },
-];
+].filter((s) => s.href);
 
 const mapSrc = `https://www.google.com/maps?q=${site.geo.lat},${site.geo.lng}(${encodeURIComponent(site.name)})&z=15&output=embed`;
 
@@ -53,17 +53,19 @@ export default function ContactPage() {
                     <div>
                       <p className="text-sm text-stone">Address</p>
                       <address className="not-italic font-medium text-charcoal">
-                        {site.address.street}, {site.address.district}, {site.address.city}
+                        {site.address.street}, {site.address.city}
                       </address>
                     </div>
                   </li>
-                  <li className="flex gap-4">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-clay/10 text-clay"><Icon name="phone" size={20} /></span>
-                    <div>
-                      <p className="text-sm text-stone">Phone</p>
-                      <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="font-medium text-charcoal link-underline">{site.phone}</a>
-                    </div>
-                  </li>
+                  {site.phone && (
+                    <li className="flex gap-4">
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-clay/10 text-clay"><Icon name="phone" size={20} /></span>
+                      <div>
+                        <p className="text-sm text-stone">Phone</p>
+                        <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="font-medium text-charcoal link-underline">{site.phone}</a>
+                      </div>
+                    </li>
+                  )}
                   <li className="flex gap-4">
                     <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-clay/10 text-clay"><Icon name="mail" size={20} /></span>
                     <div>

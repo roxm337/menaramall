@@ -28,7 +28,13 @@ export type BrandCategory =
   | "Supermarket"
   | "Entertainment";
 
-export type Floor = "Ground Floor" | "First Floor" | "Second Floor";
+export type Floor =
+  | "Ground Floor"
+  | "First Floor"
+  | "Second Floor"
+  | "Mall Directory"
+  | "Food Court"
+  | "Le Souk";
 
 export interface Brand {
   id: string;
@@ -48,6 +54,8 @@ export interface Brand {
   tags?: string[];
   /** Art-direction note for the hero placeholder image. */
   heroArt: string;
+  /** Official or CMS-hosted image URL. Falls back to `heroArt` placeholder when absent. */
+  imageSrc?: string;
   gallery?: string[];
 }
 
@@ -70,6 +78,7 @@ export interface Restaurant {
   featured?: boolean;
   tags?: string[];
   heroArt: string;
+  imageSrc?: string;
   gallery?: string[];
 }
 

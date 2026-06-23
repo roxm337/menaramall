@@ -12,7 +12,7 @@ export function RestaurantCard({ restaurant: r }: { restaurant: Restaurant }) {
       className="lift group flex h-full flex-col overflow-hidden rounded-[var(--radius-xl2)] bg-white ring-1 ring-charcoal/8"
     >
       <div className="relative">
-        <ArtImage art={r.heroArt} ratio="card" rounded={false} scrim />
+        <ArtImage art={r.heroArt} src={r.imageSrc} ratio="card" rounded={false} scrim />
         <div className="absolute left-4 top-4 flex flex-wrap gap-2">
           <Badge tone="gold">{r.type}</Badge>
           {r.tags?.includes("Terrace") && <Badge tone="palm">Terrace</Badge>}

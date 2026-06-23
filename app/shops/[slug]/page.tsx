@@ -57,6 +57,7 @@ export default async function ShopDetailPage({
       <section className="relative isolate overflow-hidden bg-charcoal pt-[var(--header-h,4.5rem)]">
         <ArtImage
           art={brand.heroArt}
+          src={brand.imageSrc}
           ratio="hero"
           rounded={false}
           className="!absolute inset-0 h-full w-full !rounded-none"
@@ -108,9 +109,6 @@ export default async function ShopDetailPage({
               <Reveal className="mt-12">
                 <h3 className="mb-5 text-2xl text-charcoal">Gallery</h3>
                 <Gallery items={gallery} />
-                <p className="mt-3 text-xs text-stone/70">
-                  Imagery shown is art-directed placeholder — to be replaced with brand photography. [VERIFY]
-                </p>
               </Reveal>
 
               <Reveal className="mt-12">

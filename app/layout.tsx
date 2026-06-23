@@ -64,18 +64,18 @@ function StructuredData() {
     name: site.name,
     description: site.description,
     url: site.url,
-    telephone: site.phone,
+    ...(site.phone ? { telephone: site.phone } : {}),
     email: site.email,
     address: {
       "@type": "PostalAddress",
       streetAddress: site.address.street,
       addressLocality: site.address.city,
-      postalCode: site.address.postalCode,
+      ...(site.address.postalCode ? { postalCode: site.address.postalCode } : {}),
       addressCountry: "MA",
     },
     geo: { "@type": "GeoCoordinates", latitude: site.geo.lat, longitude: site.geo.lng },
     openingHours: summarizeHours(mallHours),
-    sameAs: Object.values(site.social),
+    sameAs: Object.values(site.social).filter(Boolean),
   };
   return (
     <script

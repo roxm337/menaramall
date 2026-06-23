@@ -12,6 +12,7 @@ export function PageHero({
   title,
   lede,
   art,
+  imageSrc,
   tone,
   crumbs,
   children,
@@ -20,6 +21,7 @@ export function PageHero({
   title: string;
   lede?: string;
   art: string;
+  imageSrc?: string;
   tone?: "sand" | "clay" | "palm" | "charcoal" | "gold";
   crumbs?: Crumb[];
   children?: React.ReactNode;
@@ -28,6 +30,7 @@ export function PageHero({
     <section className="relative isolate overflow-hidden bg-charcoal pt-[var(--header-h,4.5rem)]">
       <ArtImage
         art={art}
+        src={imageSrc}
         tone={tone}
         ratio="hero"
         rounded={false}

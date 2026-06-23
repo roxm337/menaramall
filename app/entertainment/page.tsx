@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { ArtImage } from "@/components/ui/ArtImage";
 import { Icon, type IconName } from "@/components/ui/Icon";
+import { officialMedia } from "@/lib/data/official-media";
 
 export const metadata: Metadata = {
   title: "Entertainment & Play — Family Fun at Kidzo",
@@ -16,9 +17,9 @@ export const metadata: Metadata = {
 };
 
 const activities: { icon: IconName; title: string; text: string }[] = [
-  { icon: "play", title: "Arcade & Games", text: "Classic arcades, redemption games and prizes for every score." },
-  { icon: "sparkles", title: "Rides & Attractions", text: "Gentle rides and spinning favourites for younger explorers." },
-  { icon: "baby", title: "Soft Play", text: "Cushioned climbing, slides and ball pits for toddlers and tots." },
+  { icon: "play", title: "Jeux en Réalité Virtuelle", text: "Des expériences VR amusantes et immersives pour tous les âges." },
+  { icon: "sparkles", title: "Cinéma 7D", text: "Mouvements, éclaboussures, lumière and wind effects for an immersive family ride." },
+  { icon: "baby", title: "Petite Crèche", text: "A safe, warm space for children from 1 to 4 years old." },
   { icon: "heart", title: "Birthday Parties", text: "Tailored packages with hosts, cake and a private celebration zone." },
   { icon: "star", title: "Seasonal Shows", text: "Live characters, storytelling and holiday programming." },
   { icon: "compass", title: "Discovery Workshops", text: "Hands-on creative and science activities that teach as they play." },
@@ -39,6 +40,7 @@ export default function EntertainmentPage() {
         title="Where little adventures and big smiles begin"
         lede="A premium family playground at the heart of Menara Mall — Kidzo brings rides, games and imaginative play together in a safe, joyful space for all ages."
         art="Families enjoying a bright entertainment zone, children laughing, playful colour"
+        imageSrc={officialMedia.kidzoHero}
         tone="gold"
         crumbs={[{ label: "Entertainment" }]}
       >
@@ -58,10 +60,9 @@ export default function EntertainmentPage() {
                 A world of imaginative play, beautifully done
               </h2>
               <p className="mt-5 text-stone">
-                Kidzo is Menara Mall&rsquo;s dedicated family entertainment destination — thoughtfully
-                designed to spark curiosity and delight. From the youngest visitors in soft play
-                to older children chasing high scores in the arcade, every corner is built for fun
-                that feels safe, clean and welcoming.
+                L&apos;univers magique des enfants vous attend à Kidzo - Menara Mall.
+                The official Kidzo experience highlights a patinoire, Cinéma 7D,
+                VR games and a Petite Crèche for younger children.
               </p>
               <p className="mt-4 text-stone">
                 Parents can relax close by, knowing the space is supervised and secure — making it
@@ -69,8 +70,8 @@ export default function EntertainmentPage() {
               </p>
             </Reveal>
             <Reveal delay={0.1} className="grid grid-cols-2 gap-4">
-              <ArtImage art="Child delighted on a colourful ride, motion and joy" ratio="tall" tone="gold" className="mt-8" />
-              <ArtImage art="Soft play area with cushioned shapes, bright and clean" ratio="tall" tone="clay" />
+              <ArtImage art="Kidzo Menara Mall official play area" src={officialMedia.kidzoHero} ratio="tall" tone="gold" className="mt-8" />
+              <ArtImage art="Kidzo Menara Mall official attractions" src={officialMedia.kidzoPlay} ratio="tall" tone="clay" />
             </Reveal>
           </div>
         </Container>
@@ -120,10 +121,10 @@ export default function EntertainmentPage() {
               </p>
             </Reveal>
             <Reveal delay={0.1} className="grid grid-cols-2 gap-4">
-              <ArtImage art="Family laughing together at the arcade, candid warmth" ratio="square" tone="gold" />
-              <ArtImage art="Birthday celebration with balloons and cake, festive" ratio="square" tone="clay" />
-              <ArtImage art="Toddler in soft play, gentle focus" ratio="square" tone="sand" />
-              <ArtImage art="Older kids high-fiving by a game machine" ratio="square" tone="gold" />
+              <ArtImage art="Kidzo VR official photography" src={officialMedia.gallery[2]} ratio="square" tone="gold" />
+              <ArtImage art="Kidzo official play photography" src={officialMedia.kidzoPlay} ratio="square" tone="clay" />
+              <ArtImage art="Kidzo Menara Mall official hero" src={officialMedia.kidzoHero} ratio="square" tone="sand" />
+              <ArtImage art="Menara Mall fountains and family visit" src={officialMedia.fountains} ratio="square" tone="gold" />
             </Reveal>
           </div>
         </Container>

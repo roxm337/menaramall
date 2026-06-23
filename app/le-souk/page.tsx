@@ -8,6 +8,7 @@ import { ArtImage } from "@/components/ui/ArtImage";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { BrandCard } from "@/components/cards/BrandCard";
 import { brands } from "@/lib/data/brands";
+import { officialMedia } from "@/lib/data/official-media";
 
 export const metadata: Metadata = {
   title: "Le Souk — A Curated Moroccan Experience",
@@ -16,10 +17,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/le-souk" },
 };
 
-const worlds: { icon: IconName; title: string; text: string; art: string; tone: "clay" | "gold" | "sand" | "palm" }[] = [
-  { icon: "compass", title: "Moroccan Craft", text: "Hand-tooled leather, hammered brass, carved wood and woven baskets from local artisans.", art: "Brass lanterns and leather goods on display, amber light", tone: "gold" },
-  { icon: "bag", title: "Traditional Fashion", text: "Kaftans, djellabas and babouches — heritage silhouettes, beautifully made.", art: "Embroidered kaftans on display, rich fabric detail", tone: "clay" },
-  { icon: "droplet", title: "Beauty Rituals", text: "Argan oil, ghassoul clay and black soap — the timeless rituals of the hammam.", art: "Argan oil and natural beauty jars, spa-like calm", tone: "palm" },
+const worlds: { icon: IconName; title: string; text: string; art: string; imageSrc?: string; tone: "clay" | "gold" | "sand" | "palm" }[] = [
+  { icon: "compass", title: "Moroccan Craft", text: "Hand-tooled leather, hammered brass, carved wood and woven baskets from local artisans.", art: "Brass lanterns and leather goods on display, amber light", imageSrc: officialMedia.soukDetail, tone: "gold" },
+  { icon: "bag", title: "Traditional Fashion", text: "Kaftans, djellabas and babouches — heritage silhouettes, beautifully made.", art: "Embroidered kaftans on display, rich fabric detail", imageSrc: officialMedia.soukHero, tone: "clay" },
+  { icon: "droplet", title: "Beauty Rituals", text: "Argan oil, ghassoul clay and black soap — the timeless rituals of the hammam.", art: "Argan oil and natural beauty jars, spa-like calm", imageSrc: officialMedia.gallery[3], tone: "palm" },
   { icon: "sparkles", title: "Perfumes & Attars", text: "Rose, amber, oud and orange blossom — bespoke fragrance blended by hand.", art: "Glass perfume bottles and rose petals, apothecary mood", tone: "gold" },
   { icon: "heart", title: "Local Gifts", text: "Thoughtful keepsakes and souvenirs that carry a little of Marrakech home.", art: "Curated gift table, ceramics and trinkets, warm styling", tone: "sand" },
   { icon: "star", title: "Décor", text: "Ceramics, rugs, mirrors and lanterns to bring Moroccan warmth to any space.", art: "Moroccan home décor, mosaic and textiles, styled interior", tone: "clay" },
@@ -35,6 +36,7 @@ export default function LeSoukPage() {
         title="A Moroccan experience within the mall"
         lede="Step off the polished concourse into a lantern-lit world of craft, fragrance and tradition — Le Souk gathers the artisanal soul of Marrakech under one roof."
         art="Lantern-lit Moroccan souk promenade, artisan stalls, warm amber glow"
+        imageSrc={officialMedia.soukHero}
         tone="clay"
         crumbs={[{ label: "Le Souk" }]}
       >
@@ -66,7 +68,7 @@ export default function LeSoukPage() {
             {worlds.map((w) => (
               <RevealItem key={w.title}>
                 <div className="lift group h-full overflow-hidden rounded-[var(--radius-xl2)] bg-white ring-1 ring-charcoal/8">
-                  <ArtImage art={w.art} tone={w.tone} ratio="wide" rounded={false} />
+                  <ArtImage art={w.art} src={w.imageSrc} tone={w.tone} ratio="wide" rounded={false} />
                   <div className="p-7">
                     <span className="flex h-11 w-11 items-center justify-center rounded-full bg-clay/10 text-clay">
                       <Icon name={w.icon} size={20} />
@@ -102,7 +104,7 @@ export default function LeSoukPage() {
 
       {/* Immersive band */}
       <section className="relative isolate overflow-hidden bg-charcoal py-28 text-center text-ivory">
-        <ArtImage art="Close-up of Moroccan zellige mosaic and brass, intricate pattern" ratio="hero" rounded={false} className="!absolute inset-0 h-full w-full !rounded-none" tone="clay" />
+        <ArtImage art="Le Souq Al Madinah official photography" src={officialMedia.soukDetail} ratio="hero" rounded={false} className="!absolute inset-0 h-full w-full !rounded-none" tone="clay" />
         <div className="absolute inset-0 bg-charcoal/70" />
         <Container size="narrow" className="relative z-10">
           <Reveal>

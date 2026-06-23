@@ -1,88 +1,77 @@
 import type { Service } from "@/lib/types";
 
-/**
- * Visitor services. Marked items should be verified by the Menara Mall team;
- * where a service is not confirmed, treat the copy as an editable placeholder.
- */
+/** Official service and activity labels sourced from https://www.menaramall.com/. */
 export const services: Service[] = [
   {
-    id: "s-parking",
-    title: "Parking",
+    id: "s-parking-pmr",
+    title: "Parking & Accès PMR",
     icon: "car",
     description:
-      "Generous covered and open-air parking with direct mall access and clearly signed zones. [VERIFY capacity & rates]",
-    location: "Levels P1–P2 · multiple entrances",
+      "Parking and accessibility support are listed by Menara Mall as part of the visitor experience.",
+    location: "Menara Mall",
   },
   {
-    id: "s-security",
-    title: "Security & Safety",
-    icon: "shield",
+    id: "s-restauration",
+    title: "Restauration",
+    icon: "utensils",
     description:
-      "24/7 on-site security and CCTV throughout the mall and parking for a safe, comfortable visit.",
-    location: "Mall-wide · Control Room, Ground Floor",
+      "Restaurants, cafés and Food Court options for coffee, quick meals, desserts and sit-down dining.",
+    location: "Restaurants & cafés",
   },
   {
-    id: "s-info",
-    title: "Information Desk",
-    icon: "info",
+    id: "s-mode-bijoux",
+    title: "Mode & Bijoux",
+    icon: "bag",
     description:
-      "Multilingual concierge for directions, lost & found, wheelchair requests and general assistance.",
-    location: "Ground Floor · Central Court",
+      "Fashion, shoes, accessories and jewelry brands from the official shopping directory.",
+    location: "Shopping directory",
   },
   {
-    id: "s-family",
-    title: "Family Services",
-    icon: "baby",
+    id: "s-kidzo",
+    title: "Kidzo",
+    icon: "play",
     description:
-      "Baby-changing rooms, stroller-friendly routes and family restrooms designed for parents on the go.",
-    location: "Each floor · near restrooms",
+      "Family entertainment including Kidzo experiences highlighted on the official site.",
+    location: "Kidzo",
   },
   {
-    id: "s-prayer",
-    title: "Prayer Rooms",
-    icon: "moon",
+    id: "s-souq",
+    title: "Le SouQ Al Madinah",
+    icon: "compass",
     description:
-      "Dedicated, well-maintained prayer rooms with ablution facilities for men and women. [VERIFY location]",
-    location: "Ground Floor · East Wing",
+      "A Moroccan souk experience for crafts, traditional fashion, beauty rituals and local gifts.",
+    location: "Le SouQ Al Madinah",
   },
   {
-    id: "s-accessibility",
-    title: "Accessibility",
-    icon: "accessibility",
+    id: "s-beaute",
+    title: "Beauté & Bien-être",
+    icon: "sparkles",
     description:
-      "Step-free access, lifts to every floor, accessible restrooms and complimentary wheelchairs on request.",
-    location: "All floors · lifts at each court",
+      "Beauty, fragrance, grooming and wellness brands from the official Menara Mall directory.",
+    location: "Shopping directory",
   },
   {
-    id: "s-wifi",
-    title: "Free Wi-Fi",
+    id: "s-high-tech",
+    title: "High-Tech & Accessoires",
     icon: "wifi",
     description:
-      "Complimentary high-speed Wi-Fi throughout the mall — connect and stay in touch as you explore. [VERIFY]",
-    location: "Mall-wide",
+      "Phones, accessories, telecom services and tech shops listed in the official directory.",
+    location: "Shopping directory",
   },
   {
-    id: "s-atm",
-    title: "ATMs & Bureau de Change",
+    id: "s-carrefour",
+    title: "Carrefour",
+    icon: "bag",
+    description:
+      "Carrefour Market is open daily from 09:00 to 23:00 according to the official footer.",
+    location: "Carrefour Market",
+  },
+  {
+    id: "s-exchange",
+    title: "Exchange",
     icon: "banknote",
     description:
-      "Cash machines from major banks and currency exchange for international visitors.",
-    location: "Ground Floor · near Central Court",
-  },
-  {
-    id: "s-lost-found",
-    title: "Lost & Found",
-    icon: "search",
-    description:
-      "Misplaced an item? Our Information Desk safely holds found property — ask the team or contact us.",
-    location: "Ground Floor · Information Desk",
-  },
-  {
-    id: "s-restrooms",
-    title: "Restrooms",
-    icon: "droplet",
-    description:
-      "Clean, attended restrooms on every floor, including accessible and family facilities.",
-    location: "Every floor",
+      "Currency exchange services for visitor transactions are listed in the official shopping directory.",
+    location: "Shopping directory",
   },
 ];

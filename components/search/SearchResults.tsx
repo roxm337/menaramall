@@ -94,7 +94,7 @@ export function SearchResults() {
                 {results.map((r: SearchResult) => (
                   <li key={r.href + r.title}>
                     <Link href={r.href} className="flex items-center gap-4 p-4 transition-colors hover:bg-ivory">
-                      <ArtImage art={r.art} ratio="square" className="h-16 w-16 shrink-0" />
+                      <ArtImage art={r.art} src={r.imageSrc} ratio="square" className="h-16 w-16 shrink-0" />
                       <span className="min-w-0 flex-1">
                         <span className="block truncate font-display text-lg text-charcoal">{r.title}</span>
                         <span className="block truncate text-sm text-stone">{r.subtitle}</span>

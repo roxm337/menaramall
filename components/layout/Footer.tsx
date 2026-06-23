@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { site, footerNav, legalNav, mallHours } from "@/lib/data/site";
+import { site, footerNav, legalNav, mallHours, foodCourtHours, carrefourHours } from "@/lib/data/site";
 import { HoursList } from "@/components/ui/OpeningHours";
 import { Newsletter } from "@/components/Newsletter";
 import { Logo } from "./Logo";
@@ -10,7 +10,7 @@ const socials: { name: IconName; href: string; label: string }[] = [
   { name: "facebook", href: site.social.facebook, label: "Facebook" },
   { name: "tiktok", href: site.social.tiktok, label: "TikTok" },
   { name: "youtube", href: site.social.youtube, label: "YouTube" },
-];
+].filter((s) => s.href);
 
 export function Footer() {
   return (
@@ -92,24 +92,38 @@ export function Footer() {
         <div className="lg:col-span-4">
           <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40">Find us</h3>
           <address className="mt-4 not-italic text-sm leading-relaxed text-white/70">
-            {site.address.street}, {site.address.district}
+            {site.address.street}
+            {site.address.district ? `, ${site.address.district}` : ""}
             <br />
-            {site.address.city} {site.address.postalCode}, {site.address.country}
+            {site.address.city}
+            {site.address.postalCode ? ` ${site.address.postalCode}` : ""}, {site.address.country}
           </address>
           <div className="mt-4 space-y-2 text-sm text-white/70">
-            <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-2 hover:text-gold-soft">
-              <Icon name="phone" size={15} /> {site.phone}
-            </a>
-            <br />
+            {site.phone && (
+              <>
+                <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-2 hover:text-gold-soft">
+                  <Icon name="phone" size={15} /> {site.phone}
+                </a>
+                <br />
+              </>
+            )}
             <a href={`mailto:${site.email}`} className="inline-flex items-center gap-2 hover:text-gold-soft">
               <Icon name="mail" size={15} /> {site.email}
             </a>
           </div>
           <div className="mt-5 rounded-2xl bg-white/5 p-4">
             <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-white/40">
-              Opening hours
+              Shops
             </p>
             <HoursList hours={mallHours} className="[&_dt]:text-white/55 [&_dd]:text-white [&>div]:border-white/10" />
+            <p className="mb-2 mt-5 text-xs font-semibold uppercase tracking-widest text-white/40">
+              Food Court & Kidzo
+            </p>
+            <HoursList hours={foodCourtHours} className="[&_dt]:text-white/55 [&_dd]:text-white [&>div]:border-white/10" />
+            <p className="mb-2 mt-5 text-xs font-semibold uppercase tracking-widest text-white/40">
+              Carrefour Market
+            </p>
+            <HoursList hours={carrefourHours} className="[&_dt]:text-white/55 [&_dd]:text-white [&>div]:border-white/10" />
           </div>
         </div>
       </div>

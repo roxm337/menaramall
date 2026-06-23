@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Accordion } from "@/components/ui/Accordion";
 import { HoursList } from "@/components/ui/OpeningHours";
 import { Icon, type IconName } from "@/components/ui/Icon";
-import { site, mallHours } from "@/lib/data/site";
+import { site, mallHours, foodCourtHours, carrefourHours } from "@/lib/data/site";
 
 export const metadata: Metadata = {
   title: "Visit Us — Hours, Parking & Directions",
@@ -24,7 +24,7 @@ const access: { icon: IconName; title: string; text: string }[] = [
 ];
 
 const faqs = [
-  { q: "What are the opening hours?", a: "Menara Mall is open daily from 10:00, with most stores closing at 22:00 (later on weekends). Carrefour and selected dining venues keep extended hours. Hours may vary during Ramadan and public holidays. [VERIFY]" },
+  { q: "What are the opening hours?", a: "Shops are open daily from 10:00 to 22:00. Food Court & Kidzo are open 10:00 to 00:00 Sunday to Thursday and 10:00 to 01:00 Friday and Saturday. Carrefour Market is open daily from 09:00 to 23:00." },
   { q: "Is parking available and how much does it cost?", a: "Yes — covered and open-air parking is available with direct access to the mall. Current rates and capacity are confirmed on site. [VERIFY]" },
   { q: "Is the mall accessible for wheelchairs and pushchairs?", a: "Absolutely. The mall offers step-free entrances, lifts to all floors, accessible restrooms and complimentary wheelchairs on request at the Information Desk." },
   { q: "Are there family facilities?", a: "Yes. You'll find baby-changing rooms, family restrooms and stroller-friendly routes throughout, plus the Kidzo family entertainment zone." },
@@ -62,16 +62,17 @@ export default function VisitPage() {
                   referrerPolicy="no-referrer-when-downgrade"
                 />
               </div>
-              <p className="mt-3 text-xs text-stone/70">Map location is approximate. [VERIFY exact pin]</p>
             </Reveal>
 
             <Reveal delay={0.1} className="space-y-5">
               <div className="rounded-[var(--radius-xl2)] bg-white p-6 ring-1 ring-charcoal/8">
                 <h2 className="text-xl text-charcoal">Address</h2>
                 <address className="mt-3 not-italic leading-relaxed text-stone">
-                  {site.address.street}, {site.address.district}
+                  {site.address.street}
+                  {site.address.district ? `, ${site.address.district}` : ""}
                   <br />
-                  {site.address.city} {site.address.postalCode}, {site.address.country}
+                  {site.address.city}
+                  {site.address.postalCode ? ` ${site.address.postalCode}` : ""}, {site.address.country}
                 </address>
                 <div className="mt-4 flex flex-wrap gap-3">
                   <Button
@@ -82,18 +83,21 @@ export default function VisitPage() {
                   >
                     Get directions
                   </Button>
-                  <Button href={`tel:${site.phone.replace(/\s/g, "")}`} variant="outline" size="sm" icon="phone">
-                    Call the mall
+                  <Button href={`mailto:${site.email}`} variant="outline" size="sm" icon="mail">
+                    Email the mall
                   </Button>
                 </div>
               </div>
 
               <div className="rounded-[var(--radius-xl2)] bg-white p-6 ring-1 ring-charcoal/8">
                 <h2 className="flex items-center gap-2 text-xl text-charcoal">
-                  <Icon name="clock" size={20} className="text-clay" /> Opening hours
+                  <Icon name="clock" size={20} className="text-clay" /> Shops
                 </h2>
                 <HoursList hours={mallHours} className="mt-4" />
-                <p className="mt-3 text-xs text-stone/70">Hours may vary on public holidays and during Ramadan. [VERIFY]</p>
+                <h3 className="mt-6 text-sm font-semibold uppercase tracking-widest text-stone">Food Court & Kidzo</h3>
+                <HoursList hours={foodCourtHours} className="mt-3" />
+                <h3 className="mt-6 text-sm font-semibold uppercase tracking-widest text-stone">Carrefour Market</h3>
+                <HoursList hours={carrefourHours} className="mt-3" />
               </div>
             </Reveal>
           </div>

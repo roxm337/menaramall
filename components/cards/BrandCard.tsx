@@ -14,6 +14,7 @@ export function BrandCard({ brand }: { brand: Brand }) {
       <div className="relative">
         <ArtImage
           art={brand.heroArt}
+          src={brand.imageSrc}
           ratio="card"
           monogram={brand.monogram}
           rounded={false}

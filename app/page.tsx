@@ -16,24 +16,27 @@ import { restaurants } from "@/lib/data/restaurants";
 import { events, isUpcoming } from "@/lib/data/events";
 import { offers } from "@/lib/data/offers";
 import { site } from "@/lib/data/site";
+import { officialMedia } from "@/lib/data/official-media";
 
 const experiences: Experience[] = [
   {
     title: "Shop",
     description:
-      "Fashion, beauty, home and everyday essentials across a curated mix of brands.",
+      "More than 50 boutiques and enseignes across fashion, beauty, tech and everyday essentials.",
     href: "/shops",
     icon: "bag",
     art: "Premium shopping interior, polished stone floors, soft daylight",
+    imageSrc: officialMedia.shoppingHero,
     tone: "sand",
   },
   {
     title: "Dine",
     description:
-      "From relaxed cafés to family dining, flavours for every moment of the day.",
+      "More than 18 restaurants and cafés, with Food Court energy and panoramic terrace moments.",
     href: "/dining",
     icon: "utensils",
     art: "Café lifestyle, marble table, coffee and pastries, warm light",
+    imageSrc: officialMedia.diningHero,
     tone: "clay",
   },
   {
@@ -43,6 +46,7 @@ const experiences: Experience[] = [
     href: "/entertainment",
     icon: "play",
     art: "Family entertainment zone, joyful children playing, bright colours",
+    imageSrc: officialMedia.kidzoHero,
     tone: "gold",
   },
   {
@@ -52,15 +56,16 @@ const experiences: Experience[] = [
     href: "/le-souk",
     icon: "compass",
     art: "Moroccan craft detail, brass lanterns and textiles, amber glow",
+    imageSrc: officialMedia.soukHero,
     tone: "palm",
   },
 ];
 
 const visitFacts: { icon: IconName; label: string; value: string }[] = [
   { icon: "clock", label: "Open daily", value: "10:00 – 22:00" },
-  { icon: "car", label: "Parking", value: "Covered & open-air" },
-  { icon: "map-pin", label: "Location", value: "Avenue Mohammed VI" },
-  { icon: "accessibility", label: "Access", value: "Step-free, all floors" },
+  { icon: "utensils", label: "Dining & Kidzo", value: "Until 00:00 / 01:00" },
+  { icon: "map-pin", label: "Location", value: "Avenue Mohamed VI" },
+  { icon: "bag", label: "Directory", value: "+50 boutiques" },
 ];
 
 export default function HomePage() {
@@ -79,9 +84,9 @@ export default function HomePage() {
           <Reveal>
             <p className="eyebrow text-clay">A lifestyle destination</p>
             <p className="mt-6 text-balance font-display text-3xl leading-snug text-charcoal sm:text-4xl md:text-[2.75rem]">
-              More than a mall — a meeting place where Marrakech comes together to
-              shop, dine, play and discover, all within one warm, light-filled
-              destination.
+              Bienvenue au Menara Mall, perché sur les hauteurs de l&apos;Avenue
+              Mohamed VI. Un espace dédié au shopping, aux loisirs et aux
+              expériences qui rassemblent.
             </p>
           </Reveal>
           <Reveal delay={0.1} className="mt-8 flex justify-center">
@@ -96,7 +101,7 @@ export default function HomePage() {
           <SectionHeader
             eyebrow="Four ways to experience"
             title="Everything Marrakech loves, under one roof"
-            lede="Curated retail, restaurants and cafés, family leisure and a Moroccan craft experience — designed to be discovered at your own pace."
+            lede="Shopping, restaurants et cafés, Kidzo, Le Souq Al Madinah and essential services in one climate-controlled destination."
             action={<Button href="/visit" variant="outline" icon="arrow-right">Plan your visit</Button>}
           />
           <RevealGroup className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -114,8 +119,8 @@ export default function HomePage() {
         <Container>
           <SectionHeader
             eyebrow="Featured brands"
-            title="Names you love, beautifully gathered"
-            lede="From international fashion and beauty houses to Morocco's everyday favourites."
+            title="Boutiques & enseignes"
+            lede="The official Menara Mall directory spans fashion, beauty, high-tech, services, toys, leisure and Carrefour Market."
             action={<Button href="/shops" variant="ghost" icon="arrow-right">All shops</Button>}
           />
           <RevealGroup
@@ -137,7 +142,7 @@ export default function HomePage() {
           <SectionHeader
             eyebrow="Dining highlights"
             title="A table for every moment"
-            lede="Slow Moroccan feasts, Mediterranean terraces, specialty coffee and sweet finishes."
+            lede="The official restaurants and cafés directory includes fast food, coffee, desserts, international plates and terrace-friendly stops."
             action={<Button href="/dining" variant="ghost" icon="arrow-right">All dining</Button>}
           />
           <RevealGroup className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -157,6 +162,7 @@ export default function HomePage() {
             <Reveal>
               <ArtImage
                 art="Families enjoying Kidzo entertainment, soft play and rides, joyful light"
+                src={officialMedia.kidzoPlay}
                 ratio="card"
                 tone="clay"
                 className="shadow-2xl"
@@ -168,10 +174,9 @@ export default function HomePage() {
                 Where little adventures and big smiles begin
               </h2>
               <p className="mt-5 max-w-lg text-white/70">
-                Kidzo brings a world of safe, imaginative play to Menara Mall — rides,
-                games, soft play and hands-on activities for children, with comfortable
-                spaces for parents close by. From quiet afternoons to unforgettable
-                birthday celebrations, it&rsquo;s family time, elevated.
+                L&apos;univers magique des enfants vous attend à Kidzo - Menara Mall:
+                patinoire, cinéma 7D, jeux en réalité virtuelle et Petite Crèche
+                pour les plus jeunes.
               </p>
               <ul className="mt-7 grid grid-cols-2 gap-4 text-sm">
                 {([
@@ -222,8 +227,8 @@ export default function HomePage() {
               </div>
             </Reveal>
             <Reveal delay={0.1} className="order-1 grid grid-cols-2 gap-4 lg:order-2">
-              <ArtImage art="Handwoven Moroccan textiles, rich colour, artisan detail" ratio="tall" tone="clay" className="mt-8" />
-              <ArtImage art="Brass lanterns and perfume bottles, warm amber light" ratio="tall" tone="gold" />
+              <ArtImage art="Le Souq Al Madinah traditional craft" src={officialMedia.soukHero} ratio="tall" tone="clay" className="mt-8" />
+              <ArtImage art="Le Souq Al Madinah at Menara Mall" src={officialMedia.soukDetail} ratio="tall" tone="gold" />
             </Reveal>
           </div>
         </Container>
@@ -265,7 +270,7 @@ export default function HomePage() {
               </h2>
               <p className="mt-5 max-w-lg text-white/75">
                 Find opening hours, parking, directions and services — all in one place.
-                Menara Mall sits on Avenue Mohammed VI, minutes from the heart of
+                Menara Mall sits on Avenue Mohamed VI, minutes from the heart of
                 Marrakech and its leading hotels.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
@@ -305,14 +310,7 @@ export default function HomePage() {
             stagger={0.05}
             className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6"
           >
-            {[
-              "Golden-hour mall exterior, palms and modern facade",
-              "Friends with shopping bags laughing, candid lifestyle",
-              "Mint tea poured at a Moroccan café, close-up",
-              "Child delighted on a ride at Kidzo, motion blur",
-              "Artisan hands shaping leather in Le Souk",
-              "Elegant fashion window display, evening light",
-            ].map((art, i) => (
+            {officialMedia.gallery.map((src, i) => (
               <RevealItem key={i}>
                 <a
                   href={site.social.instagram}
@@ -320,7 +318,7 @@ export default function HomePage() {
                   rel="noopener noreferrer"
                   className="group relative block"
                 >
-                  <ArtImage art={art} ratio="square" />
+                  <ArtImage art="Official Menara Mall gallery image" src={src} ratio="square" />
                   <span className="absolute inset-0 flex items-center justify-center rounded-[var(--radius-xl2)] bg-charcoal/0 text-white opacity-0 transition-all duration-300 group-hover:bg-charcoal/40 group-hover:opacity-100">
                     <Icon name="instagram" size={26} />
                   </span>
