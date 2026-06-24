@@ -13,24 +13,24 @@ const dining: OpeningHours = [
 
 const featuredRestaurants = new Set(["PAUL", "Burger King", "Costa Coffee", "Kasbah Café", "Papa John’s"]);
 const restaurantMeta = new Map<string, [RestaurantType, string]>([
-  ["Happy Yog", ["Dessert", "Frozen yogurt · Crêpes"]],
-  ["Le Box", ["Fast Food", "Sushi · Burgers · Pasta"]],
-  ["Bollywood Café", ["Restaurant", "Indian"]],
-  ["Pizza Factory", ["Fast Food", "Pizza"]],
-  ["Bella Italia", ["Restaurant", "Italian"]],
-  ["Tacos Français", ["Fast Food", "French tacos"]],
-  ["Kebab & Tacos", ["Fast Food", "Kebab · Tacos"]],
-  ["Oriental Legend", ["Dessert", "Artisanal ice cream"]],
-  ["Alwardeh Alshamieh", ["Dessert", "Oriental pastries"]],
-  ["Burger King", ["Fast Food", "Burgers"]],
+  ["Happy Yog", ["Dessert", "Yaourt glace · Crepes"]],
+  ["Le Box", ["Restauration rapide", "Sushi · Burgers · Pates"]],
+  ["Bollywood Café", ["Restaurant", "Indien"]],
+  ["Pizza Factory", ["Restauration rapide", "Pizza"]],
+  ["Bella Italia", ["Restaurant", "Italien"]],
+  ["Tacos Français", ["Restauration rapide", "Tacos francais"]],
+  ["Kebab & Tacos", ["Restauration rapide", "Kebab · Tacos"]],
+  ["Oriental Legend", ["Dessert", "Glace artisanale"]],
+  ["Alwardeh Alshamieh", ["Dessert", "Patisseries orientales"]],
+  ["Burger King", ["Restauration rapide", "Burgers"]],
   ["Kaspas Desserts", ["Dessert", "Desserts · Milkshakes"]],
-  ["Costa Coffee", ["Café", "Coffee · Pastries"]],
-  ["Carteer Square", ["Fast Food", "Kebabs · Pizza · Pasta"]],
-  ["Victor", ["Restaurant", "Moroccan · International"]],
-  ["Kasbah Café", ["Café", "Moroccan · International"]],
-  ["PAUL", ["Café", "French bakery"]],
-  ["Papa John’s", ["Fast Food", "Pizza · Tex-Mex"]],
-  ["Venezia Ice", ["Dessert", "Artisanal ice cream"]],
+  ["Costa Coffee", ["Cafe", "Cafe · Patisseries"]],
+  ["Carteer Square", ["Restauration rapide", "Kebabs · Pizza · Pates"]],
+  ["Victor", ["Restaurant", "Marocain · International"]],
+  ["Kasbah Café", ["Cafe", "Marocain · International"]],
+  ["PAUL", ["Cafe", "Boulangerie francaise"]],
+  ["Papa John’s", ["Restauration rapide", "Pizza · Tex-Mex"]],
+  ["Venezia Ice", ["Dessert", "Glace artisanale"]],
 ]);
 
 function slugify(value: string): string {
@@ -59,7 +59,7 @@ function monogram(value: string): string {
 
 export const restaurants: Restaurant[] = sourceRestaurants.map((item) => {
   const name = item.title.trim();
-  const [type, cuisine] = restaurantMeta.get(name) ?? ["Restaurant", "Dining"];
+  const [type, cuisine] = restaurantMeta.get(name) ?? ["Restaurant", "Restauration"];
 
   return {
     id: "r-official-" + item.id,
@@ -69,19 +69,19 @@ export const restaurants: Restaurant[] = sourceRestaurants.map((item) => {
     cuisine,
     type,
     floor: "Food Court",
-    locationLabel: "Menara Mall · Restaurants & cafés",
+    locationLabel: "Menara Mall · Restaurants et cafes",
     description: item.description.trim(),
     openingHours: dining,
     reservationUrl: "/contact",
     featured: featuredRestaurants.has(name),
     tags: [type, "Food Court"],
-    heroArt: name + " at Menara Mall Marrakech",
+    heroArt: name + " a Menara Mall Marrakech",
     imageSrc: item.imageUrl,
     gallery: [item.imageUrl],
   };
 });
 
-export const cuisineTypes = ["Restaurant", "Café", "Fast Food", "Dessert"] as const;
+export const cuisineTypes = ["Restaurant", "Cafe", "Restauration rapide", "Dessert"] as const;
 
 export function getRestaurant(slug: string): Restaurant | undefined {
   return restaurants.find((r) => r.slug === slug);

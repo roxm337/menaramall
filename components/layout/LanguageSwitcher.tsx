@@ -6,15 +6,13 @@ import { cn } from "@/lib/utils";
 import { Icon } from "@/components/ui/Icon";
 
 /**
- * Language switcher. The information architecture is multilingual-ready
- * (FR / EN / AR). This control demonstrates RTL readiness by flipping the
- * document direction for Arabic and persisting the choice. Full localized
- * routing (e.g. /fr, /ar) is the next integration step with next-intl.
+ * Language switcher. The content is now French-first, while this control keeps
+ * persisting the user preference and handling RTL for Arabic.
  */
 export function LanguageSwitcher({ tone = "dark" }: { tone?: "dark" | "light" }) {
   type Code = (typeof locales)[number]["code"];
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState<Code>("en");
+  const [active, setActive] = useState<Code>("fr");
   const ref = useRef<HTMLDivElement>(null);
 
   // Restore the persisted preference once on mount (client-only API).
@@ -52,7 +50,7 @@ export function LanguageSwitcher({ tone = "dark" }: { tone?: "dark" | "light" })
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="listbox"
         aria-expanded={open}
-        aria-label="Change language"
+        aria-label="Changer de langue"
         className={cn(
           "inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-medium transition-colors",
           tone === "light"

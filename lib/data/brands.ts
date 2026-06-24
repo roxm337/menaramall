@@ -49,26 +49,26 @@ function monogram(value: string): string {
 
 function categoryFor(title: string, sourceCategory: string): BrandCategory {
   const lower = title.toLowerCase();
-  if (title === "Carrefour Market") return "Supermarket";
-  if (sourceCategory === "Beauté et bien être") return "Beauty";
-  if (sourceCategory === "High-Tech & Accessoires") return "Electronics";
-  if (sourceCategory === "Jouets & Loisirs") return "Kids";
-  if (sourceCategory === "Supermarche") return "Supermarket";
-  if (sourceCategory === "Divers") return lower.includes("galerie") ? "Moroccan Craft" : "Services";
-  return "Fashion";
+  if (title === "Carrefour Market") return "Supermarche";
+  if (sourceCategory === "Beauté et bien être") return "Beaute";
+  if (sourceCategory === "High-Tech & Accessoires") return "High-Tech";
+  if (sourceCategory === "Jouets & Loisirs") return "Enfants";
+  if (sourceCategory === "Supermarche") return "Supermarche";
+  if (sourceCategory === "Divers") return lower.includes("galerie") ? "Artisanat marocain" : "Services";
+  return "Mode";
 }
 
 function tagsFor(title: string, description: string, sourceCategory: string): string[] {
   const haystack = title + " " + description;
   const tags = [sourceCategory];
-  if (/bijou|jewellery|jewelry/i.test(haystack)) tags.push("Jewelry");
+  if (/bijou|jewellery|jewelry/i.test(haystack)) tags.push("Bijoux");
   if (/barber|coiffure|salon/i.test(haystack)) tags.push("Salon");
   if (/apple|téléphone|telecom|accessoires|high-tech|vape/i.test(haystack)) tags.push("Tech");
   return [...new Set(tags)];
 }
 
 function floorFor(title: string): Floor {
-  return title === "Carrefour Market" ? "Ground Floor" : "Mall Directory";
+  return title === "Carrefour Market" ? "Rez-de-chaussee" : "Galerie marchande";
 }
 
 export const brands: Brand[] = sourceShopping.map((item) => {
@@ -82,33 +82,33 @@ export const brands: Brand[] = sourceShopping.map((item) => {
     monogram: monogram(name),
     category: categoryFor(name, item.categorie),
     floor: floorFor(name),
-    locationLabel: isCarrefour ? "Menara Mall · Carrefour Market" : "Menara Mall · Official shopping directory",
+    locationLabel: isCarrefour ? "Menara Mall · Carrefour Market" : "Menara Mall · Galerie marchande officielle",
     description: item.description.trim(),
     openingHours: isCarrefour ? grocery : std,
     featured: featuredBrands.has(name),
     tags: tagsFor(name, item.description, item.categorie),
-    heroArt: name + " at Menara Mall Marrakech",
+    heroArt: name + " a Menara Mall Marrakech",
     imageSrc: item.imageUrl,
     gallery: [item.imageUrl],
   };
 });
 
 export const brandCategories = [
-  "Fashion",
-  "Beauty",
-  "Jewelry",
-  "Kids",
-  "Home",
-  "Sports",
-  "Electronics",
+  "Mode",
+  "Beaute",
+  "Bijoux",
+  "Enfants",
+  "Maison",
+  "Sport",
+  "High-Tech",
   "Services",
-  "Moroccan Craft",
-  "Supermarket",
-  "Entertainment",
+  "Artisanat marocain",
+  "Supermarche",
+  "Loisirs",
 ] as const;
 
 export const sourceBrandCategories = sourceShoppingCategories;
-export const floors = ["Ground Floor", "First Floor", "Second Floor", "Mall Directory", "Food Court", "Le Souk"] as const;
+export const floors = ["Rez-de-chaussee", "1er etage", "2e etage", "Galerie marchande", "Food Court", "Le Souk"] as const;
 
 export function getBrand(slug: string): Brand | undefined {
   return brands.find((b) => b.slug === slug);

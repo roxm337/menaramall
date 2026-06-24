@@ -16,7 +16,7 @@ export function ExperienceCard({ exp, large = false }: { exp: Experience; large?
   return (
     <Link
       href={exp.href}
-      className="lift group relative flex overflow-hidden rounded-[var(--radius-xl2)]"
+      className="group relative flex h-full overflow-hidden rounded-[var(--radius-xl2)] shadow-[0_18px_40px_-30px_rgba(23,23,23,0.4)] transition-shadow duration-500 ease-[var(--ease-luxe)] hover:shadow-[0_36px_70px_-30px_rgba(23,23,23,0.5)]"
     >
       <ArtImage
         art={exp.art}
@@ -36,7 +36,7 @@ export function ExperienceCard({ exp, large = false }: { exp: Experience; large?
           {exp.description}
         </p>
         <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-gold-soft">
-          Explore
+          Explorer
           <Icon name="arrow-right" size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
         </span>
       </div>

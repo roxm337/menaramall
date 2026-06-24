@@ -29,16 +29,16 @@ export const metadata: Metadata = {
   description: site.description,
   keywords: [
     "Menara Mall",
-    "Marrakech mall",
+    "centre commercial Marrakech",
     "shopping Marrakech",
-    "dining Marrakech",
+    "restaurants Marrakech",
     "Le Souk",
-    "family entertainment Marrakech",
+    "loisirs en famille Marrakech",
     "Avenue Mohammed VI",
   ],
   openGraph: {
     type: "website",
-    locale: "en",
+    locale: "fr_FR",
     siteName: site.name,
     title: `${site.name} — ${site.tagline}`,
     description: site.description,
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "/",
-    languages: { en: "/", fr: "/fr", ar: "/ar" },
+    languages: { fr: "/", en: "/en", ar: "/ar" },
   },
   robots: { index: true, follow: true },
 };
@@ -89,14 +89,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" dir="ltr" className={`${cormorant.variable} ${inter.variable}`}>
+    <html lang="fr" dir="ltr" className={`${cormorant.variable} ${inter.variable}`}>
       <body className="min-h-screen">
         <StructuredData />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-full focus:bg-charcoal focus:px-5 focus:py-3 focus:text-sm focus:text-ivory"
         >
-          Skip to content
+          Aller au contenu
         </a>
         <Header />
         <main id="main" className="pb-[4.5rem] lg:pb-0">

@@ -2,60 +2,60 @@ import { Hero } from "@/components/home/Hero";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import { Parallax, ScrollProgress, TiltCard } from "@/components/ui/Motion";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { ArtImage } from "@/components/ui/ArtImage";
 import { Icon, type IconName } from "@/components/ui/Icon";
-import { ExperienceCard, type Experience } from "@/components/cards/ExperienceCard";
+import {
+  ExperienceCard,
+  type Experience,
+} from "@/components/cards/ExperienceCard";
 import { BrandCard } from "@/components/cards/BrandCard";
 import { RestaurantCard } from "@/components/cards/RestaurantCard";
-import { EventCard } from "@/components/cards/EventCard";
-import { OfferCard } from "@/components/cards/OfferCard";
 import { brands } from "@/lib/data/brands";
 import { restaurants } from "@/lib/data/restaurants";
-import { events, isUpcoming } from "@/lib/data/events";
-import { offers } from "@/lib/data/offers";
 import { site } from "@/lib/data/site";
 import { officialMedia } from "@/lib/data/official-media";
 
 const experiences: Experience[] = [
   {
-    title: "Shop",
+    title: "Shopping",
     description:
-      "More than 50 boutiques and enseignes across fashion, beauty, tech and everyday essentials.",
+      "Plus de 90 enseignes nationales et internationales entre mode, beaute, high-tech et essentiels du quotidien.",
     href: "/shops",
     icon: "bag",
-    art: "Premium shopping interior, polished stone floors, soft daylight",
-    imageSrc: officialMedia.shoppingHero,
+    art: "Interieur shopping premium, sols en pierre polie, lumiere naturelle douce",
+    imageSrc: officialMedia.shoppingFeature,
     tone: "sand",
   },
   {
-    title: "Dine",
+    title: "Restaurants",
     description:
-      "More than 18 restaurants and cafés, with Food Court energy and panoramic terrace moments.",
+      "Plus de 17 restaurants et cafes, entre l'energie du Food Court et les instants en terrasse panoramique.",
     href: "/dining",
     icon: "utensils",
-    art: "Café lifestyle, marble table, coffee and pastries, warm light",
-    imageSrc: officialMedia.diningHero,
+    art: "Ambiance cafe lifestyle, table en marbre, cafe et patisseries, lumiere chaleureuse",
+    imageSrc: officialMedia.diningFeature,
     tone: "clay",
   },
   {
-    title: "Play",
+    title: "Kidzo",
     description:
-      "Family entertainment, games and memorable moments for children and adults.",
+      "L'univers magique des enfants vous attend a Kidzo - Menara Mall, pour des jeux et des souvenirs memorables en famille.",
     href: "/entertainment",
     icon: "play",
-    art: "Family entertainment zone, joyful children playing, bright colours",
+    art: "Univers Kidzo, enfants joyeux, jeux et couleurs lumineuses",
     imageSrc: officialMedia.kidzoHero,
     tone: "gold",
   },
   {
-    title: "Discover",
+    title: "Decouvrir",
     description:
-      "Step into Le Souk and explore Moroccan craft, gifts, beauty and culture.",
+      "Entrez dans Le Souk et explorez l'artisanat marocain, les cadeaux, la beaute et la culture.",
     href: "/le-souk",
     icon: "compass",
-    art: "Moroccan craft detail, brass lanterns and textiles, amber glow",
+    art: "Detail d'artisanat marocain, lanternes en laiton et textiles, lueur ambree",
     imageSrc: officialMedia.soukHero,
     tone: "palm",
   },
@@ -64,43 +64,31 @@ const experiences: Experience[] = [
 export default function HomePage() {
   const featuredBrands = brands.filter((b) => b.featured).slice(0, 6);
   const featuredDining = restaurants.filter((r) => r.featured).slice(0, 3);
-  const upcoming = events.filter((e) => isUpcoming(e)).slice(0, 2);
-  const featuredOffers = offers.filter((o) => o.featured).slice(0, 2);
 
   return (
     <>
+      <ScrollProgress />
       <Hero />
 
-      {/* Intro / positioning statement */}
-      <section className="bg-ivory py-20 sm:py-28">
-        <Container size="narrow" className="text-center">
-          <Reveal>
-            <p className="eyebrow text-clay">A lifestyle destination</p>
-            <p className="mt-6 text-balance font-display text-3xl leading-snug text-charcoal sm:text-4xl md:text-[2.75rem]">
-              Bienvenue au Menara Mall, perché sur les hauteurs de l&apos;Avenue
-              Mohamed VI. Un espace dédié au shopping, aux loisirs et aux
-              expériences qui rassemblent.
-            </p>
-          </Reveal>
-          <Reveal delay={0.1} className="mt-8 flex justify-center">
-            <span className="rule-gold w-24" />
-          </Reveal>
-        </Container>
-      </section>
-
       {/* Experience cards */}
-      <section className="bg-ivory pb-24">
+      <section className="bg-ivory pb-24 pt-16 sm:pt-20 lg:pt-24">
         <Container>
           <SectionHeader
-            eyebrow="Four ways to experience"
-            title="Everything Marrakech loves, under one roof"
-            lede="Shopping, restaurants et cafés, Kidzo, Le Souq Al Madinah and essential services in one climate-controlled destination."
-            action={<Button href="/shops" variant="outline" icon="arrow-right">Browse directory</Button>}
+            eyebrow="Quatre facons de vivre Menara Mall"
+            title="Tout ce que Marrakech aime, sous un meme toit"
+            lede="Shopping, restaurants et cafes, Kidzo, Le Souk Al Madinah et services essentiels dans une destination climatisee."
+            action={
+              <Button href="/shops" variant="outline" icon="arrow-right">
+                Parcourir l'annuaire
+              </Button>
+            }
           />
           <RevealGroup className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {experiences.map((exp) => (
               <RevealItem key={exp.title}>
-                <ExperienceCard exp={exp} />
+                <TiltCard className="h-full rounded-[var(--radius-xl2)]">
+                  <ExperienceCard exp={exp} />
+                </TiltCard>
               </RevealItem>
             ))}
           </RevealGroup>
@@ -111,10 +99,14 @@ export default function HomePage() {
       <section className="bg-cream py-24">
         <Container>
           <SectionHeader
-            eyebrow="Featured brands"
-            title="Boutiques & enseignes"
-            lede="The official Menara Mall directory spans fashion, beauty, high-tech, services, toys, leisure and Carrefour Market."
-            action={<Button href="/shops" variant="ghost" icon="arrow-right">All shops</Button>}
+            eyebrow="Marques a la une"
+            title="Boutiques et enseignes"
+            lede="L'annuaire officiel Menara Mall rassemble mode, beaute, high-tech, services, jouets, Kidzo et Carrefour Market."
+            action={
+              <Button href="/shops" variant="ghost" icon="arrow-right">
+                Toutes les boutiques
+              </Button>
+            }
           />
           <RevealGroup
             stagger={0.06}
@@ -133,10 +125,14 @@ export default function HomePage() {
       <section className="bg-ivory py-24">
         <Container>
           <SectionHeader
-            eyebrow="Dining highlights"
-            title="A table for every moment"
-            lede="The official restaurants and cafés directory includes fast food, coffee, desserts, international plates and terrace-friendly stops."
-            action={<Button href="/dining" variant="ghost" icon="arrow-right">All dining</Button>}
+            eyebrow="Coups de coeur restauration"
+            title="Une table pour chaque moment"
+            lede="L'annuaire officiel des restaurants et cafes propose restauration rapide, cafe, desserts, cuisines du monde et pauses en terrasse."
+            action={
+              <Button href="/dining" variant="ghost" icon="arrow-right">
+                Tous les restaurants
+              </Button>
+            }
           />
           <RevealGroup className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
             {featuredDining.map((r) => (
@@ -153,32 +149,45 @@ export default function HomePage() {
         <Container>
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <Reveal>
-              <ArtImage
-                art="Families enjoying Kidzo entertainment, soft play and rides, joyful light"
-                src={officialMedia.kidzoPlay}
-                ratio="card"
-                tone="clay"
-                className="shadow-2xl"
-              />
+              <Parallax
+                amount={34}
+                className="overflow-hidden rounded-[var(--radius-xl2)] shadow-2xl"
+              >
+                <ArtImage
+                  art="Familles profitant de Kidzo, jeux et attractions, lumiere joyeuse"
+                  src={officialMedia.kidzoFeature}
+                  ratio="card"
+                  tone="clay"
+                  className="scale-[1.2]"
+                />
+              </Parallax>
             </Reveal>
             <Reveal delay={0.1}>
-              <Badge tone="gold">Kidzo · Family Entertainment</Badge>
-              <h2 className="mt-5 text-balance text-white" style={{ fontSize: "var(--text-title)" }}>
-                Where little adventures and big smiles begin
+              <Badge tone="gold">Kidzo · Univers enfants</Badge>
+              <h2
+                className="mt-5 text-balance text-white"
+                style={{ fontSize: "var(--text-title)" }}
+              >
+                La ou commencent les petites aventures et les grands sourires
               </h2>
               <p className="mt-5 max-w-lg text-white/70">
-                L&apos;univers magique des enfants vous attend à Kidzo - Menara Mall:
-                patinoire, cinéma 7D, jeux en réalité virtuelle et Petite Crèche
-                pour les plus jeunes.
+                L&apos;univers magique des enfants vous attend à Kidzo - Menara
+                Mall: patinoire, cinéma 7D, jeux en réalité virtuelle et Petite
+                Crèche pour les plus jeunes.
               </p>
               <ul className="mt-7 grid grid-cols-2 gap-4 text-sm">
-                {([
-                  { icon: "shield", text: "Safe, supervised play" },
-                  { icon: "sparkles", text: "Rides & arcade games" },
-                  { icon: "heart", text: "Birthday packages" },
-                  { icon: "baby", text: "Toddler-friendly zones" },
-                ] as { icon: IconName; text: string }[]).map((f) => (
-                  <li key={f.text} className="flex items-center gap-3 text-white/80">
+                {(
+                  [
+                    { icon: "shield", text: "Jeux surveilles et securises" },
+                    { icon: "sparkles", text: "Attractions et arcade" },
+                    { icon: "heart", text: "Formules anniversaire" },
+                    { icon: "baby", text: "Espaces adaptes aux tout-petits" },
+                  ] as { icon: IconName; text: string }[]
+                ).map((f) => (
+                  <li
+                    key={f.text}
+                    className="flex items-center gap-3 text-white/80"
+                  >
                     <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-gold-soft">
                       <Icon name={f.icon} size={17} />
                     </span>
@@ -187,8 +196,12 @@ export default function HomePage() {
                 ))}
               </ul>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Button href="/entertainment" variant="gold" icon="arrow-right">Discover Play</Button>
-                <Button href="/contact" variant="light" icon="ticket">Plan a family visit</Button>
+                <Button href="/entertainment" variant="gold" icon="arrow-right">
+                  Decouvrir Kidzo
+                </Button>
+                <Button href="/contact" variant="light" icon="ticket">
+                  Preparer une visite en famille
+                </Button>
               </div>
             </Reveal>
           </div>
@@ -201,54 +214,71 @@ export default function HomePage() {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <Reveal className="order-2 lg:order-1">
               <p className="eyebrow text-clay">Le Souk</p>
-              <h2 className="mt-4 text-balance text-charcoal" style={{ fontSize: "var(--text-title)" }}>
-                A Moroccan experience within the mall
+              <h2
+                className="mt-4 text-balance text-charcoal"
+                style={{ fontSize: "var(--text-title)" }}
+              >
+                Une experience marocaine au coeur du mall
               </h2>
               <p className="mt-5 max-w-lg text-stone">
-                Discover a curated world of craft, fragrance, fashion, beauty and
-                traditional detail inspired by Marrakech. Le Souk gathers the city&rsquo;s
-                artisanal spirit — handwoven textiles, brass and leather, rose and
-                orange-blossom attars — in one elegant, lantern-lit promenade.
+                Decouvrez un univers soigneusement compose de savoir-faire,
+                parfums, mode, beaute et details traditionnels inspires de
+                Marrakech. Le Souk rassemble l'esprit artisanal de la ville,
+                entre textiles tisses main, laiton, cuir et senteurs de rose
+                et de fleur d'oranger, dans une promenade elegante eclairee
+                aux lanternes.
               </p>
               <div className="mt-8 flex flex-wrap gap-2">
-                {["Craft", "Fragrance", "Traditional fashion", "Beauty rituals", "Gifts", "Décor"].map((t) => (
-                  <Badge key={t} tone="outline">{t}</Badge>
+                {[
+                  "Artisanat",
+                  "Parfums",
+                  "Mode traditionnelle",
+                  "Rituels beaute",
+                  "Cadeaux",
+                  "Decoration",
+                ].map((t) => (
+                  <Badge key={t} tone="outline">
+                    {t}
+                  </Badge>
                 ))}
               </div>
               <div className="mt-8">
-                <Button href="/le-souk" variant="primary" icon="arrow-right">Discover Le Souk</Button>
+                <Button href="/le-souk" variant="primary" icon="arrow-right">
+                  Decouvrir Le Souk
+                </Button>
               </div>
             </Reveal>
-            <Reveal delay={0.1} className="order-1 grid grid-cols-2 gap-4 lg:order-2">
-              <ArtImage art="Le Souq Al Madinah traditional craft" src={officialMedia.soukHero} ratio="tall" tone="clay" className="mt-8" />
-              <ArtImage art="Le Souq Al Madinah at Menara Mall" src={officialMedia.soukDetail} ratio="tall" tone="gold" />
+            <Reveal
+              delay={0.1}
+              direction="left"
+              className="order-1 grid grid-cols-2 gap-4 lg:order-2"
+            >
+              <Parallax
+                amount={24}
+                className="mt-8 overflow-hidden rounded-[var(--radius-xl2)]"
+              >
+                <ArtImage
+                  art="Artisanat traditionnel Le Souk Al Madinah"
+                  src={officialMedia.soukHero}
+                  ratio="tall"
+                  tone="clay"
+                  className="scale-[1.18]"
+                />
+              </Parallax>
+              <Parallax
+                amount={-30}
+                className="overflow-hidden rounded-[var(--radius-xl2)]"
+              >
+                <ArtImage
+                  art="Le Souk Al Madinah a Menara Mall"
+                  src={officialMedia.soukDetail}
+                  ratio="tall"
+                  tone="gold"
+                  className="scale-[1.18]"
+                />
+              </Parallax>
             </Reveal>
           </div>
-        </Container>
-      </section>
-
-      {/* Events & Offers */}
-      <section className="bg-cream py-24">
-        <Container>
-          <SectionHeader
-            eyebrow="What's on"
-            title="Events & offers worth the visit"
-            lede="A calendar of culture, family festivals and seasonal moments — plus the season's best offers."
-            action={
-              <div className="flex gap-3">
-                <Button href="/events" variant="ghost" icon="calendar">Events</Button>
-                <Button href="/offers" variant="ghost" icon="tag">Offers</Button>
-              </div>
-            }
-          />
-          <RevealGroup className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {upcoming.map((e) => (
-              <RevealItem key={e.id}><EventCard event={e} /></RevealItem>
-            ))}
-            {featuredOffers.map((o) => (
-              <RevealItem key={o.id}><OfferCard offer={o} /></RevealItem>
-            ))}
-          </RevealGroup>
         </Container>
       </section>
 
@@ -258,8 +288,8 @@ export default function HomePage() {
           <SectionHeader
             align="center"
             eyebrow="@menaramall"
-            title="Moments from Menara Mall"
-            lede="Tag your visit with #MenaraMall to be featured."
+            title="Moments voles a Menara Mall"
+            lede="Identifiez votre visite avec #MenaraMall pour apparaitre dans notre selection."
           />
           <RevealGroup
             stagger={0.05}
@@ -273,7 +303,11 @@ export default function HomePage() {
                   rel="noopener noreferrer"
                   className="group relative block"
                 >
-                  <ArtImage art="Official Menara Mall gallery image" src={src} ratio="square" />
+                  <ArtImage
+                    art="Image officielle de la galerie Menara Mall"
+                    src={src}
+                    ratio="square"
+                  />
                   <span className="absolute inset-0 flex items-center justify-center rounded-[var(--radius-xl2)] bg-charcoal/0 text-white opacity-0 transition-all duration-300 group-hover:bg-charcoal/40 group-hover:opacity-100">
                     <Icon name="instagram" size={26} />
                   </span>
@@ -282,8 +316,12 @@ export default function HomePage() {
             ))}
           </RevealGroup>
           <div className="mt-10 text-center">
-            <Button href={site.social.instagram} variant="outline" icon="instagram">
-              Follow @menaramall
+            <Button
+              href={site.social.instagram}
+              variant="outline"
+              icon="instagram"
+            >
+              Suivre @menaramall
             </Button>
           </div>
         </Container>

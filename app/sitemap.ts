@@ -2,7 +2,6 @@ import type { MetadataRoute } from "next";
 import { site } from "@/lib/data/site";
 import { brands } from "@/lib/data/brands";
 import { restaurants } from "@/lib/data/restaurants";
-import { events } from "@/lib/data/events";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = site.url;
@@ -14,7 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/dining",
     "/entertainment",
     "/le-souk",
-    "/events",
     "/offers",
     "/services",
     "/leasing",
@@ -40,12 +38,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  const eventRoutes = events.map((e) => ({
-    url: `${base}/events/${e.slug}`,
-    lastModified: now,
-    changeFrequency: "weekly" as const,
-    priority: 0.6,
-  }));
-
-  return [...staticRoutes, ...brandRoutes, ...diningRoutes, ...eventRoutes];
+  return [...staticRoutes, ...brandRoutes, ...diningRoutes];
 }

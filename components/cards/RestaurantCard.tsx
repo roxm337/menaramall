@@ -15,7 +15,7 @@ export function RestaurantCard({ restaurant: r }: { restaurant: Restaurant }) {
         <ArtImage art={r.heroArt} src={r.imageSrc} ratio="card" rounded={false} scrim />
         <div className="absolute left-4 top-4 flex flex-wrap gap-2">
           <Badge tone="gold">{r.type}</Badge>
-          {r.tags?.includes("Terrace") && <Badge tone="palm">Terrace</Badge>}
+          {r.tags?.includes("Terrasse") && <Badge tone="palm">Terrasse</Badge>}
         </div>
         <div className="absolute bottom-4 left-5 right-5">
           <p className="eyebrow text-gold-soft">{r.cuisine}</p>
@@ -32,7 +32,7 @@ export function RestaurantCard({ restaurant: r }: { restaurant: Restaurant }) {
         <div className="mt-5 flex items-center justify-between border-t border-charcoal/8 pt-4">
           <OpenBadge hours={r.openingHours} />
           <span className="inline-flex items-center gap-1 text-xs font-medium text-clay">
-            View <Icon name="arrow-right" size={14} />
+            Voir <Icon name="arrow-right" size={14} />
           </span>
         </div>
       </div>

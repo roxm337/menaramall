@@ -67,7 +67,7 @@ export function ShopsDirectory({
       {/* Featured strip — only when browsing without filters */}
       {!hasFilters && !loading && (
         <div className="mb-14">
-          <p className="eyebrow mb-5 text-clay">Featured brands</p>
+          <p className="eyebrow mb-5 text-clay">Marques a la une</p>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {featured.map((b) => (
               <BrandCard key={b.id} brand={b} />
@@ -79,10 +79,10 @@ export function ShopsDirectory({
       {/* Controls */}
       <div className="sticky top-[var(--header-h,4.5rem)] z-20 -mx-5 mb-8 border-y border-charcoal/8 bg-ivory/90 px-5 py-5 backdrop-blur-md sm:-mx-8 sm:px-8">
         <div className="grid gap-4">
-          <SearchField value={query} onChange={setQuery} placeholder="Search brands, categories…" />
+          <SearchField value={query} onChange={setQuery} placeholder="Rechercher une marque, une categorie..." />
           <div className="grid gap-4 sm:grid-cols-2">
-            <ChipFilter label="Category" options={categories} value={category} onChange={setCategory} />
-            <ChipFilter label="Floor" options={floors} value={floor} onChange={setFloor} />
+            <ChipFilter label="Categorie" options={categories} value={category} onChange={setCategory} />
+            <ChipFilter label="Niveau" options={floors} value={floor} onChange={setFloor} />
           </div>
           {/* Alphabetical */}
           <div className="flex flex-wrap items-center gap-1">
@@ -93,7 +93,7 @@ export function ShopsDirectory({
                 letter === null ? "text-clay" : "text-stone hover:text-charcoal",
               )}
             >
-              All
+              Tous
             </button>
             {ALPHA.map((l) => {
               const enabled = activeLetters.has(l);
@@ -118,7 +118,7 @@ export function ShopsDirectory({
       </div>
 
       <div className="mb-6">
-        <ResultsBar count={results.length} noun="shop" onReset={reset} hasFilters={hasFilters} />
+        <ResultsBar count={results.length} noun="boutique" onReset={reset} hasFilters={hasFilters} />
       </div>
 
       {loading ? (
@@ -126,9 +126,9 @@ export function ShopsDirectory({
       ) : results.length === 0 ? (
         <EmptyState
           icon="bag"
-          title="No shops match your search"
-          message="Try adjusting your filters or searching for a different brand or category."
-          action={<Button onClick={reset} variant="outline">Reset filters</Button>}
+          title="Aucune boutique ne correspond a votre recherche"
+          message="Essayez d'ajuster vos filtres ou de rechercher une autre marque ou categorie."
+          action={<Button onClick={reset} variant="outline">Reinitialiser les filtres</Button>}
         />
       ) : (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

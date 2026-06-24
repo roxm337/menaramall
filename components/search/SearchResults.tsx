@@ -10,24 +10,24 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 
-const FILTERS = ["All", "Shop", "Dining", "Event", "Offer"] as const;
+const FILTERS = ["Tous", "Boutique", "Restaurant", "Offre"] as const;
 
 export function SearchResults() {
   const params = useSearchParams();
   const router = useRouter();
   const initial = params.get("q") ?? "";
   const [query, setQuery] = useState(initial);
-  const [filter, setFilter] = useState<(typeof FILTERS)[number]>("All");
+  const [filter, setFilter] = useState<(typeof FILTERS)[number]>("Tous");
 
   // Keep the input in sync when the ?q= param changes (e.g. via the overlay).
   // eslint-disable-next-line react-hooks/set-state-in-effect -- mirror URL param into editable input
   useEffect(() => setQuery(initial), [initial]);
 
   const all = useMemo(() => searchAll(query), [query]);
-  const results = filter === "All" ? all : all.filter((r) => r.type === filter);
+  const results = filter === "Tous" ? all : all.filter((r) => r.type === filter);
 
   const counts = useMemo(() => {
-    const c: Record<string, number> = { All: all.length };
+    const c: Record<string, number> = { Tous: all.length };
     for (const r of all) c[r.type] = (c[r.type] ?? 0) + 1;
     return c;
   }, [all]);
@@ -44,8 +44,8 @@ export function SearchResults() {
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search shops, dining, events…"
-          aria-label="Search"
+          placeholder="Rechercher des boutiques, restaurants, offres..."
+          aria-label="Recherche"
           autoFocus
           className="w-full bg-transparent font-display text-2xl text-charcoal outline-none placeholder:text-stone/50 sm:text-3xl"
         />
@@ -56,7 +56,7 @@ export function SearchResults() {
           <div className="mt-6 flex flex-wrap items-center gap-2">
             {FILTERS.map((f) => {
               const n = counts[f] ?? 0;
-              const disabled = f !== "All" && n === 0;
+              const disabled = f !== "Tous" && n === 0;
               return (
                 <button
                   key={f}
@@ -77,17 +77,17 @@ export function SearchResults() {
           </div>
 
           <p className="mt-6 text-sm text-stone">
-            <span className="font-medium text-charcoal">{results.length}</span> result
-            {results.length === 1 ? "" : "s"} for &ldquo;{query}&rdquo;
+            <span className="font-medium text-charcoal">{results.length}</span> resultat
+            {results.length === 1 ? "" : "s"} pour &ldquo;{query}&rdquo;
           </p>
 
           <div className="mt-6">
             {results.length === 0 ? (
               <EmptyState
                 icon="search"
-                title="Nothing found"
-                message="We couldn't find a match. Try a different term, or browse the directory."
-                action={<Button href="/shops" variant="outline" icon="arrow-right">Browse shops</Button>}
+                title="Aucun resultat"
+                message="Aucune correspondance trouvee. Essayez un autre terme ou parcourez l'annuaire."
+                action={<Button href="/shops" variant="outline" icon="arrow-right">Voir les boutiques</Button>}
               />
             ) : (
               <ul className="divide-y divide-charcoal/8 overflow-hidden rounded-[var(--radius-xl2)] bg-white ring-1 ring-charcoal/8">
@@ -111,7 +111,7 @@ export function SearchResults() {
       )}
 
       {!query && (
-        <p className="mt-10 text-stone">Start typing to search across shops, dining, events and offers.</p>
+        <p className="mt-10 text-stone">Commencez a saisir pour rechercher parmi les boutiques, restaurants et offres.</p>
       )}
     </div>
   );

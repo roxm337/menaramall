@@ -9,7 +9,7 @@ import { CardSkeletonGrid } from "@/components/ui/Skeleton";
 import { cn } from "@/lib/utils";
 import { SearchField, ChipFilter, ResultsBar } from "./FilterControls";
 
-const TAGS = ["Food Court", "Fast Food", "Café", "Dessert"] as const;
+const TAGS = ["Food Court", "Restauration rapide", "Cafe", "Dessert", "Terrasse"] as const;
 
 export function DiningDirectory({
   restaurants,
@@ -55,10 +55,10 @@ export function DiningDirectory({
     <div>
       <div className="sticky top-[var(--header-h,4.5rem)] z-20 -mx-5 mb-8 border-y border-charcoal/8 bg-ivory/90 px-5 py-5 backdrop-blur-md sm:-mx-8 sm:px-8">
         <div className="grid gap-4">
-          <SearchField value={query} onChange={setQuery} placeholder="Search cuisines, cafés, restaurants…" />
+          <SearchField value={query} onChange={setQuery} placeholder="Rechercher une cuisine, un cafe, un restaurant..." />
           <ChipFilter label="Type" options={types} value={type} onChange={setType} />
           <div>
-            <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-stone">Good for</p>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-stone">Ideal pour</p>
             <div className="flex flex-wrap gap-2">
               {TAGS.map((t) => (
                 <button
@@ -80,7 +80,7 @@ export function DiningDirectory({
       </div>
 
       <div className="mb-6">
-        <ResultsBar count={results.length} noun="venue" onReset={reset} hasFilters={hasFilters} />
+        <ResultsBar count={results.length} noun="adresse" onReset={reset} hasFilters={hasFilters} />
       </div>
 
       {loading ? (
@@ -88,9 +88,9 @@ export function DiningDirectory({
       ) : results.length === 0 ? (
         <EmptyState
           icon="utensils"
-          title="No venues match your search"
-          message="Try a different cuisine, type or tag — there's a table for every taste at Menara Mall."
-          action={<Button onClick={reset} variant="outline">Reset filters</Button>}
+          title="Aucune adresse ne correspond a votre recherche"
+          message="Essayez une autre cuisine, un autre type ou un autre filtre : il y a une table pour chaque envie a Menara Mall."
+          action={<Button onClick={reset} variant="outline">Reinitialiser les filtres</Button>}
         />
       ) : (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

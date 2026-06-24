@@ -1,13 +1,13 @@
 import type { DayHours, OpeningHours } from "@/lib/types";
 
 export const DAY_LABELS = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
+  "Lundi",
+  "Mardi",
+  "Mercredi",
+  "Jeudi",
+  "Vendredi",
+  "Samedi",
+  "Dimanche",
 ] as const;
 
 /** Convert JS getDay() (0=Sun) to our Monday-first index (0=Mon). */
@@ -22,7 +22,7 @@ function toMinutes(t: string): number {
 
 export interface OpenState {
   isOpen: boolean;
-  label: string; // e.g. "Open · closes 22:00" or "Closed · opens 10:00 tomorrow"
+  label: string;
   todayHours: DayHours | null;
 }
 
@@ -42,14 +42,14 @@ export function getOpenState(hours: OpeningHours, now = new Date()): OpenState {
     if (mins >= open && mins < close) {
       return {
         isOpen: true,
-        label: `Open now · closes ${today.close === "00:00" ? "midnight" : today.close}`,
+        label: `Ouvert maintenant · ferme a ${today.close === "00:00" ? "minuit" : today.close}`,
         todayHours: today,
       };
     }
     if (mins < open) {
       return {
         isOpen: false,
-        label: `Closed · opens ${today.open}`,
+        label: `Ferme · ouvre a ${today.open}`,
         todayHours: today,
       };
     }
@@ -59,21 +59,21 @@ export function getOpenState(hours: OpeningHours, now = new Date()): OpenState {
   for (let i = 1; i <= 7; i++) {
     const next = hours[(idx + i) % 7];
     if (next) {
-      const dayLabel = i === 1 ? "tomorrow" : DAY_LABELS[(idx + i) % 7];
+      const dayLabel = i === 1 ? "demain" : DAY_LABELS[(idx + i) % 7];
       return {
         isOpen: false,
-        label: `Closed · opens ${next.open} ${dayLabel}`,
+        label: `Ferme · ouvre a ${next.open} ${dayLabel}`,
         todayHours: today,
       };
     }
   }
-  return { isOpen: false, label: "Hours unavailable", todayHours: today };
+  return { isOpen: false, label: "Horaires indisponibles", todayHours: today };
 }
 
 /** Group identical consecutive days into ranges for compact display. */
 export function summarizeHours(hours: OpeningHours): string[] {
   const fmt = (d: DayHours | null) =>
-    d ? `${d.open} – ${d.close === "00:00" ? "00:00" : d.close}` : "Closed";
+    d ? `${d.open} – ${d.close === "00:00" ? "00:00" : d.close}` : "Ferme";
   const out: string[] = [];
   let start = 0;
   for (let i = 1; i <= 7; i++) {

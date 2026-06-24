@@ -21,7 +21,7 @@ export function BrandCard({ brand }: { brand: Brand }) {
         />
         <div className="absolute left-4 top-4 flex gap-2">
           <Badge tone="gold">{brand.category}</Badge>
-          {brand.featured && <Badge tone="clay">Featured</Badge>}
+          {brand.featured && <Badge tone="clay">A la une</Badge>}
         </div>
       </div>
       <div className="flex flex-1 flex-col p-6">

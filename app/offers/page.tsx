@@ -7,9 +7,9 @@ import { offers, offerCategories } from "@/lib/data/offers";
 import { formatDateRange } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Offers — Seasonal Savings & Privileges",
+  title: "Offres — Bons plans et privileges de saison",
   description:
-    "Explore the latest offers and privileges from brands at Menara Mall Marrakech — fashion, beauty, dining, electronics and family savings. Filter by category and brand.",
+    "Decouvrez les dernieres offres et privileges des marques de Menara Mall Marrakech : mode, beaute, restauration, high-tech et bons plans famille. Filtrez par categorie et par marque.",
   alternates: { canonical: "/offers" },
 };
 
@@ -22,12 +22,12 @@ export default function OffersPage() {
   return (
     <>
       <PageHero
-        eyebrow="Offers & Privileges"
-        title="The season's best, beautifully curated"
-        lede="From wardrobe refreshes to beauty gifts and family dining treats — discover current offers from the brands at Menara Mall."
-        art="Elegant retail offer display, gift sets and seasonal styling, warm light"
+        eyebrow="Offres & privileges"
+        title="Le meilleur de la saison, soigneusement selectionne"
+        lede="Des renouvellements de dressing aux cadeaux beaute et plaisirs a partager en famille : decouvrez les offres en cours des marques Menara Mall."
+        art="Presentation elegante d'offres retail, coffrets cadeaux et styling de saison, lumiere chaude"
         tone="gold"
-        crumbs={[{ label: "Offers" }]}
+        crumbs={[{ label: "Offres" }]}
       />
       <section className="bg-ivory py-16 sm:py-20">
         <Container>
@@ -37,11 +37,10 @@ export default function OffersPage() {
 
       <section className="bg-cream py-20">
         <Container size="narrow">
-          <p className="eyebrow text-clay">The small print</p>
-          <h2 className="mt-3 text-3xl text-charcoal">Terms & conditions</h2>
+          <p className="eyebrow text-clay">Informations utiles</p>
+          <h2 className="mt-3 text-3xl text-charcoal">Conditions generales</h2>
           <p className="mt-3 text-sm text-stone">
-            Offers are provided by participating brands and subject to their terms. Please confirm
-            details in store before purchase.
+            Les offres sont proposees par les marques participantes et soumises a leurs propres conditions. Merci de confirmer les details en magasin avant achat.
           </p>
           <div className="mt-8">
             <Accordion items={terms} />

@@ -10,7 +10,7 @@ export function Gallery({ items, tone }: { items: string[]; tone?: "sand" | "cla
         return (
           <ArtImage
             key={i}
-            art={isImage ? "Official Menara Mall gallery image" : item}
+            art={isImage ? "Image officielle de la galerie Menara Mall" : item}
             src={isImage ? item : undefined}
             tone={tone}
             ratio="square"

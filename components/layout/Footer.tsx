@@ -19,15 +19,15 @@ export function Footer() {
       <div className="border-b border-white/10">
         <div className="mx-auto grid max-w-7xl gap-8 px-5 py-14 sm:px-8 lg:grid-cols-2 lg:items-center lg:px-12">
           <div>
-            <p className="eyebrow text-gold-soft">Stay in the know</p>
+            <p className="eyebrow text-gold-soft">Restez informe</p>
             <h2 className="mt-3 max-w-md text-3xl text-white sm:text-4xl">
-              New openings, events & offers — first.
+              Nouvelles ouvertures et offres, en premier.
             </h2>
           </div>
           <div className="lg:justify-self-end lg:max-w-md lg:w-full">
             <Newsletter tone="light" />
             <p className="mt-3 text-xs text-white/45">
-              By subscribing you agree to receive updates from Menara Mall. Unsubscribe anytime.
+              En vous inscrivant, vous acceptez de recevoir les actualites de Menara Mall. Desinscription a tout moment.
             </p>
           </div>
         </div>
@@ -56,8 +56,8 @@ export function Footer() {
           </div>
         </div>
 
-        <nav className="lg:col-span-2" aria-label="Explore">
-          <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40">Explore</h3>
+        <nav className="lg:col-span-2" aria-label="Explorer">
+          <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40">Explorer</h3>
           <ul className="mt-4 space-y-2.5">
             {footerNav.explore.map((l) => (
               <li key={l.href}>
@@ -69,17 +69,17 @@ export function Footer() {
           </ul>
         </nav>
 
-        <nav className="lg:col-span-2" aria-label="Visit & business">
-          <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40">Visit</h3>
+        <nav className="lg:col-span-2" aria-label="Essentiels et business">
+          <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40">Essentiels</h3>
           <ul className="mt-4 space-y-2.5">
-            {footerNav.visit.map((l) => (
+            {footerNav.essentials.map((l) => (
               <li key={l.href}>
                 <Link href={l.href} className="text-sm text-white/70 transition-colors hover:text-gold-soft">
                   {l.label}
                 </Link>
               </li>
             ))}
-            {footerNav.business.slice(0, 2).map((l) => (
+            {footerNav.business.slice(0, 1).map((l) => (
               <li key={l.href}>
                 <Link href={l.href} className="text-sm text-white/70 transition-colors hover:text-gold-soft">
                   {l.label}
@@ -90,7 +90,7 @@ export function Footer() {
         </nav>
 
         <div className="lg:col-span-4">
-          <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40">Find us</h3>
+          <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40">Nous trouver</h3>
           <address className="mt-4 not-italic text-sm leading-relaxed text-white/70">
             {site.address.street}
             {site.address.district ? `, ${site.address.district}` : ""}
@@ -113,11 +113,11 @@ export function Footer() {
           </div>
           <div className="mt-5 rounded-2xl bg-white/5 p-4">
             <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-white/40">
-              Shops
+              Boutiques
             </p>
             <HoursList hours={mallHours} className="[&_dt]:text-white/55 [&_dd]:text-white [&>div]:border-white/10" />
             <p className="mb-2 mt-5 text-xs font-semibold uppercase tracking-widest text-white/40">
-              Food Court & Kidzo
+              Food Court et Kidzo
             </p>
             <HoursList hours={foodCourtHours} className="[&_dt]:text-white/55 [&_dd]:text-white [&>div]:border-white/10" />
             <p className="mb-2 mt-5 text-xs font-semibold uppercase tracking-widest text-white/40">
@@ -131,7 +131,7 @@ export function Footer() {
       {/* Legal bar */}
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-6 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12">
-          <p>© {new Date().getFullYear()} {site.name}, {site.city}. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {site.name}, {site.city}. Tous droits reserves.</p>
           <ul className="flex flex-wrap gap-4">
             {legalNav.map((l) => (
               <li key={l.label}>

@@ -8,9 +8,9 @@ import { Icon, type IconName } from "@/components/ui/Icon";
 import { services } from "@/lib/data/services";
 
 export const metadata: Metadata = {
-  title: "Services — Everything for a Comfortable Visit",
+  title: "Services — Tout pour une visite confortable",
   description:
-    "Visitor services at Menara Mall Marrakech — parking, security, information desk, family services, prayer rooms, accessibility, Wi-Fi, ATMs, lost & found and restrooms.",
+    "Les services visiteurs de Menara Mall Marrakech : parking, securite, point information, services famille, salles de priere, accessibilite, Wi-Fi, distributeurs, objets trouves et sanitaires.",
   alternates: { canonical: "/services" },
 };
 
@@ -18,19 +18,19 @@ export default function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Visitor Services"
-        title="Thoughtful services at every turn"
-        lede="From parking and prayer rooms to family facilities and accessibility, every detail is designed to make your visit effortless and comfortable."
-        art="Elegant mall concierge and information desk, warm welcoming light"
+        eyebrow="Services visiteurs"
+        title="Des services pensees pour chaque instant"
+        lede="Du parking aux salles de priere, des equipements famille a l'accessibilite, tout est prevu pour rendre votre visite simple et confortable."
+        art="Conciergerie elegante et point information du mall, lumiere accueillante"
         tone="palm"
         crumbs={[{ label: "Services" }]}
       />
       <section className="bg-ivory py-16 sm:py-20">
         <Container>
           <SectionHeader
-            eyebrow="At your service"
-            title="Here to help, throughout your day"
-            lede="Our team and facilities are on hand across every floor. Some details are confirmed on site — look for items marked for verification."
+            eyebrow="A votre service"
+            title="La pour vous accompagner tout au long de la journee"
+            lede="Notre equipe et nos equipements sont presents a chaque etage. Certains details sont confirmes sur place."
           />
           <RevealGroup className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((s) => (
@@ -52,14 +52,14 @@ export default function ServicesPage() {
           <div className="mt-14 rounded-[var(--radius-xl2)] bg-charcoal p-8 text-ivory sm:p-10">
             <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h2 className="text-2xl text-white">Need something during your visit?</h2>
+                <h2 className="text-2xl text-white">Besoin d'aide pendant votre visite ?</h2>
                 <p className="mt-2 max-w-md text-sm text-white/70">
-                  Visit the Information Desk on the Ground Floor or reach out — our team is happy to help.
+                  Rendez-vous au point information au rez-de-chaussee ou contactez-nous : notre equipe se fera un plaisir de vous aider.
                 </p>
               </div>
               <div className="flex gap-3">
-                <Button href="/shops" variant="gold" icon="bag">Browse shops</Button>
-                <Button href="/contact" variant="light" icon="phone">Contact us</Button>
+                <Button href="/shops" variant="gold" icon="bag">Voir les boutiques</Button>
+                <Button href="/contact" variant="light" icon="phone">Nous contacter</Button>
               </div>
             </div>
           </div>

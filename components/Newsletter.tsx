@@ -34,7 +34,7 @@ export function Newsletter({ tone = "dark" }: { tone?: "dark" | "light" }) {
         )}
       >
         <Icon name="check" size={18} />
-        Thank you — you’re on the list. Look out for what’s new at Menara Mall.
+        Merci, votre inscription est bien prise en compte. Restez a l'affut des nouveautes Menara Mall.
       </div>
     );
   }
@@ -59,8 +59,8 @@ export function Newsletter({ tone = "dark" }: { tone?: "dark" | "light" }) {
             setEmail(e.target.value);
             if (status === "error") setStatus("idle");
           }}
-          placeholder="Your email address"
-          aria-label="Email address"
+          placeholder="Votre adresse e-mail"
+          aria-label="Adresse e-mail"
           aria-invalid={status === "error"}
           className={cn(
             "w-full bg-transparent text-sm outline-none",
@@ -74,12 +74,12 @@ export function Newsletter({ tone = "dark" }: { tone?: "dark" | "light" }) {
             light ? "bg-white text-charcoal hover:bg-gold-soft" : "bg-charcoal text-ivory hover:bg-clay",
           )}
         >
-          Subscribe
+          S'inscrire
         </button>
       </div>
       {status === "error" && (
         <p className={cn("mt-2 pl-4 text-xs", light ? "text-gold-soft" : "text-clay")}>
-          Please enter a valid email address.
+          Veuillez saisir une adresse e-mail valide.
         </p>
       )}
     </form>

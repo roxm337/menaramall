@@ -15,7 +15,7 @@ export function hashUnit(input: string): number {
 
 export function formatDateRange(date: string, endDate?: string): string {
   const fmt = (d: string) =>
-    new Date(`${d}T00:00:00`).toLocaleDateString("en-GB", {
+    new Date(`${d}T00:00:00`).toLocaleDateString("fr-FR", {
       day: "numeric",
       month: "long",
       year: "numeric",
@@ -26,7 +26,7 @@ export function formatDateRange(date: string, endDate?: string): string {
   const sameMonth =
     a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear();
   if (sameMonth) {
-    const month = a.toLocaleDateString("en-GB", { month: "long", year: "numeric" });
+    const month = a.toLocaleDateString("fr-FR", { month: "long", year: "numeric" });
     return `${a.getDate()}–${b.getDate()} ${month}`;
   }
   return `${fmt(date)} – ${fmt(endDate)}`;
@@ -35,7 +35,7 @@ export function formatDateRange(date: string, endDate?: string): string {
 export function shortDate(date: string): { day: string; month: string } {
   const d = new Date(`${date}T00:00:00`);
   return {
-    day: d.toLocaleDateString("en-GB", { day: "2-digit" }),
-    month: d.toLocaleDateString("en-GB", { month: "short" }).toUpperCase(),
+    day: d.toLocaleDateString("fr-FR", { day: "2-digit" }),
+    month: d.toLocaleDateString("fr-FR", { month: "short" }).toUpperCase(),
   };
 }

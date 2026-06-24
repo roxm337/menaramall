@@ -6,10 +6,10 @@ import { cn } from "@/lib/utils";
 import { Icon, type IconName } from "@/components/ui/Icon";
 
 const items: { label: string; href: string; icon: IconName }[] = [
-  { label: "Shop", href: "/shops", icon: "bag" },
-  { label: "Dine", href: "/dining", icon: "utensils" },
-  { label: "Play", href: "/entertainment", icon: "play" },
-  { label: "Events", href: "/events", icon: "calendar" },
+  { label: "Boutiques", href: "/shops", icon: "bag" },
+  { label: "Resto", href: "/dining", icon: "utensils" },
+  { label: "Kidzo", href: "/entertainment", icon: "play" },
+  { label: "Souk", href: "/le-souk", icon: "compass" },
 ];
 
 /** Sticky bottom quick-navigation for mobile. */
@@ -17,7 +17,7 @@ export function MobileQuickNav() {
   const pathname = usePathname();
   return (
     <nav
-      aria-label="Quick navigation"
+      aria-label="Navigation rapide"
       className="fixed inset-x-0 bottom-0 z-30 border-t border-charcoal/8 bg-ivory/90 backdrop-blur-md lg:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >

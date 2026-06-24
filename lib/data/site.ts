@@ -11,23 +11,22 @@ export const site = {
   name: "Menara Mall",
   shortName: "Menara",
   city: "Marrakech",
-  country: "Morocco",
-  tagline: "Experience Marrakech in One Destination",
+  country: "Maroc",
+  tagline: "Vivez Marrakech en une seule destination",
   description:
-    "A lifestyle destination on Avenue Mohamed VI — shopping, dining, Kidzo, Le Souq Al Madinah and visitor experiences in Marrakech.",
+    "Une destination lifestyle sur l'avenue Mohamed VI : shopping, restauration, Kidzo et Le Souk Al Madinah a Marrakech.",
   url: "https://www.menaramall.com",
   address: {
     street: "Avenue Mohamed VI",
     district: "",
     city: "Marrakech",
     postalCode: "",
-    country: "Morocco",
+    country: "Maroc",
   },
   geo: { lat: 31.6186366, lng: -8.0092535 },
   phone: "" as string,
   email: "info@menaramall.com",
   leasingEmail: "info@menaramall.com",
-  eventsEmail: "info@menaramall.com",
   social: {
     instagram: "https://instagram.com",
     facebook: "https://facebook.com",
@@ -70,43 +69,40 @@ export const carrefourHours: OpeningHours = [
 ];
 
 export const primaryNav = [
-  { label: "Shops", href: "/shops" },
-  { label: "Dining", href: "/dining" },
-  { label: "Entertainment", href: "/entertainment" },
+  { label: "Boutiques", href: "/shops" },
+  { label: "Restaurants", href: "/dining" },
+  { label: "Kidzo", href: "/entertainment" },
   { label: "Le Souk", href: "/le-souk" },
-  { label: "Events", href: "/events" },
 ] as const;
 
 export const footerNav = {
   explore: [
-    { label: "Shops", href: "/shops" },
-    { label: "Dining", href: "/dining" },
-    { label: "Entertainment", href: "/entertainment" },
+    { label: "Boutiques", href: "/shops" },
+    { label: "Restaurants", href: "/dining" },
+    { label: "Kidzo", href: "/entertainment" },
     { label: "Le Souk", href: "/le-souk" },
-    { label: "Events", href: "/events" },
-    { label: "Offers", href: "/offers" },
+    { label: "Offres", href: "/offers" },
   ],
-  visit: [
+  essentials: [
     { label: "Services", href: "/services" },
-    { label: "Search", href: "/search" },
+    { label: "Recherche", href: "/search" },
     { label: "Contact", href: "/contact" },
   ],
   business: [
-    { label: "Leasing & Partnerships", href: "/leasing" },
-    { label: "Events & Activations", href: "/leasing#events" },
-    { label: "Media & Advertising", href: "/leasing#media" },
+    { label: "Location & partenariats", href: "/leasing" },
+    { label: "Medias & publicite", href: "/leasing#media" },
     { label: "Contact", href: "/contact" },
   ],
 } as const;
 
 export const legalNav = [
-  { label: "Privacy Policy", href: "/contact" },
-  { label: "Terms of Use", href: "/contact" },
-  { label: "Cookie Preferences", href: "/contact" },
+  { label: "Politique de confidentialite", href: "/contact" },
+  { label: "Conditions d'utilisation", href: "/contact" },
+  { label: "Preferences cookies", href: "/contact" },
 ] as const;
 
 export const locales = [
-  { code: "en", label: "English", dir: "ltr" },
   { code: "fr", label: "Français", dir: "ltr" },
+  { code: "en", label: "English", dir: "ltr" },
   { code: "ar", label: "العربية", dir: "rtl" },
 ] as const;

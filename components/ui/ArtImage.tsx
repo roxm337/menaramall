@@ -14,12 +14,12 @@ import { cn, hashUnit } from "@/lib/utils";
  * team supplies real assets — the props map cleanly to image src/alt.
  */
 const tones: Record<string, [string, string, string]> = {
-  sand: ["#e7d3b3", "#cda06a", "#9c5a3c"],
-  clay: ["#c98463", "#b76e4c", "#7d4730"],
-  palm: ["#3f8a72", "#2f7a63", "#163d31"],
-  charcoal: ["#3a3733", "#2c2a27", "#141312"],
-  gold: ["#d8c393", "#b89b5e", "#8a7340"],
-  ivory: ["#fbf7f0", "#e7d3b3", "#cba978"],
+  sand: ["#c7d0e6", "#a9b6d6", "#7c8dbe"],
+  clay: ["#4a66cc", "#2a4bc0", "#1b2f86"],
+  palm: ["#1fa38c", "#16887a", "#0a4a40"],
+  charcoal: ["#2c3543", "#1b2330", "#0e131c"],
+  gold: ["#f0c26b", "#e7a12e", "#b27a1e"],
+  ivory: ["#f6f6f1", "#e3e3db", "#c9cbc0"],
 };
 const toneKeys = Object.keys(tones);
 

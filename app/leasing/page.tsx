@@ -9,47 +9,46 @@ import { Icon, type IconName } from "@/components/ui/Icon";
 import { ContactForm } from "@/components/forms/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Leasing & Partnerships — Grow With Menara Mall",
+  title: "Location & partenariats — Developpez votre marque avec Menara Mall",
   description:
-    "Partner with Menara Mall Marrakech. Retail leasing, pop-up opportunities, event activations and media advertising at a premium lifestyle destination on Avenue Mohammed VI.",
+    "Associez-vous a Menara Mall Marrakech. Location commerciale, pop-up stores et solutions media dans une destination lifestyle premium sur l'avenue Mohammed VI.",
   alternates: { canonical: "/leasing" },
 };
 
 const stats = [
-  { value: "Prime", label: "Location on Avenue Mohammed VI" },
-  { value: "All ages", label: "Families, locals & tourists" },
-  { value: "3 floors", label: "Of curated retail & dining" },
-  { value: "Year-round", label: "Footfall from a tourism hub" },
+  { value: "Premium", label: "Adresse sur l'avenue Mohammed VI" },
+  { value: "Tous publics", label: "Familles, residents et touristes" },
+  { value: "3 niveaux", label: "De shopping et restauration" },
+  { value: "Toute l'annee", label: "Flux porte par un pole touristique" },
 ];
 
 const why: { icon: IconName; title: string; text: string }[] = [
-  { icon: "map-pin", title: "Landmark address", text: "A prominent position on one of Marrakech's most prestigious avenues, in the Hivernage hotel district." },
-  { icon: "star", title: "Premium positioning", text: "A lifestyle destination that attracts discerning local and international shoppers." },
-  { icon: "heart", title: "Loyal family audience", text: "Anchored by Carrefour, Kidzo and leading brands that bring families back week after week." },
-  { icon: "compass", title: "Tourism gateway", text: "Steps from major hotels, drawing a steady international visitor base year-round." },
+  { icon: "map-pin", title: "Adresse emblématique", text: "Une position de choix sur l'une des avenues les plus prestigieuses de Marrakech, au coeur du quartier hotelier de l'Hivernage." },
+  { icon: "star", title: "Positionnement premium", text: "Une destination lifestyle qui attire une clientele locale et internationale exigeante." },
+  { icon: "heart", title: "Audience familiale fidele", text: "Portee par Carrefour, Kidzo et des enseignes fortes qui font revenir les familles semaine apres semaine." },
+  { icon: "compass", title: "Porte d'entree touristique", text: "A quelques pas des grands hotels, avec un flux regulier de visiteurs internationaux toute l'annee." },
 ];
 
 const opportunities: { id: string; icon: IconName; title: string; text: string }[] = [
-  { id: "retail", icon: "bag", title: "Retail leasing", text: "Flagship and in-line units across fashion, beauty, lifestyle and services — join a carefully curated tenant mix." },
-  { id: "popups", icon: "sparkles", title: "Pop-up opportunities", text: "Short-term retail moments and seasonal activations in high-visibility concourse locations." },
-  { id: "events", icon: "ticket", title: "Event activations", text: "Brand experiences, launches and sampling in our central court and terrace spaces." },
-  { id: "media", icon: "play", title: "Media & advertising", text: "Digital screens, atrium branding and high-impact placements to reach our visitors." },
+  { id: "retail", icon: "bag", title: "Location commerciale", text: "Cellules flagship et boutiques lineaires en mode, beaute, lifestyle et services : rejoignez un mix enseignes soigneusement compose." },
+  { id: "popups", icon: "sparkles", title: "Opportunites pop-up", text: "Formats courts et activations saisonnieres dans des zones de passage a forte visibilite." },
+  { id: "media", icon: "play", title: "Medias & publicite", text: "Ecrans digitaux, habillage d'atrium et dispositifs impactants pour toucher nos visiteurs." },
 ];
 
 export default function LeasingPage() {
   return (
     <>
       <PageHero
-        eyebrow="Leasing · Partnerships"
-        title="Grow your brand at the heart of Marrakech"
-        lede="Menara Mall brings together discerning shoppers, families and international visitors in a premium setting on Avenue Mohammed VI — the ideal stage for your brand."
-        art="Architectural mall interior, premium retail concourse, aspirational light"
+        eyebrow="Location · Partenariats"
+        title="Faites grandir votre marque au coeur de Marrakech"
+        lede="Menara Mall rassemble une clientele exigeante, des familles et des visiteurs internationaux dans un cadre premium sur l'avenue Mohammed VI : la scene ideale pour votre marque."
+        art="Interieur architectural du mall, galerie premium, lumiere inspiree"
         tone="charcoal"
-        crumbs={[{ label: "Leasing" }]}
+        crumbs={[{ label: "Location & partenariats" }]}
       >
         <div className="flex flex-wrap gap-3">
-          <Button href="#enquire" variant="gold" icon="arrow-right">Enquire now</Button>
-          <Button href="#" variant="light" icon="download">Download brochure</Button>
+          <Button href="#enquire" variant="gold" icon="arrow-right">Demander des informations</Button>
+          <Button href="#" variant="light" icon="download">Telecharger la brochure</Button>
         </div>
       </PageHero>
 
@@ -65,7 +64,7 @@ export default function LeasingPage() {
             ))}
           </div>
           <p className="mt-8 text-xs text-white/40">
-            Indicative positioning — request the media pack for verified footfall and demographic data. [VERIFY]
+            Positionnement indicatif : demandez le media pack pour les donnees de frequentation et de profil visiteur verifiees. [A VERIFIER]
           </p>
         </Container>
       </section>
@@ -73,7 +72,7 @@ export default function LeasingPage() {
       {/* Why */}
       <section className="bg-ivory py-24">
         <Container>
-          <SectionHeader eyebrow="Why Menara Mall" title="A location that works as hard as you do" />
+          <SectionHeader eyebrow="Pourquoi Menara Mall" title="Une adresse qui travaille autant que vous" />
           <RevealGroup className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {why.map((w) => (
               <RevealItem key={w.title}>
@@ -94,9 +93,9 @@ export default function LeasingPage() {
       <section className="bg-cream py-24">
         <Container>
           <SectionHeader
-            eyebrow="Opportunities"
-            title="Ways to partner with us"
-            lede="Whether you're opening a flagship, testing a concept or launching a campaign, there's a format to match your ambition."
+            eyebrow="Opportunites"
+            title="Les formats de partenariat possibles"
+            lede="Que vous ouvriez un flagship, testiez un concept ou lanciez une campagne, il existe une formule a la hauteur de votre ambition."
           />
           <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-2">
             {opportunities.map((o) => (
@@ -123,21 +122,21 @@ export default function LeasingPage() {
         <Container>
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <Reveal>
-              <ArtImage art="Stylish shoppers in a bright mall concourse, lifestyle candid" ratio="card" tone="sand" />
+              <ArtImage art="Clients elegants dans une galerie lumineuse, scene lifestyle" ratio="card" tone="sand" />
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="eyebrow text-clay">Our visitors</p>
+              <p className="eyebrow text-clay">Nos visiteurs</p>
               <h2 className="mt-3 text-charcoal" style={{ fontSize: "var(--text-title)" }}>
-                Who you&rsquo;ll reach
+                Qui vous allez toucher
               </h2>
               <p className="mt-5 text-stone">
-                Menara Mall welcomes a vibrant mix of Marrakech families, young professionals and
-                international tourists — visitors who value quality, experience and a warm,
-                premium environment. It&rsquo;s an audience that comes to spend the day, not just
-                to shop.
+                Menara Mall accueille un melange vivant de familles marrakchies, de jeunes actifs
+                et de touristes internationaux, des visiteurs sensibles a la qualite, a l'experience
+                et a un environnement premium et chaleureux. C'est une audience qui vient passer
+                du temps sur place, pas seulement faire des achats.
               </p>
               <ul className="mt-6 space-y-3">
-                {["Affluent local families and residents", "International tourists from nearby hotels", "Young, brand-aware professionals", "Repeat visitors drawn by dining & leisure"].map((t) => (
+                {["Familles locales et residents au pouvoir d'achat eleve", "Touristes internationaux sejournant dans les hotels voisins", "Jeunes actifs attentifs aux marques", "Visiteurs recurrents attires par la restauration et les loisirs"].map((t) => (
                   <li key={t} className="flex items-start gap-3 text-sm text-stone">
                     <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-palm/12 text-palm">
                       <Icon name="check" size={14} />
@@ -156,12 +155,12 @@ export default function LeasingPage() {
         <Container size="narrow">
           <SectionHeader
             align="center"
-            eyebrow="Let's talk"
-            title="Start the conversation"
-            lede="Tell us about your brand and what you're looking for — our leasing team will be in touch."
+            eyebrow="Parlons-en"
+            title="Ouvrons la conversation"
+            lede="Parlez-nous de votre marque et de vos besoins : notre equipe location reviendra vers vous."
           />
           <div className="mt-10">
-            <ContactForm defaultTopic="Leasing & partnerships" />
+            <ContactForm defaultTopic="Location & partenariats" />
           </div>
         </Container>
       </section>

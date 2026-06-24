@@ -7,9 +7,9 @@ import { Icon, type IconName } from "@/components/ui/Icon";
 import { site } from "@/lib/data/site";
 
 export const metadata: Metadata = {
-  title: "Contact — We'd Love to Hear From You",
+  title: "Contact — Parlons de votre demande",
   description:
-    "Contact Menara Mall Marrakech — general inquiries, leasing, events and media. Find our phone, email, address, map and social channels.",
+    "Contactez Menara Mall Marrakech pour toute demande generale, location ou media. Retrouvez notre e-mail, adresse, carte et reseaux sociaux.",
   alternates: { canonical: "/contact" },
 };
 
@@ -27,9 +27,9 @@ export default function ContactPage() {
     <>
       <PageHero
         eyebrow="Contact"
-        title="We'd love to hear from you"
-        lede="Whether you're planning a visit, exploring a partnership or have a question, the Menara Mall team is here to help."
-        art="Warm welcoming mall entrance at golden hour, concierge detail"
+        title="Nous sommes a votre ecoute"
+        lede="Que vous prepariez une visite, envisagiez un partenariat ou ayez une question, l'equipe Menara Mall est la pour vous aider."
+        art="Entree chaleureuse du mall a l'heure doree, detail de conciergerie"
         tone="clay"
         crumbs={[{ label: "Contact" }]}
       />
@@ -40,18 +40,17 @@ export default function ContactPage() {
             {/* Info column */}
             <div className="lg:col-span-2">
               <Reveal>
-                <p className="eyebrow text-clay">Get in touch</p>
-                <h2 className="mt-3 text-3xl text-charcoal">Reach the team directly</h2>
+                <p className="eyebrow text-clay">Entrer en contact</p>
+                <h2 className="mt-3 text-3xl text-charcoal">Joignez directement notre equipe</h2>
                 <p className="mt-4 text-stone">
-                  Choose the inquiry type that fits, or use the details below. We typically reply
-                  within two business days.
+                  Choisissez le type de demande adapte ou utilisez les coordonnees ci-dessous. Nous repondons generalement sous deux jours ouvrables.
                 </p>
 
                 <ul className="mt-8 space-y-5">
                   <li className="flex gap-4">
                     <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-clay/10 text-clay"><Icon name="map-pin" size={20} /></span>
                     <div>
-                      <p className="text-sm text-stone">Address</p>
+                      <p className="text-sm text-stone">Adresse</p>
                       <address className="not-italic font-medium text-charcoal">
                         {site.address.street}, {site.address.city}
                       </address>
@@ -61,7 +60,7 @@ export default function ContactPage() {
                     <li className="flex gap-4">
                       <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-clay/10 text-clay"><Icon name="phone" size={20} /></span>
                       <div>
-                        <p className="text-sm text-stone">Phone</p>
+                        <p className="text-sm text-stone">Telephone</p>
                         <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="font-medium text-charcoal link-underline">{site.phone}</a>
                       </div>
                     </li>
@@ -69,14 +68,14 @@ export default function ContactPage() {
                   <li className="flex gap-4">
                     <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-clay/10 text-clay"><Icon name="mail" size={20} /></span>
                     <div>
-                      <p className="text-sm text-stone">Email</p>
+                      <p className="text-sm text-stone">E-mail</p>
                       <a href={`mailto:${site.email}`} className="font-medium text-charcoal link-underline">{site.email}</a>
                     </div>
                   </li>
                 </ul>
 
                 <div className="mt-8">
-                  <p className="text-sm text-stone">Follow us</p>
+                  <p className="text-sm text-stone">Suivez-nous</p>
                   <div className="mt-3 flex gap-2">
                     {socials.map((s) => (
                       <a
@@ -96,7 +95,7 @@ export default function ContactPage() {
                 <div className="mt-8 overflow-hidden rounded-[var(--radius-xl2)] ring-1 ring-charcoal/10">
                   <iframe
                     src={mapSrc}
-                    title={`Map showing ${site.name}`}
+                    title={`Carte montrant ${site.name}`}
                     className="aspect-video w-full"
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"

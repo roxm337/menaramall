@@ -27,22 +27,33 @@ export function Header() {
   }, []);
 
   const transparent = isHome && !scrolled && !menuOpen;
+  const compact = scrolled && !menuOpen;
   const tone = transparent ? "light" : "dark";
 
   return (
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-          transparent
-            ? "bg-transparent"
-            : "border-b border-charcoal/8 bg-ivory/85 backdrop-blur-md",
+          "fixed inset-x-0 top-0 z-50 px-3 transition-all duration-500 sm:px-5 lg:px-6",
+          compact ? "pt-1.5 sm:pt-2" : "pt-0",
         )}
       >
-        <div className="mx-auto flex h-[var(--header-h,4.5rem)] max-w-[96rem] items-center justify-between gap-4 px-5 sm:px-8 lg:px-12">
-          <Logo tone={tone} />
+        <div
+          className={cn(
+            "mx-auto flex items-center justify-between transition-all duration-500",
+            compact
+              ? "h-14 max-w-[76rem] gap-3 rounded-[1rem] border border-charcoal/8 bg-ivory/95 px-3.5 shadow-[0_18px_40px_-30px_rgba(23,23,23,0.55)] backdrop-blur-xl sm:px-4.5"
+              : "max-w-[96rem] gap-4",
+            transparent
+              ? "h-[var(--header-h,4.5rem)] bg-transparent px-2 sm:px-3"
+              : !compact
+                ? "h-[var(--header-h,4.5rem)] border-b border-charcoal/8 bg-ivory/85 px-2 backdrop-blur-md sm:px-3"
+                : "",
+          )}
+        >
+          <Logo tone={tone} compact={compact} />
 
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+          <nav className={cn("hidden items-center gap-1 lg:flex", compact && "gap-0.5")} aria-label="Navigation principale">
             {primaryNav.map((item) => {
               const active = pathname.startsWith(item.href);
               return (
@@ -50,7 +61,8 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "rounded-full px-4 py-2 text-sm font-medium transition-colors",
+                    "rounded-full font-medium transition-all duration-500",
+                    compact ? "px-3 py-1.5 text-[0.82rem]" : "px-4 py-2 text-sm",
                     transparent
                       ? "text-white/85 hover:bg-white/10 hover:text-white"
                       : "text-charcoal/80 hover:bg-charcoal/5 hover:text-charcoal",
@@ -63,35 +75,37 @@ export function Header() {
             })}
           </nav>
 
-          <div className="flex items-center gap-1 sm:gap-2">
+          <div className={cn("flex items-center gap-1 sm:gap-2", compact && "sm:gap-1.5")}>
             <button
               onClick={() => setSearchOpen(true)}
-              aria-label="Search"
+              aria-label="Recherche"
               className={cn(
-                "flex h-10 w-10 items-center justify-center rounded-full transition-colors",
+                "flex items-center justify-center rounded-full transition-all duration-500",
+                compact ? "h-9 w-9" : "h-10 w-10",
                 transparent ? "text-white hover:bg-white/10" : "text-charcoal hover:bg-charcoal/5",
               )}
             >
-              <Icon name="search" size={20} />
+              <Icon name="search" size={compact ? 19 : 20} />
             </button>
-            <div className="hidden sm:block">
+            <div className="hidden sm:block transition-all duration-500">
               <LanguageSwitcher tone={tone} />
             </div>
-            <div className="hidden lg:block">
-              <Button href="/contact" variant={transparent ? "light" : "primary"} size="sm" icon="mail">
+            <div className="hidden lg:block transition-all duration-500">
+              <Button href="/contact" variant={transparent ? "light" : "primary"} size="sm" icon="mail" className={compact ? "px-3.5 py-1.5 text-[0.79rem]" : ""}>
                 Contact
               </Button>
             </div>
             <button
               onClick={() => setMenuOpen((o) => !o)}
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
               aria-expanded={menuOpen}
               className={cn(
-                "flex h-10 w-10 items-center justify-center rounded-full transition-colors lg:hidden",
+                "flex items-center justify-center rounded-full transition-all duration-500 lg:hidden",
+                compact ? "h-9 w-9" : "h-10 w-10",
                 transparent ? "text-white hover:bg-white/10" : "text-charcoal hover:bg-charcoal/5",
               )}
             >
-              <Icon name={menuOpen ? "close" : "menu"} size={24} />
+              <Icon name={menuOpen ? "close" : "menu"} size={compact ? 22 : 24} />
             </button>
           </div>
         </div>
@@ -108,7 +122,7 @@ export function Header() {
             className="fixed inset-0 z-40 overflow-y-auto bg-ivory pt-[var(--header-h,4.5rem)] lg:hidden"
           >
             <div className="px-5 py-8 sm:px-8">
-              <nav className="flex flex-col" aria-label="Mobile">
+              <nav className="flex flex-col" aria-label="Navigation mobile">
                 {primaryNav.map((item, i) => (
                   <motion.div
                     key={item.href}
@@ -141,12 +155,12 @@ export function Header() {
                     setSearchOpen(true);
                   }}
                 >
-                  Search
+                  Rechercher
                 </Button>
               </div>
 
               <div className="mt-8 flex items-center justify-between border-t border-charcoal/8 pt-6">
-                <span className="text-sm text-stone">Language</span>
+                <span className="text-sm text-stone">Langue</span>
                 <LanguageSwitcher />
               </div>
             </div>

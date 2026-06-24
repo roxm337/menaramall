@@ -16,23 +16,23 @@ export interface DayHours {
 export type OpeningHours = (DayHours | null)[];
 
 export type BrandCategory =
-  | "Fashion"
-  | "Beauty"
-  | "Jewelry"
-  | "Kids"
-  | "Home"
-  | "Sports"
-  | "Electronics"
+  | "Mode"
+  | "Beaute"
+  | "Bijoux"
+  | "Enfants"
+  | "Maison"
+  | "Sport"
+  | "High-Tech"
   | "Services"
-  | "Moroccan Craft"
-  | "Supermarket"
-  | "Entertainment";
+  | "Artisanat marocain"
+  | "Supermarche"
+  | "Loisirs";
 
 export type Floor =
-  | "Ground Floor"
-  | "First Floor"
-  | "Second Floor"
-  | "Mall Directory"
+  | "Rez-de-chaussee"
+  | "1er etage"
+  | "2e etage"
+  | "Galerie marchande"
   | "Food Court"
   | "Le Souk";
 
@@ -59,7 +59,7 @@ export interface Brand {
   gallery?: string[];
 }
 
-export type RestaurantType = "Restaurant" | "Café" | "Fast Food" | "Dessert";
+export type RestaurantType = "Restaurant" | "Cafe" | "Restauration rapide" | "Dessert";
 
 export interface Restaurant {
   id: string;
@@ -82,39 +82,13 @@ export interface Restaurant {
   gallery?: string[];
 }
 
-export type EventCategory =
-  | "Family"
-  | "Culture"
-  | "Music"
-  | "Fashion"
-  | "Seasonal"
-  | "Workshop";
-
-export interface MallEvent {
-  id: string;
-  title: string;
-  slug: string;
-  /** ISO date, e.g. "2026-07-12" */
-  date: string;
-  endDate?: string;
-  startTime: string;
-  endTime: string;
-  location: string;
-  category: EventCategory;
-  description: string;
-  longDescription?: string;
-  registrationUrl?: string;
-  featured?: boolean;
-  heroArt: string;
-}
-
 export type OfferCategory =
-  | "Fashion"
-  | "Beauty"
-  | "Dining"
-  | "Electronics"
-  | "Family"
-  | "Home";
+  | "Mode"
+  | "Beaute"
+  | "Restauration"
+  | "High-Tech"
+  | "Famille"
+  | "Maison";
 
 export interface Offer {
   id: string;

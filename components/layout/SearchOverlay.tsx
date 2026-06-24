@@ -9,7 +9,7 @@ import { ArtImage } from "@/components/ui/ArtImage";
 import { Badge } from "@/components/ui/Badge";
 import { Icon } from "@/components/ui/Icon";
 
-const SUGGESTIONS = ["Zara", "Le Souk", "Coffee", "Kids", "Carrefour", "Terrace dining"];
+const SUGGESTIONS = ["Zara", "Le Souk", "Cafe", "Enfants", "Carrefour", "Terrasse"];
 
 export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [q, setQ] = useState("");
@@ -69,10 +69,10 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
           >
             <div className="mx-auto max-w-3xl">
               <div className="flex items-center justify-between">
-                <span className="eyebrow text-clay">Search Menara Mall</span>
+                <span className="eyebrow text-clay">Rechercher dans Menara Mall</span>
                 <button
                   onClick={onClose}
-                  aria-label="Close search"
+                  aria-label="Fermer la recherche"
                   className="flex h-10 w-10 items-center justify-center rounded-full text-charcoal hover:bg-charcoal/5"
                 >
                   <Icon name="close" size={22} />
@@ -85,15 +85,15 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
                   ref={inputRef}
                   value={q}
                   onChange={(e) => setQ(e.target.value)}
-                  placeholder="Search shops, dining, events…"
+                  placeholder="Rechercher des boutiques, restaurants, offres..."
                   className="w-full bg-transparent font-display text-2xl text-charcoal outline-none placeholder:text-stone/60 sm:text-3xl"
-                  aria-label="Search query"
+                  aria-label="Requete de recherche"
                 />
               </form>
 
               {!q && (
                 <div className="mt-6">
-                  <p className="text-xs text-stone">Popular searches</p>
+                  <p className="text-xs text-stone">Recherches populaires</p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {SUGGESTIONS.map((s) => (
                       <button
@@ -112,7 +112,7 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
                 <div className="mt-6 space-y-2">
                   {results.length === 0 && (
                     <p className="py-8 text-center text-sm text-stone">
-                      No results for “{q}”. Try another search.
+                      Aucun resultat pour “{q}”. Essayez une autre recherche.
                     </p>
                   )}
                   {results.map((r) => (
@@ -135,7 +135,7 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
                       onClick={submit}
                       className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-clay"
                     >
-                      View all results <Icon name="arrow-right" size={15} />
+                      Voir tous les resultats <Icon name="arrow-right" size={15} />
                     </button>
                   )}
                 </div>

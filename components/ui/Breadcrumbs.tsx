@@ -8,11 +8,11 @@ export interface Crumb {
 
 export function Breadcrumbs({ items }: { items: Crumb[] }) {
   return (
-    <nav aria-label="Breadcrumb">
+    <nav aria-label="Fil d'Ariane">
       <ol className="flex flex-wrap items-center gap-1.5 text-xs text-stone">
         <li>
           <Link href="/" className="link-underline hover:text-charcoal">
-            Home
+            Accueil
           </Link>
         </li>
         {items.map((item, i) => (

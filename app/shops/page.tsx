@@ -5,9 +5,9 @@ import { ShopsDirectory } from "@/components/directory/ShopsDirectory";
 import { brands, brandCategories, floors } from "@/lib/data/brands";
 
 export const metadata: Metadata = {
-  title: "Shops — A Curated Brand Directory",
+  title: "Boutiques — Un annuaire de marques soigneusement selectionne",
   description:
-    "Browse the full directory of shops at Menara Mall Marrakech — fashion, beauty, jewellery, electronics, sports, Moroccan craft and more. Search by category and floor.",
+    "Parcourez l'annuaire complet des boutiques de Menara Mall Marrakech : mode, beaute, bijoux, high-tech, sport, artisanat marocain et plus encore. Recherchez par categorie et par niveau.",
   alternates: { canonical: "/shops" },
 };
 
@@ -16,11 +16,11 @@ export default function ShopsPage() {
     <>
       <PageHero
         eyebrow="Shopping"
-        title="A curated directory of the brands you love"
-        lede="From international fashion and beauty houses to Morocco's everyday favourites — find every store, floor and opening time in one place."
-        art="Premium shopping mall interior, elegant storefronts, soft daylight"
+        title="Un annuaire soigne de toutes les marques que vous aimez"
+        lede="Des enseignes internationales de mode et de beaute aux incontournables du quotidien au Maroc, retrouvez chaque boutique, niveau et horaire en un seul endroit."
+        art="Interieur de centre commercial premium, vitrines elegantes, lumiere douce"
         tone="sand"
-        crumbs={[{ label: "Shops" }]}
+        crumbs={[{ label: "Boutiques" }]}
       />
       <section className="bg-ivory py-16 sm:py-20">
         <Container>

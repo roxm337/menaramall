@@ -7,7 +7,7 @@ export const services: Service[] = [
     title: "Parking & Accès PMR",
     icon: "car",
     description:
-      "Parking and accessibility support are listed by Menara Mall as part of the visitor experience.",
+      "Le parking et les dispositifs d'accessibilite figurent parmi les services proposes pour faciliter la visite.",
     location: "Menara Mall",
   },
   {
@@ -15,63 +15,63 @@ export const services: Service[] = [
     title: "Restauration",
     icon: "utensils",
     description:
-      "Restaurants, cafés and Food Court options for coffee, quick meals, desserts and sit-down dining.",
-    location: "Restaurants & cafés",
+      "Restaurants, cafes et options du Food Court pour un cafe, un repas rapide, un dessert ou un moment a table.",
+    location: "Restaurants et cafes",
   },
   {
     id: "s-mode-bijoux",
     title: "Mode & Bijoux",
     icon: "bag",
     description:
-      "Fashion, shoes, accessories and jewelry brands from the official shopping directory.",
-    location: "Shopping directory",
+      "Marques de mode, chaussures, accessoires et bijoux presentes dans l'annuaire officiel.",
+    location: "Galerie marchande",
   },
   {
     id: "s-kidzo",
     title: "Kidzo",
     icon: "play",
     description:
-      "Family entertainment including Kidzo experiences highlighted on the official site.",
+      "Des loisirs en famille avec les experiences Kidzo mises en avant sur le site officiel.",
     location: "Kidzo",
   },
   {
     id: "s-souq",
-    title: "Le SouQ Al Madinah",
+    title: "Le Souk Al Madinah",
     icon: "compass",
     description:
-      "A Moroccan souk experience for crafts, traditional fashion, beauty rituals and local gifts.",
-    location: "Le SouQ Al Madinah",
+      "Une experience de souk marocain autour de l'artisanat, de la mode traditionnelle, des rituels beaute et des cadeaux locaux.",
+    location: "Le Souk Al Madinah",
   },
   {
     id: "s-beaute",
     title: "Beauté & Bien-être",
     icon: "sparkles",
     description:
-      "Beauty, fragrance, grooming and wellness brands from the official Menara Mall directory.",
-    location: "Shopping directory",
+      "Marques de beaute, parfum, grooming et bien-etre presentes dans l'annuaire officiel Menara Mall.",
+    location: "Galerie marchande",
   },
   {
     id: "s-high-tech",
     title: "High-Tech & Accessoires",
     icon: "wifi",
     description:
-      "Phones, accessories, telecom services and tech shops listed in the official directory.",
-    location: "Shopping directory",
+      "Telephones, accessoires, services telecom et enseignes high-tech recenses dans l'annuaire officiel.",
+    location: "Galerie marchande",
   },
   {
     id: "s-carrefour",
     title: "Carrefour",
     icon: "bag",
     description:
-      "Carrefour Market is open daily from 09:00 to 23:00 according to the official footer.",
+      "Carrefour Market est ouvert tous les jours de 09:00 a 23:00 selon le pied de page officiel.",
     location: "Carrefour Market",
   },
   {
     id: "s-exchange",
-    title: "Exchange",
+    title: "Change",
     icon: "banknote",
     description:
-      "Currency exchange services for visitor transactions are listed in the official shopping directory.",
-    location: "Shopping directory",
+      "Des services de change pour les visiteurs figurent dans l'annuaire officiel du centre.",
+    location: "Galerie marchande",
   },
 ];

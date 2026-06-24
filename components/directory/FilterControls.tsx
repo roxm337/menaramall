@@ -24,7 +24,7 @@ export function SearchField({
         className="w-full bg-transparent text-sm text-charcoal outline-none placeholder:text-stone/60"
       />
       {value && (
-        <button onClick={() => onChange("")} aria-label="Clear search" className="text-stone hover:text-charcoal">
+        <button onClick={() => onChange("")} aria-label="Effacer la recherche" className="text-stone hover:text-charcoal">
           <Icon name="close" size={16} />
         </button>
       )}
@@ -38,7 +38,7 @@ export function ChipFilter<T extends string>({
   options,
   value,
   onChange,
-  allLabel = "All",
+  allLabel = "Tous",
 }: {
   label: string;
   options: readonly T[];
@@ -93,7 +93,7 @@ export function ResultsBar({
           onClick={onReset}
           className="inline-flex items-center gap-1.5 text-sm font-medium text-clay hover:underline"
         >
-          <Icon name="close" size={14} /> Clear filters
+          <Icon name="close" size={14} /> Effacer les filtres
         </button>
       )}
     </div>

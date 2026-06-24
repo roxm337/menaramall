@@ -23,13 +23,13 @@ export function OfferCard({ offer }: { offer: Offer }) {
         <p className="flex-1 text-sm leading-relaxed text-stone">{offer.description}</p>
         <p className="mt-4 inline-flex items-center gap-1.5 text-xs text-stone">
           <Icon name="calendar" size={13} />
-          Valid {formatDateRange(offer.validFrom, offer.validUntil)}
+          Valable du {formatDateRange(offer.validFrom, offer.validUntil)}
         </p>
         <Link
           href={href}
           className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-clay"
         >
-          Visit brand
+          Voir la marque
           <Icon name="arrow-right" size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
         </Link>
       </div>

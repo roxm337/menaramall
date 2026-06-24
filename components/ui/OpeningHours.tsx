@@ -33,7 +33,7 @@ export function OpenBadge({
           className,
         )}
       >
-        <Icon name="clock" size={14} /> Opening hours
+        <Icon name="clock" size={14} /> Horaires
       </span>
     );
   }
