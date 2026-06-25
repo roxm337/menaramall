@@ -9,6 +9,7 @@ import { Icon, type IconName } from "@/components/ui/Icon";
 import { BrandCard } from "@/components/cards/BrandCard";
 import { brands } from "@/lib/data/brands";
 import { officialMedia } from "@/lib/data/official-media";
+import { sourceSouk } from "@/lib/data/source-api";
 
 export const metadata: Metadata = {
   title: "Le Souk — Une experience marocaine soigneusement composee",
@@ -17,13 +18,19 @@ export const metadata: Metadata = {
   alternates: { canonical: "/le-souk" },
 };
 
+const soukImages = {
+  perfumes: sourceSouk[7]?.imageUrl,
+  gifts: sourceSouk[8]?.imageUrl,
+  decor: sourceSouk[5]?.imageUrl,
+} as const;
+
 const worlds: { icon: IconName; title: string; text: string; art: string; imageSrc?: string; tone: "clay" | "gold" | "sand" | "palm" }[] = [
   { icon: "compass", title: "Artisanat marocain", text: "Cuir travaille a la main, laiton martelé, bois sculpte et paniers tisses par des artisans locaux.", art: "Lanternes en laiton et articles en cuir exposes, lumiere ambree", imageSrc: officialMedia.soukDetail, tone: "gold" },
   { icon: "bag", title: "Mode traditionnelle", text: "Caftans, djellabas et babouches : des silhouettes patrimoniales superbement realisees.", art: "Caftans brodes exposes, richesse des matieres", imageSrc: officialMedia.soukHero, tone: "clay" },
   { icon: "droplet", title: "Rituels beaute", text: "Huile d'argan, ghassoul et savon noir : les rituels intemporels du hammam.", art: "Huile d'argan et pots de beaute naturelle, ambiance spa", imageSrc: officialMedia.gallery[3], tone: "palm" },
-  { icon: "sparkles", title: "Parfums & attars", text: "Rose, ambre, oud et fleur d'oranger : des fragrances composees a la main.", art: "Flacons de parfum en verre et petales de rose, ambiance d'apothicaire", tone: "gold" },
-  { icon: "heart", title: "Cadeaux locaux", text: "Des souvenirs choisis avec soin qui emportent un peu de Marrakech avec vous.", art: "Table de cadeaux selectionnes, ceramiques et objets, styling chaleureux", tone: "sand" },
-  { icon: "star", title: "Decoration", text: "Ceramiques, tapis, miroirs et lanternes pour inviter la chaleur du Maroc dans chaque interieur.", art: "Decoration marocaine, mosaïque et textiles, interieur stylise", tone: "clay" },
+  { icon: "sparkles", title: "Parfums & attars", text: "Rose, ambre, oud et fleur d'oranger : des fragrances composees a la main.", art: "Flacons de parfum en verre et petales de rose, ambiance d'apothicaire", imageSrc: soukImages.perfumes, tone: "gold" },
+  { icon: "heart", title: "Cadeaux locaux", text: "Des souvenirs choisis avec soin qui emportent un peu de Marrakech avec vous.", art: "Table de cadeaux selectionnes, ceramiques et objets, styling chaleureux", imageSrc: soukImages.gifts, tone: "sand" },
+  { icon: "star", title: "Decoration", text: "Ceramiques, tapis, miroirs et lanternes pour inviter la chaleur du Maroc dans chaque interieur.", art: "Decoration marocaine, mosaïque et textiles, interieur stylise", imageSrc: soukImages.decor, tone: "clay" },
 ];
 
 export default function LeSoukPage() {
@@ -96,7 +103,7 @@ export default function LeSoukPage() {
               Chaque piece raconte une histoire de la ville
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-white/75">
-              Visitez Le Souk au rez-de-chaussee et repartez avec une piece authentique de l'artisanat marocain,
+              Visitez Le Souk au rez-de-chaussee et repartez avec une piece authentique de l&apos;artisanat marocain,
               faite a la main et avec coeur.
             </p>
             <div className="mt-8 flex justify-center gap-3">

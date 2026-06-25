@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { ArtImage } from "@/components/ui/ArtImage";
@@ -338,7 +338,7 @@ export default function EntertainmentPage() {
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-white/70">
               Preparez votre visite, demandez nos tarifs groupes ou
-              renseignez-vous sur une fete d'anniversaire : nous serons ravis
+              renseignez-vous sur une fete d&apos;anniversaire : nous serons ravis
               de vous aider.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">

@@ -40,7 +40,7 @@ export function Hero() {
   const imageScale = useTransform(
     scrollYProgress,
     [0, 1],
-    [1, reduce ? 1 : 1.08],
+    [1, reduce ? 1 : 1.05],
   );
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const contentY = useTransform(
@@ -70,11 +70,27 @@ export function Hero() {
         <AnimatePresence initial={false}>
           <motion.div
             key={active}
-            initial={{ opacity: reduce ? 1 : 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-0 animate-kenburns"
+            initial={
+              reduce
+                ? { opacity: 1, scale: 1.04, y: "0%" }
+                : { opacity: 0, scale: 1.02, y: "4%" }
+            }
+            animate={{
+              opacity: 1,
+              scale: reduce ? 1.04 : 1.18,
+              y: reduce ? "0%" : "-3%",
+            }}
+            exit={{
+              opacity: 0,
+              scale: reduce ? 1.04 : 1.12,
+              y: reduce ? "0%" : "-1%",
+            }}
+            transition={{
+              opacity: { duration: reduce ? 0.45 : 1.2, ease: [0.22, 1, 0.36, 1] },
+              scale: { duration: reduce ? 0.45 : 6.5, ease: [0.16, 1, 0.3, 1] },
+              y: { duration: reduce ? 0.45 : 6.5, ease: [0.16, 1, 0.3, 1] },
+            }}
+            className="absolute inset-0 will-change-transform"
           >
             <ArtImage
               art="Menara Mall Marrakech official hero photography"
@@ -175,7 +191,7 @@ export function Hero() {
                 className="mt-7 max-w-2xl text-pretty text-base leading-relaxed text-white/82 sm:text-[1.1rem]"
               >
                 Decouvrez shopping premium, restaurants en terrasse, loisirs
-                en famille et artisanat marocain au sein d'une adresse
+                en famille et artisanat marocain au sein d&apos;une adresse
                 incontournable, au coeur de Menara Mall.
               </motion.p>
 

@@ -66,6 +66,9 @@ export function ArtImage({
   const key = tone ?? (toneKeys[Math.floor(seed * toneKeys.length)] as keyof typeof tones);
   const [c1, c2, c3] = tones[key];
   const angle = 120 + Math.floor(seed * 80);
+  const normalizedSrc = src ? encodeURI(src) : undefined;
+  const bypassOptimization =
+    normalizedSrc?.startsWith("https://www.menaramall.com/img/") ?? false;
 
   return (
     <div
@@ -80,10 +83,11 @@ export function ArtImage({
     >
       {src ? (
         <Image
-          src={encodeURI(src)}
+          src={normalizedSrc!}
           alt={art}
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          unoptimized={bypassOptimization}
           className="object-cover"
         />
       ) : (

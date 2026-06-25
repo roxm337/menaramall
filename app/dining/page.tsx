@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/ui/Container";
 import { DiningDirectory } from "@/components/directory/DiningDirectory";
+import { officialMedia } from "@/lib/data/official-media";
 import { restaurants, cuisineTypes } from "@/lib/data/restaurants";
 
 export const metadata: Metadata = {
@@ -19,6 +20,7 @@ export default function DiningPage() {
         title="Une table pour chaque moment de la journee"
         lede="Cafes decontractes, restaurants en terrasse avec vue, douceurs sucrees et pauses rapides : explorez les saveurs de Marrakech et d'ailleurs."
         art="Art de vivre en terrasse, assiettes a partager, lumiere doree de Marrakech"
+        imageSrc={officialMedia.diningHero}
         tone="clay"
         crumbs={[{ label: "Restaurants" }]}
       />
