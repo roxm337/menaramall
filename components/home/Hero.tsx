@@ -241,58 +241,6 @@ export function Hero() {
                 <div className="pointer-events-none absolute -right-12 -top-12 h-44 w-44 rounded-full bg-gold/20 blur-3xl" />
                 <div className="pointer-events-none absolute -bottom-16 -left-10 h-40 w-40 rounded-full bg-clay/25 blur-3xl" />
 
-                <div className="relative px-5 pt-5">
-                  <div className="flex items-center justify-between">
-                    <p className="eyebrow text-gold-soft">Dans Menara</p>
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-white/12 bg-white/5 px-2.5 py-1 text-[0.6rem] uppercase tracking-[0.2em] text-white/60">
-                      <Icon name="compass" size={11} className="text-gold-soft" />
-                      4 univers
-                    </span>
-                  </div>
-                  <p className="mt-3 max-w-[24ch] text-[0.98rem] leading-7 text-white/82">
-                    Shopping, restauration, loisirs et artisanat dans une même
-                    adresse.
-                  </p>
-                </div>
-
-                <div className="relative mt-4 space-y-1.5 p-1.5">
-                  {heroWorlds.map((world, i) => (
-                    <motion.div
-                      key={world.label}
-                      initial={{ opacity: 0, x: reduce ? 0 : 16 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{
-                        duration: 0.6,
-                        delay: 0.52 + i * 0.08,
-                        ease: [0.16, 1, 0.3, 1],
-                      }}
-                    >
-                      <Link
-                        href={world.href}
-                        className="group/row relative flex items-center gap-3.5 overflow-hidden rounded-2xl border border-white/8 bg-white/[0.03] px-3.5 py-3 transition-colors duration-300 hover:border-white/20 hover:bg-white/[0.06]"
-                      >
-                        {/* Hover sweep */}
-                        <span className="pointer-events-none absolute inset-y-0 left-0 w-0 bg-gradient-to-r from-gold/15 to-transparent transition-[width] duration-500 ease-[var(--ease-luxe)] group-hover/row:w-full" />
-                        <span className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(140deg,rgba(42,75,192,0.6),rgba(231,161,46,0.28))] text-white ring-1 ring-white/15 transition-transform duration-300 group-hover/row:scale-105">
-                          <Icon name={world.icon} size={17} />
-                        </span>
-                        <span className="relative min-w-0 flex-1">
-                          <span className="block text-[0.92rem] font-medium leading-tight text-white/92">
-                            {world.label}
-                          </span>
-                          <span className="mt-0.5 block text-[0.72rem] leading-tight text-white/45">
-                            {world.meta}
-                          </span>
-                        </span>
-                        <Icon
-                          name="arrow-up-right"
-                          size={15}
-                          className="relative shrink-0 text-white/35 transition-all duration-300 group-hover/row:-translate-y-0.5 group-hover/row:translate-x-0.5 group-hover/row:text-gold-soft"
-                        />
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
               </div>
             </motion.aside>
           </div>
