@@ -79,7 +79,7 @@ export default function HomePage() {
             lede="Shopping, restaurants et cafes, Kidzo, Le Souk Al Madinah et services essentiels dans une destination climatisee."
             action={
               <Button href="/shops" variant="outline" icon="arrow-right">
-                Parcourir l'annuaire
+                Parcourir l&apos;annuaire
               </Button>
             }
           />
@@ -180,7 +180,7 @@ export default function HomePage() {
                   [
                     { icon: "shield", text: "Jeux surveilles et securises" },
                     { icon: "sparkles", text: "Attractions et arcade" },
-                    { icon: "heart", text: "Formules anniversaire" },
+                    { icon: "heart", text: "Moments a partager en famille" },
                     { icon: "baby", text: "Espaces adaptes aux tout-petits" },
                   ] as { icon: IconName; text: string }[]
                 ).map((f) => (
@@ -199,8 +199,8 @@ export default function HomePage() {
                 <Button href="/entertainment" variant="gold" icon="arrow-right">
                   Decouvrir Kidzo
                 </Button>
-                <Button href="/contact" variant="light" icon="ticket">
-                  Preparer une visite en famille
+                <Button href="/contact" variant="light" icon="mail">
+                  Nous contacter
                 </Button>
               </div>
             </Reveal>
@@ -223,9 +223,9 @@ export default function HomePage() {
               <p className="mt-5 max-w-lg text-stone">
                 Decouvrez un univers soigneusement compose de savoir-faire,
                 parfums, mode, beaute et details traditionnels inspires de
-                Marrakech. Le Souk rassemble l'esprit artisanal de la ville,
+                Marrakech. Le Souk rassemble l&apos;esprit artisanal de la ville,
                 entre textiles tisses main, laiton, cuir et senteurs de rose
-                et de fleur d'oranger, dans une promenade elegante eclairee
+                et de fleur d&apos;oranger, dans une promenade elegante eclairee
                 aux lanternes.
               </p>
               <div className="mt-8 flex flex-wrap gap-2">

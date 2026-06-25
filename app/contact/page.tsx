@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { Icon, type IconName } from "@/components/ui/Icon";
+import { officialMedia } from "@/lib/data/official-media";
 import { site } from "@/lib/data/site";
 
 export const metadata: Metadata = {
@@ -30,6 +31,7 @@ export default function ContactPage() {
         title="Nous sommes a votre ecoute"
         lede="Que vous prepariez une visite, envisagiez un partenariat ou ayez une question, l'equipe Menara Mall est la pour vous aider."
         art="Entree chaleureuse du mall a l'heure doree, detail de conciergerie"
+        imageSrc={officialMedia.homeHero}
         tone="clay"
         crumbs={[{ label: "Contact" }]}
       />

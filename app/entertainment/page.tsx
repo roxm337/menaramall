@@ -74,7 +74,7 @@ const vrGames = [
 const kidzoFeatures: { icon: IconName; text: string }[] = [
   { icon: "shield", text: "Jeux surveilles et securises" },
   { icon: "sparkles", text: "Attractions et experiences immersives" },
-  { icon: "heart", text: "Formules anniversaire" },
+  { icon: "heart", text: "Moments a partager en famille" },
   { icon: "baby", text: "Espaces adaptes aux plus jeunes" },
 ];
 
@@ -103,16 +103,7 @@ export default function EntertainmentPage() {
         imageSrc={heroSlides[0].src}
         tone="gold"
         crumbs={[{ label: "Kidzo" }]}
-      >
-        <div className="flex flex-wrap gap-3">
-          <Button href="/contact" variant="gold" icon="ticket">
-            Preparer une visite en famille
-          </Button>
-          <Button href="/contact" variant="light" icon="heart">
-            Demander un anniversaire
-          </Button>
-        </div>
-      </PageHero>
+      />
 
       <section className="bg-ivory py-24">
         <Container>
@@ -337,16 +328,12 @@ export default function EntertainmentPage() {
               Pret pour une journee dont toute la famille se souviendra ?
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-white/70">
-              Preparez votre visite, demandez nos tarifs groupes ou
-              renseignez-vous sur une fete d&apos;anniversaire : nous serons ravis
-              de vous aider.
+              Preparez votre visite ou demandez nos tarifs groupes : nous
+              serons ravis de vous aider.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Button href="/contact" variant="gold" icon="mail">
                 Nous contacter
-              </Button>
-              <Button href="/contact" variant="light" icon="ticket">
-                Faire une demande
               </Button>
             </div>
           </Reveal>
