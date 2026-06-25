@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Icon } from "@/components/ui/Icon";
 import { Button } from "@/components/ui/Button";
+import { getLocaleFromPathname, getUiText } from "@/lib/i18n";
 
-const TOPICS = ["Demande generale", "Location & partenariats", "Medias & publicite"] as const;
-type Topic = (typeof TOPICS)[number];
+type Topic = "Demande generale" | "Location & partenariats" | "Medias & publicite";
 
 const fieldBase =
   "w-full rounded-xl border border-charcoal/15 bg-white px-4 py-3 text-sm text-charcoal outline-none transition-colors placeholder:text-stone/55 focus:border-clay";
@@ -17,6 +18,13 @@ const fieldBase =
  * service or CRM endpoint at integration time.
  */
 export function ContactForm({ defaultTopic = "Demande generale" }: { defaultTopic?: Topic }) {
+  const locale = getLocaleFromPathname(usePathname());
+  const t = getUiText(locale).contactForm;
+  const topics = [
+    { key: "Demande generale", label: t.defaultTopic },
+    { key: "Location & partenariats", label: t.businessTopic },
+    { key: "Medias & publicite", label: t.mediaTopic },
+  ] as const;
   const [topic, setTopic] = useState<Topic>(defaultTopic);
   const [form, setForm] = useState({ name: "", email: "", phone: "", company: "", message: "" });
   const [errors, setErrors] = useState<Record<string, boolean>>({});
@@ -46,9 +54,9 @@ export function ContactForm({ defaultTopic = "Demande generale" }: { defaultTopi
         <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-palm text-white">
           <Icon name="check" size={28} />
         </span>
-        <h3 className="mt-5 text-2xl text-charcoal">Merci, votre message a bien ete recu</h3>
+        <h3 className="mt-5 text-2xl text-charcoal">{t.successTitle}</h3>
         <p className="mx-auto mt-2 max-w-sm text-sm text-stone">
-          Un membre de l'equipe Menara Mall vous recontactera rapidement. Merci pour votre interet.
+          {t.successMessage}
         </p>
       </div>
     );
@@ -57,19 +65,19 @@ export function ContactForm({ defaultTopic = "Demande generale" }: { defaultTopi
   return (
     <form onSubmit={submit} noValidate className="rounded-[var(--radius-xl2)] bg-white p-6 ring-1 ring-charcoal/8 sm:p-8">
       <fieldset>
-        <legend className="mb-2 text-xs font-semibold uppercase tracking-widest text-stone">Comment pouvons-nous vous aider ?</legend>
+        <legend className="mb-2 text-xs font-semibold uppercase tracking-widest text-stone">{t.legend}</legend>
         <div className="flex flex-wrap gap-2">
-          {TOPICS.map((t) => (
+          {topics.map((tItem) => (
             <button
               type="button"
-              key={t}
-              onClick={() => setTopic(t)}
+              key={tItem.key}
+              onClick={() => setTopic(tItem.key as Topic)}
               className={cn(
                 "rounded-full border px-4 py-2 text-sm font-medium transition-all",
-                topic === t ? "border-charcoal bg-charcoal text-ivory" : "border-charcoal/15 text-charcoal/75 hover:border-charcoal/40",
+                topic === tItem.key ? "border-charcoal bg-charcoal text-ivory" : "border-charcoal/15 text-charcoal/75 hover:border-charcoal/40",
               )}
             >
-              {t}
+              {tItem.label}
             </button>
           ))}
         </div>
@@ -77,36 +85,36 @@ export function ContactForm({ defaultTopic = "Demande generale" }: { defaultTopi
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <label className="block">
-          <span className="mb-1.5 block text-sm font-medium text-charcoal">Nom complet *</span>
-          <input value={form.name} onChange={set("name")} className={cn(fieldBase, errors.name && "border-clay")} placeholder="Votre nom" aria-invalid={!!errors.name} />
+          <span className="mb-1.5 block text-sm font-medium text-charcoal">{t.name}</span>
+          <input value={form.name} onChange={set("name")} className={cn(fieldBase, errors.name && "border-clay")} placeholder={t.namePlaceholder} aria-invalid={!!errors.name} />
         </label>
         <label className="block">
-          <span className="mb-1.5 block text-sm font-medium text-charcoal">E-mail *</span>
+          <span className="mb-1.5 block text-sm font-medium text-charcoal">{t.email}</span>
           <input type="email" value={form.email} onChange={set("email")} className={cn(fieldBase, errors.email && "border-clay")} placeholder="you@email.com" aria-invalid={!!errors.email} />
         </label>
         <label className="block">
-          <span className="mb-1.5 block text-sm font-medium text-charcoal">Telephone</span>
-          <input value={form.phone} onChange={set("phone")} className={fieldBase} placeholder="+212 …" />
+          <span className="mb-1.5 block text-sm font-medium text-charcoal">{t.phone}</span>
+          <input value={form.phone} onChange={set("phone")} className={fieldBase} placeholder={t.phonePlaceholder} />
         </label>
         {isBusiness && (
           <label className="block">
-            <span className="mb-1.5 block text-sm font-medium text-charcoal">Entreprise / marque</span>
-            <input value={form.company} onChange={set("company")} className={fieldBase} placeholder="Organisation" />
+            <span className="mb-1.5 block text-sm font-medium text-charcoal">{t.company}</span>
+            <input value={form.company} onChange={set("company")} className={fieldBase} placeholder={t.companyPlaceholder} />
           </label>
         )}
         <label className="block sm:col-span-2">
-          <span className="mb-1.5 block text-sm font-medium text-charcoal">Message *</span>
-          <textarea value={form.message} onChange={set("message")} rows={5} className={cn(fieldBase, "resize-none", errors.message && "border-clay")} placeholder="Parlez-nous un peu de votre demande..." aria-invalid={!!errors.message} />
+          <span className="mb-1.5 block text-sm font-medium text-charcoal">{t.message}</span>
+          <textarea value={form.message} onChange={set("message")} rows={5} className={cn(fieldBase, "resize-none", errors.message && "border-clay")} placeholder={t.messagePlaceholder} aria-invalid={!!errors.message} />
         </label>
       </div>
 
       {Object.keys(errors).length > 0 && (
-        <p className="mt-3 text-xs text-clay">Veuillez renseigner les champs obligatoires marques d'un *.</p>
+        <p className="mt-3 text-xs text-clay">{t.error}</p>
       )}
 
       <div className="mt-6 flex items-center justify-between gap-4">
-        <p className="text-xs text-stone">Nous repondons en general sous deux jours ouvrables.</p>
-        <Button type="submit" variant="primary" icon="arrow-right">Envoyer le message</Button>
+        <p className="text-xs text-stone">{t.responseTime}</p>
+        <Button type="submit" variant="primary" icon="arrow-right">{t.submit}</Button>
       </div>
     </form>
   );

@@ -1,30 +1,49 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { locales } from "@/lib/data/site";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Icon } from "@/components/ui/Icon";
+import {
+  defaultLocale,
+  getLocaleDir,
+  getLocaleFromPathname,
+  localeMeta,
+  locales,
+  localizeHref,
+  stripLocalePrefix,
+  type Locale,
+} from "@/lib/i18n";
 
 /**
  * Language switcher. The content is now French-first, while this control keeps
  * persisting the user preference and handling RTL for Arabic.
  */
-export function LanguageSwitcher({ tone = "dark" }: { tone?: "dark" | "light" }) {
-  type Code = (typeof locales)[number]["code"];
+export function LanguageSwitcher({
+  locale,
+  tone = "dark",
+}: {
+  locale?: Locale;
+  tone?: "dark" | "light";
+}) {
+  type Code = Locale;
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState<Code>("fr");
+  const pathname = usePathname();
+  const router = useRouter();
+  const initialLocale = locale ?? getLocaleFromPathname(pathname);
+  const [active, setActive] = useState<Code>(initialLocale);
   const ref = useRef<HTMLDivElement>(null);
 
   // Restore the persisted preference once on mount (client-only API).
   useEffect(() => {
     const saved = localStorage.getItem("mm-locale") as Code | null;
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing from a browser-only store on mount
-    if (saved) setActive(saved);
-  }, []);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing from the current route and browser preference
+    setActive(locale ?? saved ?? getLocaleFromPathname(pathname) ?? defaultLocale);
+  }, [locale, pathname]);
 
   // Apply + persist the active locale. DOM/document writes belong in an effect.
   useEffect(() => {
-    const dir = locales.find((l) => l.code === active)?.dir ?? "ltr";
+    const dir = getLocaleDir(active);
     document.documentElement.lang = active;
     document.documentElement.dir = dir;
     localStorage.setItem("mm-locale", active);
@@ -41,6 +60,8 @@ export function LanguageSwitcher({ tone = "dark" }: { tone?: "dark" | "light" })
   const choose = (code: Code) => {
     setActive(code);
     setOpen(false);
+    const nextPath = localizeHref(stripLocalePrefix(pathname || "/"), code);
+    router.push(nextPath);
   };
 
   return (
@@ -50,7 +71,7 @@ export function LanguageSwitcher({ tone = "dark" }: { tone?: "dark" | "light" })
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="listbox"
         aria-expanded={open}
-        aria-label="Changer de langue"
+        aria-label="Change language"
         className={cn(
           "inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-medium transition-colors",
           tone === "light"
@@ -68,18 +89,18 @@ export function LanguageSwitcher({ tone = "dark" }: { tone?: "dark" | "light" })
           className="absolute right-0 z-50 mt-2 w-40 overflow-hidden rounded-2xl bg-white p-1.5 shadow-xl ring-1 ring-charcoal/10"
         >
           {locales.map((l) => (
-            <li key={l.code}>
+            <li key={l}>
               <button
                 role="option"
-                aria-selected={active === l.code}
-                onClick={() => choose(l.code)}
+                aria-selected={active === l}
+                onClick={() => choose(l)}
                 className={cn(
                   "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm transition-colors hover:bg-ivory",
-                  active === l.code ? "text-clay" : "text-charcoal",
+                  active === l ? "text-clay" : "text-charcoal",
                 )}
               >
-                <span>{l.label}</span>
-                {active === l.code && <Icon name="check" size={15} />}
+                <span>{localeMeta[l].label}</span>
+                {active === l && <Icon name="check" size={15} />}
               </button>
             </li>
           ))}

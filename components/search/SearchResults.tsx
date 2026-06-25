@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { searchAll, type SearchResult } from "@/lib/search";
 import { ArtImage } from "@/components/ui/ArtImage";
@@ -9,12 +9,16 @@ import { Badge } from "@/components/ui/Badge";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
+import { getLocaleFromPathname, getUiText, localizeHref } from "@/lib/i18n";
 
 const FILTERS = ["Tous", "Boutique", "Restaurant", "Offre"] as const;
 
 export function SearchResults() {
   const params = useSearchParams();
   const router = useRouter();
+  const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname);
+  const t = getUiText(locale);
   const initial = params.get("q") ?? "";
   const [query, setQuery] = useState(initial);
   const [filter, setFilter] = useState<(typeof FILTERS)[number]>("Tous");
@@ -34,7 +38,7 @@ export function SearchResults() {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    router.replace(`/search?q=${encodeURIComponent(query.trim())}`);
+    router.replace(localizeHref(`/search?q=${encodeURIComponent(query.trim())}`, locale));
   };
 
   return (
@@ -44,8 +48,8 @@ export function SearchResults() {
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Rechercher des boutiques, restaurants, offres..."
-          aria-label="Recherche"
+          placeholder={t.search.placeholder}
+          aria-label={t.nav.search}
           autoFocus
           className="w-full bg-transparent font-display text-2xl text-charcoal outline-none placeholder:text-stone/50 sm:text-3xl"
         />
@@ -85,15 +89,19 @@ export function SearchResults() {
             {results.length === 0 ? (
               <EmptyState
                 icon="search"
-                title="Aucun resultat"
-                message="Aucune correspondance trouvee. Essayez un autre terme ou parcourez l'annuaire."
-                action={<Button href="/shops" variant="outline" icon="arrow-right">Voir les boutiques</Button>}
+                title={locale === "en" ? "No results" : locale === "ar" ? "لا توجد نتائج" : "Aucun resultat"}
+                message={locale === "en"
+                  ? "No match found. Try another term or browse the directory."
+                  : locale === "ar"
+                    ? "لم يتم العثور على نتيجة مطابقة. جرّب مصطلحًا آخر أو تصفح الدليل."
+                    : "Aucune correspondance trouvee. Essayez un autre terme ou parcourez l'annuaire."}
+                action={<Button href="/shops" locale={locale} variant="outline" icon="arrow-right">{locale === "en" ? "View shops" : locale === "ar" ? "عرض المتاجر" : "Voir les boutiques"}</Button>}
               />
             ) : (
               <ul className="divide-y divide-charcoal/8 overflow-hidden rounded-[var(--radius-xl2)] bg-white ring-1 ring-charcoal/8">
                 {results.map((r: SearchResult) => (
                   <li key={r.href + r.title}>
-                    <Link href={r.href} className="flex items-center gap-4 p-4 transition-colors hover:bg-ivory">
+                    <Link href={localizeHref(r.href, locale)} className="flex items-center gap-4 p-4 transition-colors hover:bg-ivory">
                       <ArtImage art={r.art} src={r.imageSrc} ratio="square" className="h-16 w-16 shrink-0" />
                       <span className="min-w-0 flex-1">
                         <span className="block truncate font-display text-lg text-charcoal">{r.title}</span>
@@ -111,7 +119,7 @@ export function SearchResults() {
       )}
 
       {!query && (
-        <p className="mt-10 text-stone">Commencez a saisir pour rechercher parmi les boutiques, restaurants et offres.</p>
+        <p className="mt-10 text-stone">{locale === "en" ? "Start typing to search shops, restaurants, and offers." : locale === "ar" ? "ابدأ الكتابة للبحث بين المتاجر والمطاعم والعروض." : "Commencez a saisir pour rechercher parmi les boutiques, restaurants et offres."}</p>
       )}
     </div>
   );

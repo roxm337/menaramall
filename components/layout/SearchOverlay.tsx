@@ -8,13 +8,23 @@ import { searchAll } from "@/lib/search";
 import { ArtImage } from "@/components/ui/ArtImage";
 import { Badge } from "@/components/ui/Badge";
 import { Icon } from "@/components/ui/Icon";
+import { getUiText, localizeHref, type Locale } from "@/lib/i18n";
 
 const SUGGESTIONS = ["Zara", "Le Souk", "Cafe", "Enfants", "Carrefour", "Terrasse"];
 
-export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () => void }) {
+export function SearchOverlay({
+  locale = "fr",
+  open,
+  onClose,
+}: {
+  locale?: Locale;
+  open: boolean;
+  onClose: () => void;
+}) {
   const [q, setQ] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const t = getUiText(locale);
 
   const results = useMemo(() => searchAll(q).slice(0, 6), [q]);
 
@@ -44,7 +54,7 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!q.trim()) return;
-    router.push(`/search?q=${encodeURIComponent(q.trim())}`);
+    router.push(localizeHref(`/search?q=${encodeURIComponent(q.trim())}`, locale));
     onClose();
   };
 
@@ -69,10 +79,10 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
           >
             <div className="mx-auto max-w-3xl">
               <div className="flex items-center justify-between">
-                <span className="eyebrow text-clay">Rechercher dans Menara Mall</span>
+                <span className="eyebrow text-clay">{t.search.title}</span>
                 <button
                   onClick={onClose}
-                  aria-label="Fermer la recherche"
+                  aria-label={t.search.close}
                   className="flex h-10 w-10 items-center justify-center rounded-full text-charcoal hover:bg-charcoal/5"
                 >
                   <Icon name="close" size={22} />
@@ -85,15 +95,15 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
                   ref={inputRef}
                   value={q}
                   onChange={(e) => setQ(e.target.value)}
-                  placeholder="Rechercher des boutiques, restaurants, offres..."
+                  placeholder={t.search.placeholder}
                   className="w-full bg-transparent font-display text-2xl text-charcoal outline-none placeholder:text-stone/60 sm:text-3xl"
-                  aria-label="Requete de recherche"
+                  aria-label={t.search.queryLabel}
                 />
               </form>
 
               {!q && (
                 <div className="mt-6">
-                  <p className="text-xs text-stone">Recherches populaires</p>
+                  <p className="text-xs text-stone">{t.search.popular}</p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {SUGGESTIONS.map((s) => (
                       <button
@@ -112,13 +122,13 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
                 <div className="mt-6 space-y-2">
                   {results.length === 0 && (
                     <p className="py-8 text-center text-sm text-stone">
-                      Aucun resultat pour “{q}”. Essayez une autre recherche.
+                      {t.search.noResults.replace("{q}", q)}
                     </p>
                   )}
                   {results.map((r) => (
                     <Link
                       key={r.href + r.title}
-                      href={r.href}
+                      href={localizeHref(r.href, locale)}
                       onClick={onClose}
                       className="flex items-center gap-4 rounded-2xl p-2.5 transition-colors hover:bg-white"
                     >
@@ -135,7 +145,7 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
                       onClick={submit}
                       className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-clay"
                     >
-                      Voir tous les resultats <Icon name="arrow-right" size={15} />
+                      {t.nav.viewAllResults} <Icon name="arrow-right" size={15} />
                     </button>
                   )}
                 </div>

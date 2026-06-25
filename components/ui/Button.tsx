@@ -1,6 +1,10 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Icon, type IconName } from "./Icon";
+import { getLocaleFromPathname, localizeHref, type Locale } from "@/lib/i18n";
 
 type Variant = "primary" | "gold" | "outline" | "light" | "ghost";
 type Size = "sm" | "md" | "lg";
@@ -30,6 +34,7 @@ interface CommonProps {
   size?: Size;
   icon?: IconName;
   className?: string;
+  locale?: Locale;
   children: React.ReactNode;
 }
 
@@ -42,7 +47,9 @@ type ButtonAsButton = CommonProps &
   React.ButtonHTMLAttributes<HTMLButtonElement> & { href?: never };
 
 export function Button(props: ButtonAsLink | ButtonAsButton) {
-  const { variant = "primary", size = "md", icon, className, children } = props;
+  const pathname = usePathname();
+  const activeLocale = getLocaleFromPathname(pathname);
+  const { variant = "primary", size = "md", icon, className, locale = activeLocale, children } = props;
   const classes = cn(base, variants[variant], sizes[size], className);
   const content = (
     <>
@@ -59,12 +66,12 @@ export function Button(props: ButtonAsLink | ButtonAsButton) {
 
   if ("href" in props && props.href) {
     return (
-      <Link href={props.href} className={classes}>
+      <Link href={localizeHref(props.href, locale)} className={classes}>
         {content}
       </Link>
     );
   }
-  const { variant: _v, size: _s, icon: _i, className: _c, children: _ch, ...rest } =
+  const { variant: _v, size: _s, icon: _i, className: _c, locale: _l, children: _ch, ...rest } =
     props as ButtonAsButton;
   return (
     <button className={classes} {...rest}>

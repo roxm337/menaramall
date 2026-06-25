@@ -1,6 +1,10 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArtImage } from "@/components/ui/ArtImage";
 import { Icon, type IconName } from "@/components/ui/Icon";
+import { getLocaleFromPathname, localizeHref } from "@/lib/i18n";
 
 export interface Experience {
   title: string;
@@ -13,9 +17,10 @@ export interface Experience {
 }
 
 export function ExperienceCard({ exp, large = false }: { exp: Experience; large?: boolean }) {
+  const locale = getLocaleFromPathname(usePathname());
   return (
     <Link
-      href={exp.href}
+      href={localizeHref(exp.href, locale)}
       className="group relative flex h-full overflow-hidden rounded-[var(--radius-xl2)] shadow-[0_18px_40px_-30px_rgba(23,23,23,0.4)] transition-shadow duration-500 ease-[var(--ease-luxe)] hover:shadow-[0_36px_70px_-30px_rgba(23,23,23,0.5)]"
     >
       <ArtImage
@@ -36,7 +41,7 @@ export function ExperienceCard({ exp, large = false }: { exp: Experience; large?
           {exp.description}
         </p>
         <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-gold-soft">
-          Explorer
+          {locale === "en" ? "Explore" : locale === "ar" ? "استكشف" : "Explorer"}
           <Icon name="arrow-right" size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
         </span>
       </div>

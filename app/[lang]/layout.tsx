@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
-import "./globals.css";
+import { notFound } from "next/navigation";
 import { site, mallHours } from "@/lib/data/site";
 import { summarizeHours } from "@/lib/hours";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MobileQuickNav } from "@/components/layout/MobileQuickNav";
+import { getLocaleDir, hasLocale, locales, type Locale } from "@/lib/i18n";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -20,43 +21,25 @@ const inter = Inter({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
-  title: {
-    default: `${site.name} — ${site.tagline}`,
-    template: `%s · ${site.name}`,
-  },
-  description: site.description,
-  keywords: [
-    "Menara Mall",
-    "centre commercial Marrakech",
-    "shopping Marrakech",
-    "restaurants Marrakech",
-    "Le Souk",
-    "loisirs en famille Marrakech",
-    "Avenue Mohammed VI",
-  ],
-  openGraph: {
-    type: "website",
-    locale: "fr_FR",
-    siteName: site.name,
-    title: `${site.name} — ${site.tagline}`,
-    description: site.description,
-    url: site.url,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${site.name} — ${site.tagline}`,
-    description: site.description,
-  },
-  alternates: {
-    canonical: "/",
-    languages: { fr: "/", en: "/en", ar: "/ar" },
-  },
-  robots: { index: true, follow: true },
-};
+export async function generateStaticParams() {
+  return locales.map((lang) => ({ lang }));
+}
 
-/** ShoppingCenter structured data for rich search results. */
+export async function generateMetadata({
+  params,
+}: LayoutProps<"/[lang]">): Promise<Metadata> {
+  const { lang } = await params;
+  if (!hasLocale(lang)) notFound();
+
+  return {
+    metadataBase: new URL(site.url),
+    alternates: {
+      canonical: lang === "fr" ? "/" : `/${lang}`,
+      languages: { fr: "/", en: "/en", ar: "/ar" },
+    },
+  };
+}
+
 function StructuredData() {
   const json = {
     "@context": "https://schema.org",
@@ -85,25 +68,32 @@ function StructuredData() {
   );
 }
 
-export default function RootLayout({
+export default async function LocalizedLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+  params,
+}: LayoutProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!hasLocale(lang)) notFound();
+
+  const locale = lang as Locale;
+  const dir = getLocaleDir(locale);
+
   return (
-    <html lang="fr" dir="ltr" className={`${cormorant.variable} ${inter.variable}`}>
+    <html lang={locale} dir={dir} className={`${cormorant.variable} ${inter.variable}`}>
       <body className="min-h-screen">
         <StructuredData />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-full focus:bg-charcoal focus:px-5 focus:py-3 focus:text-sm focus:text-ivory"
         >
-          Aller au contenu
+          Skip to content
         </a>
-        <Header locale="fr" />
+        <Header locale={locale} />
         <main id="main" className="pb-[4.5rem] lg:pb-0">
           {children}
         </main>
-        <Footer locale="fr" />
-        <MobileQuickNav locale="fr" />
+        <Footer locale={locale} />
+        <MobileQuickNav locale={locale} />
       </body>
     </html>
   );
