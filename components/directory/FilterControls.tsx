@@ -1,7 +1,34 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Icon } from "@/components/ui/Icon";
+
+export function useAutoHideFilters(offset = 96) {
+  const [hidden, setHidden] = useState(false);
+
+  useEffect(() => {
+    let lastY = window.scrollY;
+
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      const scrollingDown = currentY > lastY;
+      const scrolledPastOffset = currentY > offset;
+      const delta = Math.abs(currentY - lastY);
+
+      if (delta < 6) return;
+
+      setHidden(scrollingDown && scrolledPastOffset);
+      lastY = currentY;
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [offset]);
+
+  return hidden;
+}
 
 /** Search input used across directory pages. */
 export function SearchField({

@@ -109,6 +109,25 @@ export default async function RestaurantDetailPage({
                 <p className="mt-5 text-lg leading-relaxed text-stone">{r.description}</p>
               </Reveal>
               <Reveal className="mt-12">
+                {r.videoSrc && (
+                  <>
+                    <h3 className="mb-5 text-2xl text-charcoal">Video</h3>
+                    <div className="overflow-hidden rounded-[var(--radius-xl2)] bg-charcoal shadow-[0_24px_60px_-30px_rgba(19,26,36,0.5)]">
+                      <video
+                        controls
+                        playsInline
+                        preload="metadata"
+                        poster={r.videoPoster ?? r.imageSrc}
+                        className="aspect-video w-full bg-charcoal object-cover"
+                      >
+                        <source src={r.videoSrc} type="video/mp4" />
+                        Votre navigateur ne prend pas en charge la lecture video.
+                      </video>
+                    </div>
+                  </>
+                )}
+              </Reveal>
+              <Reveal className="mt-12">
                 <h3 className="mb-5 text-2xl text-charcoal">Galerie</h3>
                 <Gallery items={gallery} tone="clay" />
               </Reveal>

@@ -7,7 +7,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { Button } from "@/components/ui/Button";
 import { CardSkeletonGrid } from "@/components/ui/Skeleton";
 import { cn } from "@/lib/utils";
-import { SearchField, ChipFilter, ResultsBar } from "./FilterControls";
+import { SearchField, ChipFilter, ResultsBar, useAutoHideFilters } from "./FilterControls";
 
 const TAGS = ["Food Court", "Restauration rapide", "Cafe", "Dessert", "Terrasse"] as const;
 
@@ -22,6 +22,7 @@ export function DiningDirectory({
   const [type, setType] = useState<RestaurantType | "all">("all");
   const [tag, setTag] = useState<(typeof TAGS)[number] | null>(null);
   const [loading, setLoading] = useState(true);
+  const filtersHidden = useAutoHideFilters();
 
   useEffect(() => {
     const t = setTimeout(() => setLoading(false), 450);
@@ -53,7 +54,12 @@ export function DiningDirectory({
 
   return (
     <div>
-      <div className="sticky top-[var(--header-h,4.5rem)] z-20 -mx-5 mb-8 border-y border-charcoal/8 bg-ivory/90 px-5 py-5 backdrop-blur-md sm:-mx-8 sm:px-8">
+      <div
+        className={cn(
+          "sticky top-[var(--header-h,4.5rem)] z-20 -mx-5 mb-8 border-y border-charcoal/8 bg-ivory/90 px-5 py-5 backdrop-blur-md transition-transform duration-300 ease-[var(--ease-luxe)] sm:-mx-8 sm:px-8",
+          filtersHidden && "-translate-y-[calc(100%+1rem)]",
+        )}
+      >
         <div className="grid gap-4">
           <SearchField value={query} onChange={setQuery} placeholder="Rechercher une cuisine, un cafe, un restaurant..." />
           <ChipFilter label="Type" options={types} value={type} onChange={setType} />

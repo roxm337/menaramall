@@ -67,7 +67,7 @@ export function Footer({ locale = "fr" }: { locale?: Locale }) {
                 aria-label={s.label}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/8 text-white/80 transition-colors hover:bg-gold hover:text-charcoal"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/8 text-white/80 transition-colors hover:bg-gold hover:text-ivory"
               >
                 <Icon name={s.name} size={18} />
               </a>

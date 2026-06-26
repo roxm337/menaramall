@@ -6,7 +6,7 @@ import { BrandCard } from "@/components/cards/BrandCard";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Button } from "@/components/ui/Button";
 import { CardSkeletonGrid } from "@/components/ui/Skeleton";
-import { SearchField, ChipFilter, ResultsBar } from "./FilterControls";
+import { SearchField, ChipFilter, ResultsBar, useAutoHideFilters } from "./FilterControls";
 import { cn } from "@/lib/utils";
 
 const ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
@@ -25,6 +25,7 @@ export function ShopsDirectory({
   const [floor, setFloor] = useState<Floor | "all">("all");
   const [letter, setLetter] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const filtersHidden = useAutoHideFilters();
 
   // Brief initial loading state to surface the skeleton treatment.
   useEffect(() => {
@@ -77,7 +78,12 @@ export function ShopsDirectory({
       )}
 
       {/* Controls */}
-      <div className="sticky top-[var(--header-h,4.5rem)] z-20 -mx-5 mb-8 border-y border-charcoal/8 bg-ivory/90 px-5 py-5 backdrop-blur-md sm:-mx-8 sm:px-8">
+      <div
+        className={cn(
+          "sticky top-[var(--header-h,4.5rem)] z-20 -mx-5 mb-8 border-y border-charcoal/8 bg-ivory/90 px-5 py-5 backdrop-blur-md transition-transform duration-300 ease-[var(--ease-luxe)] sm:-mx-8 sm:px-8",
+          filtersHidden && "-translate-y-[calc(100%+1rem)]",
+        )}
+      >
         <div className="grid gap-4">
           <SearchField value={query} onChange={setQuery} placeholder="Rechercher une marque, une categorie..." />
           <div className="grid gap-4 sm:grid-cols-2">

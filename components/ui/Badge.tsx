@@ -7,12 +7,13 @@ export function Badge({
   className,
 }: {
   children: React.ReactNode;
-  tone?: "neutral" | "gold" | "clay" | "palm" | "outline";
+  tone?: "neutral" | "gold" | "brand" | "clay" | "palm" | "outline";
   className?: string;
 }) {
   const tones = {
     neutral: "bg-charcoal/6 text-charcoal/80",
     gold: "bg-gold/15 text-gold",
+    brand: "bg-brand/14 text-brand",
     clay: "bg-clay/12 text-clay",
     palm: "bg-palm/12 text-palm",
     outline: "border border-charcoal/15 text-charcoal/70",

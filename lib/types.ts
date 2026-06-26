@@ -79,6 +79,8 @@ export interface Restaurant {
   tags?: string[];
   heroArt: string;
   imageSrc?: string;
+  videoSrc?: string;
+  videoPoster?: string;
   gallery?: string[];
 }
 

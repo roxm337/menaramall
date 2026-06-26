@@ -13,11 +13,12 @@ export interface Experience {
   icon: IconName;
   art: string;
   imageSrc?: string;
-  tone?: "sand" | "clay" | "palm" | "charcoal" | "gold";
+  tone?: "sand" | "clay" | "palm" | "charcoal" | "gold" | "brand";
 }
 
 export function ExperienceCard({ exp, large = false }: { exp: Experience; large?: boolean }) {
   const locale = getLocaleFromPathname(usePathname());
+  const accentClass = exp.tone === "brand" ? "text-brand-soft" : "text-gold-soft";
   return (
     <Link
       href={localizeHref(exp.href, locale)}
@@ -40,7 +41,7 @@ export function ExperienceCard({ exp, large = false }: { exp: Experience; large?
         <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/80">
           {exp.description}
         </p>
-        <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-gold-soft">
+        <span className={`mt-4 inline-flex items-center gap-1.5 text-sm font-medium ${accentClass}`}>
           {locale === "en" ? "Explore" : locale === "ar" ? "استكشف" : "Explorer"}
           <Icon name="arrow-right" size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
         </span>

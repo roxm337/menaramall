@@ -19,6 +19,7 @@ export function RestaurantCard({ restaurant: r }: { restaurant: Restaurant }) {
       <div className="relative">
         <ArtImage art={r.heroArt} src={r.imageSrc} ratio="card" rounded={false} scrim />
         <div className="absolute left-4 top-4 flex flex-wrap gap-2">
+          {r.tags?.includes("New") && <Badge tone="brand">New</Badge>}
           <Badge tone="gold">{r.type}</Badge>
           {r.tags?.includes("Terrasse") && <Badge tone="palm">{locale === "en" ? "Terrace" : locale === "ar" ? "تراس" : "Terrasse"}</Badge>}
         </div>

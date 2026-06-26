@@ -47,7 +47,7 @@ const experiences: Experience[] = [
     icon: "play",
     art: "Univers Kidzo, enfants joyeux, jeux et couleurs lumineuses",
     imageSrc: officialMedia.kidzoHero,
-    tone: "gold",
+    tone: "brand",
   },
   {
     title: "Decouvrir",
@@ -163,7 +163,7 @@ export default function HomePage() {
               </Parallax>
             </Reveal>
             <Reveal delay={0.1}>
-              <Badge tone="gold">Kidzo · Univers enfants</Badge>
+              <Badge tone="brand">Kidzo · Univers enfants</Badge>
               <h2
                 className="mt-5 text-balance text-white"
                 style={{ fontSize: "var(--text-title)" }}
@@ -188,7 +188,7 @@ export default function HomePage() {
                     key={f.text}
                     className="flex items-center gap-3 text-white/80"
                   >
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-gold-soft">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-brand-soft">
                       <Icon name={f.icon} size={17} />
                     </span>
                     {f.text}
@@ -196,7 +196,7 @@ export default function HomePage() {
                 ))}
               </ul>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Button href="/entertainment" variant="gold" icon="arrow-right">
+                <Button href="/entertainment" variant="brand" icon="arrow-right">
                   Decouvrir Kidzo
                 </Button>
                 <Button href="/contact" variant="light" icon="mail">

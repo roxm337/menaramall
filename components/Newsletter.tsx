@@ -71,7 +71,7 @@ export function Newsletter({ tone = "dark" }: { tone?: "dark" | "light" }) {
           type="submit"
           className={cn(
             "shrink-0 rounded-full px-5 py-2.5 text-sm font-medium transition-colors",
-            light ? "bg-white text-charcoal hover:bg-gold-soft" : "bg-charcoal text-ivory hover:bg-clay",
+            light ? "bg-white text-charcoal hover:bg-gold-soft hover:text-ivory" : "bg-charcoal text-ivory hover:bg-clay",
           )}
         >
           S'inscrire

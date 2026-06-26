@@ -8,22 +8,12 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { Icon, type IconName } from "@/components/ui/Icon";
 import { OpenBadge } from "@/components/ui/OpeningHours";
 import { ArtImage } from "@/components/ui/ArtImage";
 import { mallHours } from "@/lib/data/site";
 import { officialMedia } from "@/lib/data/official-media";
-
-/** The four worlds surfaced in the hero directory panel. */
-const heroWorlds: { label: string; meta: string; href: string; icon: IconName }[] = [
-  { label: "Mode & beauté", meta: "Boutiques & enseignes", href: "/shops", icon: "bag" },
-  { label: "Restaurants & cafés", meta: "Food court & terrasses", href: "/dining", icon: "utensils" },
-  { label: "Kidzo en famille", meta: "Loisirs & divertissement", href: "/entertainment", icon: "baby" },
-  { label: "Artisans du Souk", meta: "Le Souq Al Madinah", href: "/le-souk", icon: "sparkles" },
-];
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -116,7 +106,7 @@ export function Hero() {
               style={{ width: i === active ? 28 : 8 }}
             >
               <motion.span
-                className="block h-full rounded-full bg-gold-soft"
+                className="block h-full rounded-full bg-brand-soft"
                 initial={false}
                 animate={{ scaleX: i === active ? 1 : 0 }}
                 style={{ originX: 0 }}
@@ -144,7 +134,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="eyebrow text-gold-soft"
+                className="eyebrow text-brand-soft"
               >
                 Marrakech · Avenue Mohamed VI
               </motion.p>
@@ -177,7 +167,7 @@ export function Hero() {
                   delay: 0.18,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="mt-7 h-px w-28 origin-left bg-gradient-to-r from-gold-soft via-gold-soft/70 to-transparent"
+                className="mt-7 h-px w-28 origin-left bg-gradient-to-r from-brand-soft via-brand-soft/70 to-transparent"
               />
 
               <motion.p
@@ -207,10 +197,10 @@ export function Hero() {
               >
                 <Button
                   href="/shops"
-                  variant="gold"
+                  variant="brand"
                   size="lg"
                   icon="arrow-right"
-                  className="shadow-[0_24px_50px_-22px_rgba(231,161,46,0.6)]"
+                  className="shadow-[0_24px_50px_-22px_rgba(180,58,50,0.5)]"
                 >
                   Explorer les boutiques
                 </Button>
@@ -236,9 +226,9 @@ export function Hero() {
               className="hidden lg:block lg:pb-4"
             >
               <div className="relative overflow-hidden rounded-[1.6rem] border border-white/12 bg-[linear-gradient(160deg,rgba(20,26,38,0.66),rgba(14,18,28,0.36))] p-1.5 shadow-[0_30px_70px_-30px_rgba(0,0,0,0.7)] backdrop-blur-xl">
-                {/* Top hairline sheen + ambient saffron glow */}
+                {/* Top hairline sheen + ambient brand glow */}
                 <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/45 to-transparent" />
-                <div className="pointer-events-none absolute -right-12 -top-12 h-44 w-44 rounded-full bg-gold/20 blur-3xl" />
+                <div className="pointer-events-none absolute -right-12 -top-12 h-44 w-44 rounded-full bg-brand/25 blur-3xl" />
                 <div className="pointer-events-none absolute -bottom-16 -left-10 h-40 w-40 rounded-full bg-clay/25 blur-3xl" />
 
               </div>
@@ -252,7 +242,7 @@ export function Hero() {
         <motion.span
           animate={reduce ? {} : { y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="hero-scroll-cue text-[0.65rem] uppercase tracking-[0.3em] text-white/50"
+          className="hero-scroll-cue hero-scroll-cue--brand text-[0.65rem] uppercase tracking-[0.3em] text-white/50"
         >
           Defiler
         </motion.span>

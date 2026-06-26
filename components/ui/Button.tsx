@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Icon, type IconName } from "./Icon";
 import { getLocaleFromPathname, localizeHref, type Locale } from "@/lib/i18n";
 
-type Variant = "primary" | "gold" | "outline" | "light" | "ghost";
+type Variant = "primary" | "gold" | "brand" | "outline" | "light" | "ghost";
 type Size = "sm" | "md" | "lg";
 
 const base =
@@ -15,7 +15,8 @@ const base =
 const variants: Record<Variant, string> = {
   primary:
     "bg-charcoal text-ivory hover:bg-charcoal-soft hover:shadow-[0_16px_40px_-16px_rgba(19,26,36,0.6)]",
-  gold: "bg-gold text-charcoal hover:bg-gold-soft hover:text-charcoal",
+  gold: "bg-gold text-ivory hover:bg-gold-soft hover:text-ivory",
+  brand: "bg-brand text-ivory hover:bg-brand-soft hover:text-ivory",
   outline:
     "border border-charcoal/25 text-charcoal hover:border-charcoal hover:bg-charcoal hover:text-ivory",
   light:

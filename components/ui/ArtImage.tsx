@@ -18,7 +18,8 @@ const tones: Record<string, [string, string, string]> = {
   clay: ["#4a66cc", "#2a4bc0", "#1b2f86"],
   palm: ["#1fa38c", "#16887a", "#0a4a40"],
   charcoal: ["#2c3543", "#1b2330", "#0e131c"],
-  gold: ["#f0c26b", "#e7a12e", "#b27a1e"],
+  gold: ["#d9877f", "#b43a32", "#7d231f"],
+  brand: ["#d9877f", "#b43a32", "#7d231f"],
   ivory: ["#f6f6f1", "#e3e3db", "#c9cbc0"],
 };
 const toneKeys = Object.keys(tones);

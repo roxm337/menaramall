@@ -57,7 +57,7 @@ function monogram(value: string): string {
     .slice(0, 3) || "MM";
 }
 
-export const restaurants: Restaurant[] = sourceRestaurants.map((item) => {
+const officialRestaurants: Restaurant[] = sourceRestaurants.map((item) => {
   const name = item.title.trim();
   const [type, cuisine] = restaurantMeta.get(name) ?? ["Restaurant", "Restauration"];
 
@@ -81,6 +81,36 @@ export const restaurants: Restaurant[] = sourceRestaurants.map((item) => {
   };
 });
 
+const shawarmaAvenue: Restaurant = {
+  id: "r-local-shawarma-avenue",
+  name: "Shawarma Avenue",
+  slug: "shawarma-avenue",
+  monogram: "SA",
+  cuisine: "Shawarma · Street food",
+  type: "Restauration rapide",
+  floor: "Food Court",
+  locationLabel: "Menara Mall · Restaurants et cafes",
+  description:
+    "Shawarma Avenue rejoint Menara Mall avec un savoir-faire construit depuis 1999. La maison propose des shawarmas prepares avec des recettes authentiques, des ingredients de qualite et un esprit street food genereux, dans une adresse pensee pour les pauses rapides et gourmandes.",
+  openingHours: dining,
+  reservationUrl: "/contact",
+  featured: true,
+  tags: ["New", "Ouverture 26/06", "Restauration rapide", "Food Court"],
+  heroArt: "Shawarma Avenue a Menara Mall Marrakech",
+  imageSrc: "/restaurants/shawarmaavenue/harat.png",
+  videoSrc:
+    "/restaurants/shawarmaavenue/SnapReels.Net_AQMZhzZzV1hRCziMaEIsDfAXvEb3y75u3MWbBAGBGc2LTW7yeQeSYBAY1tKWK7KRVN6UdLbs_iLgt1ZQyNO2p15YQghQS47zH5E_2pE.mp4",
+  videoPoster: "/restaurants/shawarmaavenue/harat.png",
+  gallery: [
+    "/restaurants/shawarmaavenue/harat.png",
+    "/restaurants/shawarmaavenue/logo.jpg",
+  ],
+};
+
+export const restaurants: Restaurant[] = [
+  shawarmaAvenue,
+  ...officialRestaurants,
+];
 export const cuisineTypes = ["Restaurant", "Cafe", "Restauration rapide", "Dessert"] as const;
 
 export function getRestaurant(slug: string): Restaurant | undefined {

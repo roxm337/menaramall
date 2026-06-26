@@ -6,7 +6,7 @@ export function Gallery({ items, tone }: { items: string[]; tone?: "sand" | "cla
   return (
     <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
       {items.map((item, i) => {
-        const isImage = /^https?:\/\//.test(item);
+        const isImage = /^(https?:\/\/|\/)/.test(item);
         return (
           <ArtImage
             key={i}

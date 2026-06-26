@@ -4,7 +4,7 @@
    Menara Mall — Design System
    The "Majorelle" palette: Marrakech told through cobalt blue (Jardin
    Majorelle) rather than the red-city cream-and-clay cliché. A cool plaster
-   base, blue-black ink, majorelle blue as the signature, saffron as the warm
+   base, blue-black ink, majorelle blue as the signature, Marrakech red as the warm
    accent and deep zellige green for relief.
 
    Note: token names are kept as stable aliases (clay = primary accent,
@@ -24,9 +24,13 @@
   /* Primary accent — majorelle blue */
   --color-clay: #2a4bc0;
   --color-clay-deep: #1f3a9e;
-  /* Warm accent — saffron */
-  --color-gold: #e7a12e;
-  --color-gold-soft: #ecb95c;
+  /* Warm accent — Marrakech red family */
+  --color-gold: #b43a32;
+  --color-gold-soft: #d25d55;
+  /* Brand accent — Marrakech red */
+  --color-brand: #b43a32;
+  --color-brand-soft: #d25d55;
+  --color-brand-deep: #8f2924;
   /* Ink — cool blue-black */
   --color-charcoal: #141a24;
   --color-charcoal-soft: #232c3a;
@@ -183,8 +187,8 @@
 }
 .hero-lattice {
   background-image:
-    linear-gradient(135deg, rgba(231, 161, 46, 0.5), rgba(231, 161, 46, 0.16)),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='none' stroke='%23e7a12e' stroke-opacity='0.62' stroke-width='1.15'%3E%3Cpath d='M70 2l68 68-68 68L2 70z'/%3E%3Cpath d='M70 24l46 46-46 46-46-46z'/%3E%3Cpath d='M70 46l24 24-24 24-24-24z'/%3E%3C/g%3E%3C/svg%3E");
+    linear-gradient(135deg, rgba(180, 58, 50, 0.52), rgba(180, 58, 50, 0.16)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='none' stroke='%23b43a32' stroke-opacity='0.62' stroke-width='1.15'%3E%3Cpath d='M70 2l68 68-68 68L2 70z'/%3E%3Cpath d='M70 24l46 46-46 46-46-46z'/%3E%3Cpath d='M70 46l24 24-24 24-24-24z'/%3E%3C/g%3E%3C/svg%3E");
   background-size: cover, 140px 140px;
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.95), transparent 88%);
   -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.95), transparent 88%);
@@ -196,8 +200,11 @@
   width: 4.8rem;
   height: 1px;
   margin: 0 auto 0.9rem;
-  background: linear-gradient(90deg, transparent, rgba(231, 161, 46, 0.9), transparent);
+  background: linear-gradient(90deg, transparent, rgba(210, 93, 85, 0.92), transparent);
   animation: cueLine 2.2s ease-in-out infinite;
+}
+.hero-scroll-cue--brand::before {
+  background: linear-gradient(90deg, transparent, rgba(210, 93, 85, 0.92), transparent);
 }
 .skeleton {
   position: relative;
