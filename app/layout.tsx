@@ -6,6 +6,7 @@ import { summarizeHours } from "@/lib/hours";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MobileQuickNav } from "@/components/layout/MobileQuickNav";
+import { LocaleHtmlSync } from "@/components/layout/LocaleHtmlSync";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -92,18 +93,13 @@ export default function RootLayout({
     <html lang="fr" dir="ltr" className={`${cormorant.variable} ${inter.variable}`}>
       <body className="min-h-screen">
         <StructuredData />
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-full focus:bg-charcoal focus:px-5 focus:py-3 focus:text-sm focus:text-ivory"
-        >
-          Aller au contenu
-        </a>
-        <Header locale="fr" />
+        <LocaleHtmlSync />
+        <Header />
         <main id="main" className="pb-[4.5rem] lg:pb-0">
           {children}
         </main>
-        <Footer locale="fr" />
-        <MobileQuickNav locale="fr" />
+        <Footer />
+        <MobileQuickNav />
       </body>
     </html>
   );

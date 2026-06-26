@@ -5,6 +5,9 @@ import { OffersView } from "@/components/offers/OffersView";
 import { Accordion } from "@/components/ui/Accordion";
 import { offers, offerCategories } from "@/lib/data/offers";
 import { formatDateRange } from "@/lib/utils";
+import { getPageText } from "@/lib/i18n-pages";
+import { offerContent, tr } from "@/lib/i18n-content";
+import type { Locale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "Offres — Bons plans et privileges de saison",
@@ -13,21 +16,29 @@ export const metadata: Metadata = {
   alternates: { canonical: "/offers" },
 };
 
-export default function OffersPage() {
-  const terms = offers.map((o) => ({
-    q: `${o.title} — ${o.brand}`,
-    a: `Valid ${formatDateRange(o.validFrom, o.validUntil)}. ${o.terms}`,
-  }));
+export default function OffersPage({
+  locale = "fr",
+}: {
+  locale?: Locale;
+}) {
+  const ofp = getPageText(locale).offers;
+  const terms = offers.map((o) => {
+    const copy = offerContent[o.id]?.[locale];
+    return {
+      q: `${copy?.title ?? o.title} — ${tr(o.brand, locale)}`,
+      a: `${ofp.valid} ${formatDateRange(o.validFrom, o.validUntil, locale)}. ${copy?.terms ?? o.terms}`,
+    };
+  });
 
   return (
     <>
       <PageHero
-        eyebrow="Offres & privileges"
-        title="Le meilleur de la saison, soigneusement selectionne"
-        lede="Des renouvellements de dressing aux cadeaux beaute et plaisirs a partager en famille : decouvrez les offres en cours des marques Menara Mall."
+        eyebrow={ofp.heroEyebrow}
+        title={ofp.heroTitle}
+        lede={ofp.heroLede}
         art="Presentation elegante d'offres retail, coffrets cadeaux et styling de saison, lumiere chaude"
         tone="gold"
-        crumbs={[{ label: "Offres" }]}
+        crumbs={[{ label: ofp.crumb }]}
       />
       <section className="bg-ivory py-16 sm:py-20">
         <Container>
@@ -37,10 +48,10 @@ export default function OffersPage() {
 
       <section className="bg-cream py-20">
         <Container size="narrow">
-          <p className="eyebrow text-clay">Informations utiles</p>
-          <h2 className="mt-3 text-3xl text-charcoal">Conditions generales</h2>
+          <p className="eyebrow text-clay">{ofp.termsEyebrow}</p>
+          <h2 className="mt-3 text-3xl text-charcoal">{ofp.termsTitle}</h2>
           <p className="mt-3 text-sm text-stone">
-            Les offres sont proposees par les marques participantes et soumises a leurs propres conditions. Merci de confirmer les details en magasin avant achat.
+            {ofp.termsIntro}
           </p>
           <div className="mt-8">
             <Accordion items={terms} />

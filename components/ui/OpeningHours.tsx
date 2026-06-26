@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import type { OpeningHours } from "@/lib/types";
+import { getLocaleFromPathname, getUiText } from "@/lib/i18n";
 import { getOpenState, summarizeHours } from "@/lib/hours";
 import { cn } from "@/lib/utils";
 import { Icon } from "./Icon";
@@ -17,13 +19,15 @@ export function OpenBadge({
   hours: OpeningHours;
   className?: string;
 }) {
+  const locale = getLocaleFromPathname(usePathname());
+  const t = getUiText(locale);
   const [state, setState] = useState<ReturnType<typeof getOpenState> | null>(null);
   useEffect(() => {
-    const tick = () => setState(getOpenState(hours));
+    const tick = () => setState(getOpenState(hours, locale));
     tick();
     const id = setInterval(tick, 60_000);
     return () => clearInterval(id);
-  }, [hours]);
+  }, [hours, locale]);
 
   if (!state) {
     return (
@@ -33,7 +37,7 @@ export function OpenBadge({
           className,
         )}
       >
-        <Icon name="clock" size={14} /> Horaires
+        <Icon name="clock" size={14} /> {t.common.openHours}
       </span>
     );
   }
@@ -66,7 +70,8 @@ export function HoursList({
   hours: OpeningHours;
   className?: string;
 }) {
-  const rows = summarizeHours(hours);
+  const locale = getLocaleFromPathname(usePathname());
+  const rows = summarizeHours(hours, locale);
   return (
     <dl className={cn("space-y-1.5 text-sm", className)}>
       {rows.map((row) => {

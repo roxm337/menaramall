@@ -1,14 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Icon } from "@/components/ui/Icon";
+import { getLocaleFromPathname } from "@/lib/i18n";
+import { getPageText } from "@/lib/i18n-pages";
 
 /**
  * Newsletter signup. Client-side validation + optimistic success state.
  * Wire `onSubmit` to a CMS/ESP endpoint (Mailchimp, Klaviyo…) at integration.
  */
 export function Newsletter({ tone = "dark" }: { tone?: "dark" | "light" }) {
+  const n = getPageText(getLocaleFromPathname(usePathname())).newsletter;
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "done" | "error">("idle");
 
@@ -34,7 +38,7 @@ export function Newsletter({ tone = "dark" }: { tone?: "dark" | "light" }) {
         )}
       >
         <Icon name="check" size={18} />
-        Merci, votre inscription est bien prise en compte. Restez a l'affut des nouveautes Menara Mall.
+        {n.success}
       </div>
     );
   }
@@ -59,8 +63,8 @@ export function Newsletter({ tone = "dark" }: { tone?: "dark" | "light" }) {
             setEmail(e.target.value);
             if (status === "error") setStatus("idle");
           }}
-          placeholder="Votre adresse e-mail"
-          aria-label="Adresse e-mail"
+          placeholder={n.placeholder}
+          aria-label={n.ariaEmail}
           aria-invalid={status === "error"}
           className={cn(
             "w-full bg-transparent text-sm outline-none",
@@ -74,12 +78,12 @@ export function Newsletter({ tone = "dark" }: { tone?: "dark" | "light" }) {
             light ? "bg-white text-charcoal hover:bg-gold-soft hover:text-ivory" : "bg-charcoal text-ivory hover:bg-clay",
           )}
         >
-          S'inscrire
+          {n.submit}
         </button>
       </div>
       {status === "error" && (
         <p className={cn("mt-2 pl-4 text-xs", light ? "text-gold-soft" : "text-clay")}>
-          Veuillez saisir une adresse e-mail valide.
+          {n.error}
         </p>
       )}
     </form>

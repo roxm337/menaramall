@@ -9,6 +9,9 @@ import { ArtImage } from "@/components/ui/ArtImage";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { Carousel } from "@/components/ui/Carousel";
 import { sourceKidzo } from "@/lib/data/source-api";
+import { getPageText } from "@/lib/i18n-pages";
+import { kidzoTagline } from "@/lib/i18n-content";
+import type { Locale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "Kidzo — Jeux et activites en famille",
@@ -17,129 +20,85 @@ export const metadata: Metadata = {
   alternates: { canonical: "/entertainment" },
 };
 
-const heroSlides = [
-  {
-    src: "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/68f92df1049d4_ELY10130.jpg",
-    title: "Bienvenue dans Kidzo !",
-  },
-  {
-    src: "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/68f92e72b49e5_ELY10155.jpg",
-    title: "Des aventures incroyables vous attendent !",
-  },
+const heroSlideSrcs = [
+  "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/68f92df1049d4_ELY10130.jpg",
+  "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/68f92e72b49e5_ELY10155.jpg",
 ] as const;
 
-const vrGames = [
-  {
-    src: "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/68f92e93b2eca_ELY10144.jpg",
-    title: "Aventure galactique",
-  },
-  {
-    src: "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/6903b16022a2f_ELY10231.jpg",
-    title: "Course cosmique",
-  },
-  {
-    src: "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/6903b1545aee3_ELY10152.jpg",
-    title: "Mission sous-marine",
-  },
-  {
-    src: "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/6903b14c3a680_ELY10153.jpg",
-    title: "Exploration des mondes",
-  },
-  {
-    src: "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/6903b3f910365_ELY10216.jpg",
-    title: "Chasse aux tresors",
-  },
-  {
-    src: "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/6903b41391457_ELY10220.jpg",
-    title: "Aventure jungle",
-  },
-  {
-    src: "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/6903b41d1492a_ELY10251.jpg",
-    title: "Combat des robots",
-  },
-  {
-    src: "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/6903b442b391f_ELY10238.jpg",
-    title: "Voyage temporel",
-  },
-  {
-    src: "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/6903b449e58fb_ELY10248.jpg",
-    title: "Escape room VR",
-  },
-  {
-    src: "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/6903b4538bceb_ELY10218.jpg",
-    title: "Aventure spatiale",
-  },
+const vrGameSrcs = [
+  "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/68f92e93b2eca_ELY10144.jpg",
+  "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/6903b16022a2f_ELY10231.jpg",
+  "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/6903b1545aee3_ELY10152.jpg",
+  "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/6903b14c3a680_ELY10153.jpg",
+  "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/6903b3f910365_ELY10216.jpg",
+  "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/6903b41391457_ELY10220.jpg",
+  "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/6903b41d1492a_ELY10251.jpg",
+  "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/6903b442b391f_ELY10238.jpg",
+  "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/6903b449e58fb_ELY10248.jpg",
+  "https://ghostwhite-goldfinch-864066.hostingersite.com/uploads/UPLODESYSTEME/images/6903b4538bceb_ELY10218.jpg",
 ] as const;
 
-const kidzoFeatures: { icon: IconName; text: string }[] = [
-  { icon: "shield", text: "Jeux surveilles et securises" },
-  { icon: "sparkles", text: "Attractions et experiences immersives" },
-  { icon: "heart", text: "Moments a partager en famille" },
-  { icon: "baby", text: "Espaces adaptes aux plus jeunes" },
-];
-
-const crecheFeatures = [
-  "Encadrement professionnel",
-  "Jeux educatifs et ludiques",
-  "Espace detente et gouter",
-  "Securite et surveillance continue",
-];
+const kidzoFeatureIcons: IconName[] = ["shield", "sparkles", "heart", "baby"];
 
 const kidzoAssets = [...sourceKidzo].sort(
   (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
 );
 
-const kidzoHero = kidzoAssets[0];
 const kidzoGallery = kidzoAssets.slice(0, 6);
 
-export default function EntertainmentPage() {
+export default function EntertainmentPage({
+  locale = "fr",
+}: {
+  locale?: Locale;
+}) {
+  const e = getPageText(locale).entertainment;
+  const heroLede = kidzoTagline[locale];
   return (
     <>
       <PageHero
-        eyebrow="Kidzo"
-        title={heroSlides[0].title}
-        lede={kidzoHero?.description ?? "L'univers magique des enfants vous attend a Kidzo - Menara Mall."}
+        eyebrow={e.heroEyebrow}
+        title={e.heroTitle}
+        lede={heroLede}
         art="Univers Kidzo lumineux, enfants rieurs, jeux et couleurs joyeuses"
-        imageSrc={heroSlides[0].src}
+        imageSrc={heroSlideSrcs[0]}
         tone="gold"
-        crumbs={[{ label: "Kidzo" }]}
+        crumbs={[{ label: e.crumb }]}
       />
 
       <section className="bg-ivory py-24">
         <Container>
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <Reveal>
-              <Badge tone="clay">Kidzo · Univers enfants</Badge>
+              <Badge tone="clay">{e.introBadge}</Badge>
               <h2
                 className="mt-5 text-balance text-charcoal"
                 style={{ fontSize: "var(--text-title)" }}
               >
-                La ou commencent les petites aventures et les grands sourires
+                {e.introTitle}
               </h2>
               <p className="mt-5 text-stone">
-                {kidzoHero?.description ??
-                  "L'univers magique des enfants vous attend a Kidzo - Menara Mall."}
+                {heroLede}
               </p>
               <ul className="mt-7 grid grid-cols-2 gap-4 text-sm">
-                {kidzoFeatures.map((feature) => (
+                {kidzoFeatureIcons.map((icon, index) => (
                   <li
-                    key={feature.text}
+                    key={icon}
                     className="flex items-center gap-3 text-charcoal"
                   >
                     <span className="flex h-9 w-9 items-center justify-center rounded-full bg-clay/10 text-clay">
-                      <Icon name={feature.icon} size={17} />
+                      <Icon name={icon} size={17} />
                     </span>
-                    {feature.text}
+                    {e.features[index]}
                   </li>
                 ))}
               </ul>
             </Reveal>
             <Reveal delay={0.1} className="grid grid-cols-2 gap-4">
-              {heroSlides.map((slide, index) => (
+              {heroSlideSrcs.map((src, index) => (
                 <ArtImage
-                  key={slide.src}
-                  art={slide.title}
-                  src={slide.src}
+                  key={src}
+                  art={e.heroSlides[index]}
+                  src={src}
                   ratio="tall"
                   tone={index === 0 ? "gold" : "clay"}
                   className={index === 0 ? "mt-8" : ""}
@@ -163,14 +122,12 @@ export default function EntertainmentPage() {
             </Reveal>
             <Reveal delay={0.1}>
               <SectionHeader
-                eyebrow="Patinoire"
-                title="Decouvrez la patinoire magique du Menara Mall"
-                lede="Plongez dans un univers feerique ou la glace scintille sous vos patins. Debutants comme amateurs de glisse y trouvent des instants de joie, de complicite et d'emerveillement."
+                eyebrow={e.patinoire.eyebrow}
+                title={e.patinoire.title}
+                lede={e.patinoire.lede}
               />
               <p className="mt-6 text-stone">
-                Enfilez vos patins et retrouvez une ambiance hivernale pleine
-                de magie, concue pour partager un moment memorable entre amis
-                ou en famille.
+                {e.patinoire.para}
               </p>
             </Reveal>
           </div>
@@ -182,14 +139,12 @@ export default function EntertainmentPage() {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <Reveal className="order-2 lg:order-1">
               <SectionHeader
-                eyebrow="Cinema 7D"
-                title="Une experience immersive pour toute la famille"
-                lede="Mouvements, eclaboussures, lumiere et vent donnent vie a chaque scene. Le cinema 7D transforme chaque seance en aventure sensorielle."
+                eyebrow={e.cinema.eyebrow}
+                title={e.cinema.title}
+                lede={e.cinema.lede}
               />
               <p className="mt-6 max-w-xl text-white/75">
-                Les sieges interactifs et les effets speciaux cites sur la page
-                officielle Kidzo offrent un divertissement intense et ludique,
-                ideal pour completer une sortie en famille.
+                {e.cinema.para}
               </p>
             </Reveal>
             <Reveal delay={0.1} className="order-1 lg:order-2">
@@ -208,9 +163,9 @@ export default function EntertainmentPage() {
         <Container>
           <SectionHeader
             align="center"
-            eyebrow="Galerie officielle"
-            title="L'univers magique de Kidzo"
-            lede="Selection d'images issue du contenu officiel Kidzo diffuse par Menara Mall."
+            eyebrow={e.gallery.eyebrow}
+            title={e.gallery.title}
+            lede={e.gallery.lede}
           />
           <Reveal className="mt-14">
             <Carousel>
@@ -228,7 +183,7 @@ export default function EntertainmentPage() {
                   />
                   <div className="p-5">
                     <p className="text-sm leading-relaxed text-stone">
-                      {item.description}
+                      {locale === "fr" ? item.description : heroLede}
                     </p>
                   </div>
                 </div>
@@ -243,18 +198,15 @@ export default function EntertainmentPage() {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <Reveal>
               <SectionHeader
-                eyebrow="Petite Creche"
-                title="Un espace chaleureux pour les tout-petits"
-                lede="La Petite Creche accueille les enfants de 1 a 4 ans dans un environnement amusant, securise et adapte au rythme des plus jeunes."
+                eyebrow={e.creche.eyebrow}
+                title={e.creche.title}
+                lede={e.creche.lede}
               />
               <p className="mt-6 text-stone">
-                La page officielle Kidzo met en avant un encadrement
-                professionnel, des jeux educatifs, des moments de detente et
-                une surveillance continue pour que les parents profitent
-                sereinement de leur visite.
+                {e.creche.para}
               </p>
               <ul className="mt-7 grid grid-cols-2 gap-4 text-sm">
-                {crecheFeatures.map((feature) => (
+                {e.creche.features.map((feature) => (
                   <li
                     key={feature}
                     className="flex items-center gap-3 text-charcoal"
@@ -290,26 +242,26 @@ export default function EntertainmentPage() {
         <Container>
           <SectionHeader
             align="center"
-            eyebrow="Jeux en realite virtuelle"
-            title="Des aventures immersives pour tous les ages"
-            lede="Le site Kidzo historique presente une collection d'experiences VR ludiques et spectaculaires. Voici les visuels officiels associes a cette section."
+            eyebrow={e.vr.eyebrow}
+            title={e.vr.title}
+            lede={e.vr.lede}
           />
           <Reveal className="mt-14">
             <Carousel>
-              {vrGames.map((game) => (
+              {vrGameSrcs.map((src, index) => (
                 <div
-                  key={game.src}
+                  key={src}
                   className="min-w-[18rem] snap-start overflow-hidden rounded-[var(--radius-xl2)] bg-white ring-1 ring-charcoal/8 shadow-[0_18px_40px_-30px_rgba(23,23,23,0.35)] sm:min-w-[22rem] lg:min-w-[24rem]"
                 >
                   <ArtImage
-                    art={game.title}
-                    src={game.src}
+                    art={e.vr.games[index]}
+                    src={src}
                     ratio="wide"
                     tone="charcoal"
                     rounded={false}
                   />
                   <div className="p-5">
-                    <h3 className="text-xl text-charcoal">{game.title}</h3>
+                    <h3 className="text-xl text-charcoal">{e.vr.games[index]}</h3>
                   </div>
                 </div>
               ))}
@@ -325,15 +277,14 @@ export default function EntertainmentPage() {
               className="text-balance text-white"
               style={{ fontSize: "var(--text-title)" }}
             >
-              Pret pour une journee dont toute la famille se souviendra ?
+              {e.cta.title}
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-white/70">
-              Preparez votre visite ou demandez nos tarifs groupes : nous
-              serons ravis de vous aider.
+              {e.cta.lede}
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Button href="/contact" variant="gold" icon="mail">
-                Nous contacter
+              <Button href="/contact" locale={locale} variant="gold" icon="mail">
+                {getPageText(locale).common.contactUs}
               </Button>
             </div>
           </Reveal>

@@ -7,10 +7,13 @@ import { ArtImage } from "@/components/ui/ArtImage";
 import { Badge } from "@/components/ui/Badge";
 import { OpenBadge } from "@/components/ui/OpeningHours";
 import { Icon } from "@/components/ui/Icon";
-import { getLocaleFromPathname, localizeHref } from "@/lib/i18n";
+import { getLocaleFromPathname, getUiText, localizeHref } from "@/lib/i18n";
+import { tr, brandDescriptions, localizeDescription } from "@/lib/i18n-content";
 
 export function BrandCard({ brand }: { brand: Brand }) {
   const locale = getLocaleFromPathname(usePathname());
+  const t = getUiText(locale);
+  const description = localizeDescription(brandDescriptions, brand.name, brand.description, locale);
   return (
     <Link
       href={localizeHref(`/shops/${brand.slug}`, locale)}
@@ -25,8 +28,8 @@ export function BrandCard({ brand }: { brand: Brand }) {
           rounded={false}
         />
         <div className="absolute left-4 top-4 flex gap-2">
-          <Badge tone="gold">{brand.category}</Badge>
-          {brand.featured && <Badge tone="clay">{locale === "en" ? "Featured" : locale === "ar" ? "مميز" : "A la une"}</Badge>}
+          <Badge tone="gold">{tr(brand.category, locale)}</Badge>
+          {brand.featured && <Badge tone="clay">{t.common.featured}</Badge>}
         </div>
       </div>
       <div className="flex flex-1 flex-col p-6">
@@ -37,10 +40,10 @@ export function BrandCard({ brand }: { brand: Brand }) {
           </span>
         </div>
         <p className="mt-1 inline-flex items-center gap-1.5 text-xs text-stone">
-          <Icon name="map-pin" size={13} /> {brand.locationLabel}
+          <Icon name="map-pin" size={13} /> {tr(brand.locationLabel, locale)}
         </p>
         <p className="mt-3 line-clamp-2 flex-1 text-sm leading-relaxed text-stone">
-          {brand.description}
+          {description}
         </p>
         <div className="mt-5 border-t border-charcoal/8 pt-4">
           <OpenBadge hours={brand.openingHours} />

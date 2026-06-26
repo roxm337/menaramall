@@ -11,15 +11,17 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 import { SearchOverlay } from "./SearchOverlay";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
-import { localizeHref, getUiText, type Locale } from "@/lib/i18n";
+import { getLocaleFromPathname, localizeHref, stripLocalePrefix, getUiText, type Locale } from "@/lib/i18n";
 
-export function Header({ locale = "fr" }: { locale?: Locale }) {
+export function Header({ locale }: { locale?: Locale }) {
   const pathname = usePathname();
-  const isHome = pathname === "/";
-  const t = getUiText(locale);
+  const activeLocale = locale ?? getLocaleFromPathname(pathname);
+  const path = stripLocalePrefix(pathname);
+  const isHome = path === "/";
+  const t = getUiText(activeLocale);
   const navLabels = {
     "/shops": t.nav.shops,
-    "/dining": locale === "en" ? "Dining" : locale === "ar" ? "المطاعم" : "Restaurants",
+    "/dining": activeLocale === "en" ? "Dining" : activeLocale === "ar" ? "المطاعم" : "Restaurants",
     "/entertainment": t.nav.entertainment,
     "/le-souk": t.nav.souk,
   } as const;
@@ -63,8 +65,8 @@ export function Header({ locale = "fr" }: { locale?: Locale }) {
 
           <nav className={cn("hidden items-center gap-1 lg:flex", compact && "gap-0.5")} aria-label={t.nav.mainNav}>
             {primaryNav.map((item) => {
-              const active = pathname.startsWith(item.href);
-              const localizedHref = localizeHref(item.href, locale);
+              const active = path.startsWith(item.href);
+              const localizedHref = localizeHref(item.href, activeLocale);
               return (
                 <Link
                   key={item.href}
@@ -97,10 +99,10 @@ export function Header({ locale = "fr" }: { locale?: Locale }) {
               <Icon name="search" size={compact ? 19 : 20} />
             </button>
             <div className="hidden sm:block transition-all duration-500">
-              <LanguageSwitcher locale={locale} tone={tone} />
+              <LanguageSwitcher locale={activeLocale} tone={tone} />
             </div>
             <div className="hidden lg:block transition-all duration-500">
-              <Button href="/contact" locale={locale} variant={transparent ? "light" : "primary"} size="sm" icon="mail" className={compact ? "px-3.5 py-1.5 text-[0.79rem]" : ""}>
+              <Button href="/contact" locale={activeLocale} variant={transparent ? "light" : "primary"} size="sm" icon="mail" className={compact ? "px-3.5 py-1.5 text-[0.79rem]" : ""}>
                 {t.nav.contact}
               </Button>
             </div>
@@ -140,7 +142,7 @@ export function Header({ locale = "fr" }: { locale?: Locale }) {
                     transition={{ delay: 0.06 * i + 0.05, ease: [0.16, 1, 0.3, 1] }}
                   >
                     <Link
-                      href={localizeHref(item.href, locale)}
+                      href={localizeHref(item.href, activeLocale)}
                       onClick={() => setMenuOpen(false)}
                       className="flex items-center justify-between border-b border-charcoal/8 py-4 font-display text-3xl text-charcoal"
                     >
@@ -152,7 +154,7 @@ export function Header({ locale = "fr" }: { locale?: Locale }) {
               </nav>
 
               <div className="mt-8 grid grid-cols-2 gap-3">
-                <Button href="/contact" locale={locale} variant="primary" icon="mail" className="w-full">
+                <Button href="/contact" locale={activeLocale} variant="primary" icon="mail" className="w-full">
                   {t.nav.contact}
                 </Button>
                 <Button
@@ -170,14 +172,14 @@ export function Header({ locale = "fr" }: { locale?: Locale }) {
 
               <div className="mt-8 flex items-center justify-between border-t border-charcoal/8 pt-6">
                 <span className="text-sm text-stone">{t.nav.language}</span>
-                <LanguageSwitcher locale={locale} />
+                <LanguageSwitcher locale={activeLocale} />
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <SearchOverlay locale={locale} open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <SearchOverlay locale={activeLocale} open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
 }

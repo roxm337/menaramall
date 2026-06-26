@@ -13,9 +13,12 @@ export function hashUnit(input: string): number {
   return ((h >>> 0) % 1000) / 1000;
 }
 
-export function formatDateRange(date: string, endDate?: string): string {
+const INTL_LOCALE: Record<string, string> = { fr: "fr-FR", en: "en-GB", ar: "ar-MA" };
+
+export function formatDateRange(date: string, endDate?: string, locale = "fr"): string {
+  const intl = INTL_LOCALE[locale] ?? "fr-FR";
   const fmt = (d: string) =>
-    new Date(`${d}T00:00:00`).toLocaleDateString("fr-FR", {
+    new Date(`${d}T00:00:00`).toLocaleDateString(intl, {
       day: "numeric",
       month: "long",
       year: "numeric",
@@ -26,7 +29,7 @@ export function formatDateRange(date: string, endDate?: string): string {
   const sameMonth =
     a.getMonth() === b.getMonth() && a.getFullYear() === b.getFullYear();
   if (sameMonth) {
-    const month = a.toLocaleDateString("fr-FR", { month: "long", year: "numeric" });
+    const month = a.toLocaleDateString(intl, { month: "long", year: "numeric" });
     return `${a.getDate()}–${b.getDate()} ${month}`;
   }
   return `${fmt(date)} – ${fmt(endDate)}`;

@@ -8,6 +8,7 @@ import {
   defaultLocale,
   getLocaleDir,
   getLocaleFromPathname,
+  getUiText,
   localeMeta,
   locales,
   localizeHref,
@@ -33,6 +34,7 @@ export function LanguageSwitcher({
   const initialLocale = locale ?? getLocaleFromPathname(pathname);
   const [active, setActive] = useState<Code>(initialLocale);
   const ref = useRef<HTMLDivElement>(null);
+  const t = getUiText(active);
 
   // Restore the persisted preference once on mount (client-only API).
   useEffect(() => {
@@ -71,7 +73,7 @@ export function LanguageSwitcher({
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="listbox"
         aria-expanded={open}
-        aria-label="Change language"
+        aria-label={t.nav.language}
         className={cn(
           "inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-medium transition-colors",
           tone === "light"

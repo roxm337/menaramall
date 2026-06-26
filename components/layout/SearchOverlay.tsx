@@ -26,7 +26,7 @@ export function SearchOverlay({
   const router = useRouter();
   const t = getUiText(locale);
 
-  const results = useMemo(() => searchAll(q).slice(0, 6), [q]);
+  const results = useMemo(() => searchAll(q, locale).slice(0, 6), [q, locale]);
 
   useEffect(() => {
     if (open) {

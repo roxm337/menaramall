@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import type { Restaurant, RestaurantType } from "@/lib/types";
 import { RestaurantCard } from "@/components/cards/RestaurantCard";
@@ -8,6 +9,8 @@ import { Button } from "@/components/ui/Button";
 import { CardSkeletonGrid } from "@/components/ui/Skeleton";
 import { cn } from "@/lib/utils";
 import { SearchField, ChipFilter, ResultsBar, useAutoHideFilters } from "./FilterControls";
+import { getLocaleFromPathname, getUiText } from "@/lib/i18n";
+import { tr } from "@/lib/i18n-content";
 
 const TAGS = ["Food Court", "Restauration rapide", "Cafe", "Dessert", "Terrasse"] as const;
 
@@ -23,6 +26,8 @@ export function DiningDirectory({
   const [tag, setTag] = useState<(typeof TAGS)[number] | null>(null);
   const [loading, setLoading] = useState(true);
   const filtersHidden = useAutoHideFilters();
+  const locale = getLocaleFromPathname(usePathname());
+  const t = getUiText(locale);
 
   useEffect(() => {
     const t = setTimeout(() => setLoading(false), 450);
@@ -61,10 +66,10 @@ export function DiningDirectory({
         )}
       >
         <div className="grid gap-4">
-          <SearchField value={query} onChange={setQuery} placeholder="Rechercher une cuisine, un cafe, un restaurant..." />
-          <ChipFilter label="Type" options={types} value={type} onChange={setType} />
+          <SearchField value={query} onChange={setQuery} placeholder={t.directory.searchDiningPlaceholder} />
+          <ChipFilter label={t.directory.type} options={types} value={type} onChange={setType} />
           <div>
-            <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-stone">Ideal pour</p>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-stone">{t.directory.idealFor}</p>
             <div className="flex flex-wrap gap-2">
               {TAGS.map((t) => (
                 <button
@@ -77,7 +82,7 @@ export function DiningDirectory({
                       : "border-charcoal/15 bg-white text-charcoal/75 hover:border-charcoal/40",
                   )}
                 >
-                  {t}
+                  {tr(t, locale)}
                 </button>
               ))}
             </div>
@@ -86,7 +91,7 @@ export function DiningDirectory({
       </div>
 
       <div className="mb-6">
-        <ResultsBar count={results.length} noun="adresse" onReset={reset} hasFilters={hasFilters} />
+        <ResultsBar count={results.length} noun={t.directory.addressNoun} onReset={reset} hasFilters={hasFilters} />
       </div>
 
       {loading ? (
@@ -94,9 +99,9 @@ export function DiningDirectory({
       ) : results.length === 0 ? (
         <EmptyState
           icon="utensils"
-          title="Aucune adresse ne correspond a votre recherche"
-          message="Essayez une autre cuisine, un autre type ou un autre filtre : il y a une table pour chaque envie a Menara Mall."
-          action={<Button onClick={reset} variant="outline">Reinitialiser les filtres</Button>}
+          title={t.directory.noDiningTitle}
+          message={t.directory.noDiningMessage}
+          action={<Button onClick={reset} variant="outline">{t.directory.resetFilters}</Button>}
         />
       ) : (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -21,22 +21,22 @@ export default async function LocalizedPage({
 
   const path = slug ?? [];
 
-  if (path.length === 0) return <HomePage />;
-  if (path.length === 1 && path[0] === "shops") return <ShopsPage />;
+  if (path.length === 0) return <HomePage locale={lang} />;
+  if (path.length === 1 && path[0] === "shops") return <ShopsPage locale={lang} />;
   if (path.length === 2 && path[0] === "shops") {
-    return <ShopsDetailPage params={Promise.resolve({ slug: path[1] })} />;
+    return <ShopsDetailPage params={Promise.resolve({ slug: path[1] })} locale={lang} />;
   }
-  if (path.length === 1 && path[0] === "dining") return <DiningPage />;
+  if (path.length === 1 && path[0] === "dining") return <DiningPage locale={lang} />;
   if (path.length === 2 && path[0] === "dining") {
-    return <DiningDetailPage params={Promise.resolve({ slug: path[1] })} />;
+    return <DiningDetailPage params={Promise.resolve({ slug: path[1] })} locale={lang} />;
   }
-  if (path.length === 1 && path[0] === "entertainment") return <EntertainmentPage />;
-  if (path.length === 1 && path[0] === "le-souk") return <LeSoukPage />;
-  if (path.length === 1 && path[0] === "services") return <ServicesPage />;
-  if (path.length === 1 && path[0] === "offers") return <OffersPage />;
-  if (path.length === 1 && path[0] === "contact") return <ContactPage />;
-  if (path.length === 1 && path[0] === "leasing") return <LeasingPage />;
-  if (path.length === 1 && path[0] === "search") return <SearchPage />;
+  if (path.length === 1 && path[0] === "entertainment") return <EntertainmentPage locale={lang} />;
+  if (path.length === 1 && path[0] === "le-souk") return <LeSoukPage locale={lang} />;
+  if (path.length === 1 && path[0] === "services") return <ServicesPage locale={lang} />;
+  if (path.length === 1 && path[0] === "offers") return <OffersPage locale={lang} />;
+  if (path.length === 1 && path[0] === "contact") return <ContactPage locale={lang} />;
+  if (path.length === 1 && path[0] === "leasing") return <LeasingPage locale={lang} />;
+  if (path.length === 1 && path[0] === "search") return <SearchPage locale={lang} />;
 
   notFound();
 }

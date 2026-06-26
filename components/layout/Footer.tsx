@@ -1,10 +1,14 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { site, footerNav, legalNav, mallHours, foodCourtHours, carrefourHours } from "@/lib/data/site";
 import { HoursList } from "@/components/ui/OpeningHours";
 import { Newsletter } from "@/components/Newsletter";
 import { Logo } from "./Logo";
 import { Icon, type IconName } from "@/components/ui/Icon";
-import { getUiText, localizeHref, type Locale } from "@/lib/i18n";
+import { getLocaleFromPathname, getUiText, localizeHref, type Locale } from "@/lib/i18n";
+import { getPageText } from "@/lib/i18n-pages";
 
 const socials: { name: IconName; href: string; label: string }[] = [
   { name: "instagram", href: site.social.instagram, label: "Instagram" },
@@ -30,8 +34,11 @@ function navLabel(label: string, href: string, locale: Locale) {
   return navLabelByHref[href as keyof typeof navLabelByHref]?.[locale] ?? label;
 }
 
-export function Footer({ locale = "fr" }: { locale?: Locale }) {
-  const t = getUiText(locale);
+export function Footer({ locale }: { locale?: Locale }) {
+  const pathname = usePathname();
+  const activeLocale = locale ?? getLocaleFromPathname(pathname);
+  const t = getUiText(activeLocale);
+  const pt = getPageText(activeLocale);
   return (
     <footer className="bg-charcoal text-ivory">
       {/* Newsletter band */}
@@ -57,7 +64,7 @@ export function Footer({ locale = "fr" }: { locale?: Locale }) {
         <div className="lg:col-span-4">
           <Logo tone="light" />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/60">
-            {site.description}
+            {pt.footer.about}
           </p>
           <div className="mt-6 flex gap-2">
             {socials.map((s) => (
@@ -80,8 +87,8 @@ export function Footer({ locale = "fr" }: { locale?: Locale }) {
           <ul className="mt-4 space-y-2.5">
             {footerNav.explore.map((l) => (
               <li key={l.href}>
-                <Link href={localizeHref(l.href, locale)} className="text-sm text-white/70 transition-colors hover:text-gold-soft">
-                  {navLabel(l.label, l.href, locale)}
+                <Link href={localizeHref(l.href, activeLocale)} className="text-sm text-white/70 transition-colors hover:text-gold-soft">
+                  {navLabel(l.label, l.href, activeLocale)}
                 </Link>
               </li>
             ))}
@@ -93,15 +100,15 @@ export function Footer({ locale = "fr" }: { locale?: Locale }) {
           <ul className="mt-4 space-y-2.5">
             {footerNav.essentials.map((l) => (
               <li key={l.href}>
-                <Link href={localizeHref(l.href, locale)} className="text-sm text-white/70 transition-colors hover:text-gold-soft">
-                  {navLabel(l.label, l.href, locale)}
+                <Link href={localizeHref(l.href, activeLocale)} className="text-sm text-white/70 transition-colors hover:text-gold-soft">
+                  {navLabel(l.label, l.href, activeLocale)}
                 </Link>
               </li>
             ))}
             {footerNav.business.slice(0, 1).map((l) => (
               <li key={l.href}>
-                <Link href={localizeHref(l.href, locale)} className="text-sm text-white/70 transition-colors hover:text-gold-soft">
-                  {navLabel(l.label, l.href, locale)}
+                <Link href={localizeHref(l.href, activeLocale)} className="text-sm text-white/70 transition-colors hover:text-gold-soft">
+                  {navLabel(l.label, l.href, activeLocale)}
                 </Link>
               </li>
             ))}
@@ -152,10 +159,10 @@ export function Footer({ locale = "fr" }: { locale?: Locale }) {
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-6 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12">
           <p>© {new Date().getFullYear()} {site.name}, {site.city}. {t.footer.rights}</p>
           <ul className="flex flex-wrap gap-4">
-            {legalNav.map((l) => (
+            {legalNav.map((l, i) => (
               <li key={l.label}>
-                <Link href={localizeHref(l.href, locale)} className="transition-colors hover:text-white/80">
-                  {l.label}
+                <Link href={localizeHref(l.href, activeLocale)} className="transition-colors hover:text-white/80">
+                  {pt.footer.legal[i] ?? l.label}
                 </Link>
               </li>
             ))}

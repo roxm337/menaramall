@@ -1,10 +1,14 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
 import type { Offer, OfferCategory } from "@/lib/types";
 import { OfferCard } from "@/components/cards/OfferCard";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { cn } from "@/lib/utils";
+import { getLocaleFromPathname } from "@/lib/i18n";
+import { tr } from "@/lib/i18n-content";
+import { getPageText } from "@/lib/i18n-pages";
 
 export function OffersView({
   offers,
@@ -13,6 +17,8 @@ export function OffersView({
   offers: Offer[];
   categories: readonly OfferCategory[];
 }) {
+  const locale = getLocaleFromPathname(usePathname());
+  const o = getPageText(locale).offers;
   const [category, setCategory] = useState<OfferCategory | "all">("all");
   const [brand, setBrand] = useState<string | "all">("all");
 
@@ -36,20 +42,20 @@ export function OffersView({
     <div>
       <div className="grid gap-4">
         <div>
-          <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-stone">Categorie</p>
+          <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-stone">{o.filterCategory}</p>
           <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <button onClick={() => setCategory("all")} className={chip(category === "all")}>Toutes</button>
+            <button onClick={() => setCategory("all")} className={chip(category === "all")}>{o.filterAll}</button>
             {categories.map((c) => (
-              <button key={c} onClick={() => setCategory(c)} className={chip(category === c)}>{c}</button>
+              <button key={c} onClick={() => setCategory(c)} className={chip(category === c)}>{tr(c, locale)}</button>
             ))}
           </div>
         </div>
         <div>
-          <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-stone">Marque</p>
+          <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-stone">{o.filterBrand}</p>
           <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <button onClick={() => setBrand("all")} className={chip(brand === "all")}>Toutes</button>
+            <button onClick={() => setBrand("all")} className={chip(brand === "all")}>{o.filterAll}</button>
             {brands.map((b) => (
-              <button key={b} onClick={() => setBrand(b)} className={chip(brand === b)}>{b}</button>
+              <button key={b} onClick={() => setBrand(b)} className={chip(brand === b)}>{tr(b, locale)}</button>
             ))}
           </div>
         </div>
@@ -59,8 +65,8 @@ export function OffersView({
         {list.length === 0 ? (
           <EmptyState
             icon="tag"
-            title="Aucune offre ne correspond a vos filtres"
-            message="Essayez une autre categorie ou une autre marque : de nouvelles offres sont ajoutees regulierement."
+            title={o.emptyTitle}
+            message={o.emptyMessage}
           />
         ) : (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

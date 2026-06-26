@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import type { Brand, BrandCategory, Floor } from "@/lib/types";
 import { BrandCard } from "@/components/cards/BrandCard";
@@ -8,6 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { CardSkeletonGrid } from "@/components/ui/Skeleton";
 import { SearchField, ChipFilter, ResultsBar, useAutoHideFilters } from "./FilterControls";
 import { cn } from "@/lib/utils";
+import { getLocaleFromPathname, getUiText } from "@/lib/i18n";
 
 const ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
@@ -26,6 +28,8 @@ export function ShopsDirectory({
   const [letter, setLetter] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const filtersHidden = useAutoHideFilters();
+  const locale = getLocaleFromPathname(usePathname());
+  const t = getUiText(locale);
 
   // Brief initial loading state to surface the skeleton treatment.
   useEffect(() => {
@@ -68,7 +72,7 @@ export function ShopsDirectory({
       {/* Featured strip — only when browsing without filters */}
       {!hasFilters && !loading && (
         <div className="mb-14">
-          <p className="eyebrow mb-5 text-clay">Marques a la une</p>
+          <p className="eyebrow mb-5 text-clay">{t.directory.featuredBrands}</p>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {featured.map((b) => (
               <BrandCard key={b.id} brand={b} />
@@ -85,10 +89,10 @@ export function ShopsDirectory({
         )}
       >
         <div className="grid gap-4">
-          <SearchField value={query} onChange={setQuery} placeholder="Rechercher une marque, une categorie..." />
+          <SearchField value={query} onChange={setQuery} placeholder={t.directory.searchBrandPlaceholder} />
           <div className="grid gap-4 sm:grid-cols-2">
-            <ChipFilter label="Categorie" options={categories} value={category} onChange={setCategory} />
-            <ChipFilter label="Niveau" options={floors} value={floor} onChange={setFloor} />
+            <ChipFilter label={t.directory.category} options={categories} value={category} onChange={setCategory} />
+            <ChipFilter label={t.directory.level} options={floors} value={floor} onChange={setFloor} />
           </div>
           {/* Alphabetical */}
           <div className="flex flex-wrap items-center gap-1">
@@ -99,7 +103,7 @@ export function ShopsDirectory({
                 letter === null ? "text-clay" : "text-stone hover:text-charcoal",
               )}
             >
-              Tous
+              {t.directory.all}
             </button>
             {ALPHA.map((l) => {
               const enabled = activeLetters.has(l);
@@ -124,7 +128,7 @@ export function ShopsDirectory({
       </div>
 
       <div className="mb-6">
-        <ResultsBar count={results.length} noun="boutique" onReset={reset} hasFilters={hasFilters} />
+        <ResultsBar count={results.length} noun={t.directory.shopNoun} onReset={reset} hasFilters={hasFilters} />
       </div>
 
       {loading ? (
@@ -132,9 +136,9 @@ export function ShopsDirectory({
       ) : results.length === 0 ? (
         <EmptyState
           icon="bag"
-          title="Aucune boutique ne correspond a votre recherche"
-          message="Essayez d'ajuster vos filtres ou de rechercher une autre marque ou categorie."
-          action={<Button onClick={reset} variant="outline">Reinitialiser les filtres</Button>}
+          title={t.directory.noShopTitle}
+          message={t.directory.noShopMessage}
+          action={<Button onClick={reset} variant="outline">{t.directory.resetFilters}</Button>}
         />
       ) : (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

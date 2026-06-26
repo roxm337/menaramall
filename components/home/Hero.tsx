@@ -15,7 +15,37 @@ import { ArtImage } from "@/components/ui/ArtImage";
 import { mallHours } from "@/lib/data/site";
 import { officialMedia } from "@/lib/data/official-media";
 
-export function Hero() {
+export function Hero({ locale = "fr" }: { locale?: "fr" | "en" | "ar" }) {
+  const copy =
+    locale === "en"
+      ? {
+          title: "Experience Marrakech",
+          subtitle: "in one destination",
+          lede:
+            "Discover premium shopping, terrace dining, family entertainment, and Moroccan craftsmanship in one essential Menara Mall address.",
+          shops: "Explore shops",
+          contact: "Contact us",
+          scroll: "Scroll",
+        }
+      : locale === "ar"
+        ? {
+            title: "عِش مراكش",
+            subtitle: "في وجهة واحدة",
+            lede:
+              "اكتشف التسوق الراقي، والمطاعم ذات التراس، والترفيه العائلي، والحرف المغربية في عنوان واحد لا غنى عنه داخل منارة مول.",
+            shops: "استكشف المتاجر",
+            contact: "اتصل بنا",
+            scroll: "مرر",
+          }
+        : {
+            title: "Vivez Marrakech",
+            subtitle: "en une seule destination",
+            lede:
+              "Decouvrez shopping premium, restaurants en terrasse, loisirs en famille et artisanat marocain au sein d'une adresse incontournable, au coeur de Menara Mall.",
+            shops: "Explorer les boutiques",
+            contact: "Contactez-nous",
+            scroll: "Defiler",
+          };
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -153,9 +183,9 @@ export function Hero() {
                   lineHeight: "0.95",
                 }}
               >
-                Vivez Marrakech
+                {copy.title}
                 <span className="mt-2 block text-white/92">
-                  en une seule destination
+                  {copy.subtitle}
                 </span>
               </motion.h1>
 
@@ -180,9 +210,7 @@ export function Hero() {
                 }}
                 className="mt-7 max-w-2xl text-pretty text-base leading-relaxed text-white/82 sm:text-[1.1rem]"
               >
-                Decouvrez shopping premium, restaurants en terrasse, loisirs
-                en famille et artisanat marocain au sein d&apos;une adresse
-                incontournable, au coeur de Menara Mall.
+                {copy.lede}
               </motion.p>
 
               <motion.div
@@ -202,10 +230,10 @@ export function Hero() {
                   icon="arrow-right"
                   className="shadow-[0_24px_50px_-22px_rgba(180,58,50,0.5)]"
                 >
-                  Explorer les boutiques
+                  {copy.shops}
                 </Button>
                 <Button href="/contact" variant="light" size="lg" icon="mail">
-                  Contactez-nous
+                  {copy.contact}
                 </Button>
                 <span className="mt-1 inline-flex items-center sm:ml-3 sm:mt-0">
                   <span className="rounded-full border border-white/12 bg-white/10 px-4 py-2 backdrop-blur-md">
@@ -244,7 +272,7 @@ export function Hero() {
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           className="hero-scroll-cue hero-scroll-cue--brand text-[0.65rem] uppercase tracking-[0.3em] text-white/50"
         >
-          Defiler
+          {copy.scroll}
         </motion.span>
       </div>
     </section>

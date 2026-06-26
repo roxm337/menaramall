@@ -14,6 +14,9 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Gallery } from "@/components/Gallery";
 import { MapPlaceholder } from "@/components/MapPlaceholder";
 import { RestaurantCard } from "@/components/cards/RestaurantCard";
+import { getPageText } from "@/lib/i18n-pages";
+import { tr, restaurantDescriptions, localizeDescription } from "@/lib/i18n-content";
+import type { Locale } from "@/lib/i18n";
 
 export function generateStaticParams() {
   return restaurants.map((r) => ({ slug: r.slug }));
@@ -37,13 +40,17 @@ export async function generateMetadata({
 
 export default async function RestaurantDetailPage({
   params,
+  locale = "fr",
 }: {
   params: Promise<{ slug: string }>;
+  locale?: Locale;
 }) {
   const { slug } = await params;
   const r = getRestaurant(slug);
   if (!r) notFound();
 
+  const d = getPageText(locale).detailDining;
+  const description = localizeDescription(restaurantDescriptions, r.name, r.description, locale);
   const related = relatedRestaurants(r);
   const gallery = r.gallery ?? [
     `Salle de ${r.name}, lumiere d'ambiance et tables dressees`,
@@ -79,16 +86,16 @@ export default async function RestaurantDetailPage({
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/45 to-charcoal/30" />
         <Container className="relative z-10 flex min-h-[46vh] flex-col justify-end py-12">
           <div className="mb-6 [&_*]:!text-white/70 [&_a:hover]:!text-white">
-            <Breadcrumbs items={[{ label: "Restaurants", href: "/dining" }, { label: r.name }]} />
+            <Breadcrumbs items={[{ label: d.crumb, href: "/dining" }, { label: r.name }]} />
           </div>
           <Reveal>
             <div className="flex flex-wrap gap-2">
-              <Badge tone="gold">{r.type}</Badge>
+              <Badge tone="gold">{tr(r.type, locale)}</Badge>
               {r.tags?.map((t) => (
-                <Badge key={t} tone="outline" className="!border-white/30 !text-white/80">{t}</Badge>
+                <Badge key={t} tone="outline" className="!border-white/30 !text-white/80">{tr(t, locale)}</Badge>
               ))}
             </div>
-            <p className="mt-4 eyebrow text-gold-soft">{r.cuisine}</p>
+            <p className="mt-4 eyebrow text-gold-soft">{tr(r.cuisine, locale)}</p>
             <h1 className="mt-2 text-white" style={{ fontSize: "var(--text-hero)", lineHeight: "1.02" }}>
               {r.name}
             </h1>
@@ -104,14 +111,14 @@ export default async function RestaurantDetailPage({
           <div className="grid gap-12 lg:grid-cols-3">
             <div className="lg:col-span-2">
               <Reveal>
-                <p className="eyebrow text-clay">L'experience</p>
-                <h2 className="mt-3 text-3xl text-charcoal">Ce qui vous attend</h2>
-                <p className="mt-5 text-lg leading-relaxed text-stone">{r.description}</p>
+                <p className="eyebrow text-clay">{d.expEyebrow}</p>
+                <h2 className="mt-3 text-3xl text-charcoal">{d.expTitle}</h2>
+                <p className="mt-5 text-lg leading-relaxed text-stone">{description}</p>
               </Reveal>
               <Reveal className="mt-12">
                 {r.videoSrc && (
                   <>
-                    <h3 className="mb-5 text-2xl text-charcoal">Video</h3>
+                    <h3 className="mb-5 text-2xl text-charcoal">{d.video}</h3>
                     <div className="overflow-hidden rounded-[var(--radius-xl2)] bg-charcoal shadow-[0_24px_60px_-30px_rgba(19,26,36,0.5)]">
                       <video
                         controls
@@ -121,53 +128,53 @@ export default async function RestaurantDetailPage({
                         className="aspect-video w-full bg-charcoal object-cover"
                       >
                         <source src={r.videoSrc} type="video/mp4" />
-                        Votre navigateur ne prend pas en charge la lecture video.
+                        {d.videoFallback}
                       </video>
                     </div>
                   </>
                 )}
               </Reveal>
               <Reveal className="mt-12">
-                <h3 className="mb-5 text-2xl text-charcoal">Galerie</h3>
+                <h3 className="mb-5 text-2xl text-charcoal">{d.gallery}</h3>
                 <Gallery items={gallery} tone="clay" />
               </Reveal>
               <Reveal className="mt-12">
-                <h3 className="mb-5 text-2xl text-charcoal">Le trouver dans le mall</h3>
+                <h3 className="mb-5 text-2xl text-charcoal">{d.find}</h3>
                 <MapPlaceholder locationLabel={r.locationLabel} floor={r.floor} />
               </Reveal>
             </div>
 
             <aside className="lg:col-span-1">
               <div className="sticky top-[calc(var(--header-h,4.5rem)+1.5rem)] rounded-[var(--radius-xl2)] bg-white p-6 ring-1 ring-charcoal/8">
-                <h3 className="text-xl text-charcoal">Reservation & infos</h3>
+                <h3 className="text-xl text-charcoal">{d.sidebarTitle}</h3>
                 <dl className="mt-4 space-y-4 text-sm">
                   <div className="flex gap-3">
                     <Icon name="utensils" size={18} className="mt-0.5 shrink-0 text-clay" />
-                    <div><dt className="text-stone">Cuisine</dt><dd className="font-medium text-charcoal">{r.cuisine}</dd></div>
+                    <div><dt className="text-stone">{d.cuisine}</dt><dd className="font-medium text-charcoal">{tr(r.cuisine, locale)}</dd></div>
                   </div>
                   <div className="flex gap-3">
                     <Icon name="map-pin" size={18} className="mt-0.5 shrink-0 text-clay" />
-                    <div><dt className="text-stone">Emplacement</dt><dd className="font-medium text-charcoal">{r.locationLabel}</dd></div>
+                    <div><dt className="text-stone">{d.location}</dt><dd className="font-medium text-charcoal">{tr(r.locationLabel, locale)}</dd></div>
                   </div>
                   {r.phone && (
                     <div className="flex gap-3">
                       <Icon name="phone" size={18} className="mt-0.5 shrink-0 text-clay" />
-                      <div><dt className="text-stone">Telephone</dt>
+                      <div><dt className="text-stone">{d.phone}</dt>
                         <dd><a href={`tel:${r.phone.replace(/\s/g, "")}`} className="font-medium text-charcoal link-underline">{r.phone}</a></dd>
                       </div>
                     </div>
                   )}
                   <div className="flex gap-3">
                     <Icon name="clock" size={18} className="mt-0.5 shrink-0 text-clay" />
-                    <div className="w-full"><dt className="mb-2 text-stone">Horaires</dt><dd><HoursList hours={r.openingHours} /></dd></div>
+                    <div className="w-full"><dt className="mb-2 text-stone">{d.hours}</dt><dd><HoursList hours={r.openingHours} /></dd></div>
                   </div>
                 </dl>
                 <div className="mt-5 space-y-2 border-t border-charcoal/8 pt-5">
                   {r.reservationUrl && (
-                    <Button href={r.reservationUrl} variant="primary" icon="phone" className="w-full">Reserver une table</Button>
+                    <Button href={r.reservationUrl} locale={locale} variant="primary" icon="phone" className="w-full">{d.reserve}</Button>
                   )}
                   {r.menuUrl && (
-                    <Button href={r.menuUrl} variant="outline" icon="utensils" className="w-full">Voir le menu</Button>
+                    <Button href={r.menuUrl} locale={locale} variant="outline" icon="utensils" className="w-full">{d.menu}</Button>
                   )}
                 </div>
               </div>
@@ -179,7 +186,7 @@ export default async function RestaurantDetailPage({
       {related.length > 0 && (
         <section className="bg-cream py-20">
           <Container>
-            <h2 className="text-3xl text-charcoal">D'autres adresses a decouvrir</h2>
+            <h2 className="text-3xl text-charcoal">{d.related}</h2>
             <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((x) => (
                 <RestaurantCard key={x.id} restaurant={x} />

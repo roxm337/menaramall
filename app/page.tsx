@@ -17,69 +17,98 @@ import { brands } from "@/lib/data/brands";
 import { restaurants } from "@/lib/data/restaurants";
 import { site } from "@/lib/data/site";
 import { officialMedia } from "@/lib/data/official-media";
+import { getPageText } from "@/lib/i18n-pages";
 
-const experiences: Experience[] = [
-  {
-    title: "Shopping",
-    description:
-      "Plus de 90 enseignes nationales et internationales entre mode, beaute, high-tech et essentiels du quotidien.",
-    href: "/shops",
-    icon: "bag",
-    art: "Interieur shopping premium, sols en pierre polie, lumiere naturelle douce",
-    imageSrc: officialMedia.shoppingFeature,
-    tone: "sand",
-  },
-  {
-    title: "Restaurants",
-    description:
-      "Plus de 17 restaurants et cafes, entre l'energie du Food Court et les instants en terrasse panoramique.",
-    href: "/dining",
-    icon: "utensils",
-    art: "Ambiance cafe lifestyle, table en marbre, cafe et patisseries, lumiere chaleureuse",
-    imageSrc: officialMedia.diningFeature,
-    tone: "clay",
-  },
-  {
-    title: "Kidzo",
-    description:
-      "L'univers magique des enfants vous attend a Kidzo - Menara Mall, pour des jeux et des souvenirs memorables en famille.",
-    href: "/entertainment",
-    icon: "play",
-    art: "Univers Kidzo, enfants joyeux, jeux et couleurs lumineuses",
-    imageSrc: officialMedia.kidzoHero,
-    tone: "brand",
-  },
-  {
-    title: "Decouvrir",
-    description:
-      "Entrez dans Le Souk et explorez l'artisanat marocain, les cadeaux, la beaute et la culture.",
-    href: "/le-souk",
-    icon: "compass",
-    art: "Detail d'artisanat marocain, lanternes en laiton et textiles, lueur ambree",
-    imageSrc: officialMedia.soukHero,
-    tone: "palm",
-  },
-];
-
-export default function HomePage() {
+export default function HomePage({
+  locale = "fr",
+}: {
+  locale?: "fr" | "en" | "ar";
+}) {
+  const pt = getPageText(locale);
+  const experiences: Experience[] =
+    locale === "en"
+      ? [
+          { title: "Shopping", description: "More than 90 national and international brands across fashion, beauty, tech, and everyday essentials.", href: "/shops", icon: "bag", art: "Interieur shopping premium, sols en pierre polie, lumiere naturelle douce", imageSrc: officialMedia.shoppingFeature, tone: "sand" },
+          { title: "Dining", description: "More than 17 restaurants and cafes, from the energy of the Food Court to panoramic terrace moments.", href: "/dining", icon: "utensils", art: "Ambiance cafe lifestyle, table en marbre, cafe et patisseries, lumiere chaleureuse", imageSrc: officialMedia.diningFeature, tone: "clay" },
+          { title: "Kidzo", description: "Kidzo - Menara Mall welcomes families with games, attractions, and memorable moments for children.", href: "/entertainment", icon: "play", art: "Univers Kidzo, enfants joyeux, jeux et couleurs lumineuses", imageSrc: officialMedia.kidzoHero, tone: "brand" },
+          { title: "Discover", description: "Step into The Souk and explore Moroccan crafts, gifts, beauty, and culture.", href: "/le-souk", icon: "compass", art: "Detail d'artisanat marocain, lanternes en laiton et textiles, lueur ambree", imageSrc: officialMedia.soukHero, tone: "palm" },
+        ]
+      : locale === "ar"
+        ? [
+            { title: "التسوق", description: "أكثر من 90 علامة وطنية وعالمية بين الأزياء والجمال والتقنية وضروريات الحياة اليومية.", href: "/shops", icon: "bag", art: "Interieur shopping premium, sols en pierre polie, lumiere naturelle douce", imageSrc: officialMedia.shoppingFeature, tone: "sand" },
+            { title: "المطاعم", description: "أكثر من 17 مطعمًا ومقهى، من حيوية الفود كورت إلى لحظات التراس البانورامي.", href: "/dining", icon: "utensils", art: "Ambiance cafe lifestyle, table en marbre, cafe et patisseries, lumiere chaleureuse", imageSrc: officialMedia.diningFeature, tone: "clay" },
+            { title: "كيدزو", description: "عالم كيدزو السحري ينتظر الأطفال والعائلات مع الألعاب والتجارب والذكريات الجميلة.", href: "/entertainment", icon: "play", art: "Univers Kidzo, enfants joyeux, jeux et couleurs lumineuses", imageSrc: officialMedia.kidzoHero, tone: "brand" },
+            { title: "اكتشف", description: "ادخل إلى السوق واكتشف الحرف المغربية والهدايا والجمال والثقافة.", href: "/le-souk", icon: "compass", art: "Detail d'artisanat marocain, lanternes en laiton et textiles, lueur ambree", imageSrc: officialMedia.soukHero, tone: "palm" },
+          ]
+        : [
+            { title: "Shopping", description: "Plus de 90 enseignes nationales et internationales entre mode, beaute, high-tech et essentiels du quotidien.", href: "/shops", icon: "bag", art: "Interieur shopping premium, sols en pierre polie, lumiere naturelle douce", imageSrc: officialMedia.shoppingFeature, tone: "sand" },
+            { title: "Restaurants", description: "Plus de 17 restaurants et cafes, entre l'energie du Food Court et les instants en terrasse panoramique.", href: "/dining", icon: "utensils", art: "Ambiance cafe lifestyle, table en marbre, cafe et patisseries, lumiere chaleureuse", imageSrc: officialMedia.diningFeature, tone: "clay" },
+            { title: "Kidzo", description: "L'univers magique des enfants vous attend a Kidzo - Menara Mall, pour des jeux et des souvenirs memorables en famille.", href: "/entertainment", icon: "play", art: "Univers Kidzo, enfants joyeux, jeux et couleurs lumineuses", imageSrc: officialMedia.kidzoHero, tone: "brand" },
+            { title: "Decouvrir", description: "Entrez dans Le Souk et explorez l'artisanat marocain, les cadeaux, la beaute et la culture.", href: "/le-souk", icon: "compass", art: "Detail d'artisanat marocain, lanternes en laiton et textiles, lueur ambree", imageSrc: officialMedia.soukHero, tone: "palm" },
+          ];
+  const copy =
+    locale === "en"
+      ? {
+          expEyebrow: "Four ways to experience Menara Mall",
+          expTitle: "Everything Marrakech loves, under one roof",
+          expLede: "Shopping, dining, Kidzo, Le Souk Al Madinah, and essential services in an air-conditioned destination.",
+          browse: "Browse directory",
+          featuredEyebrow: "Featured brands",
+          featuredTitle: "Shops and labels",
+          featuredLede: "The official Menara Mall directory brings together fashion, beauty, tech, services, toys, Kidzo, and Carrefour Market.",
+          allShops: "All shops",
+          diningEyebrow: "Dining favorites",
+          diningTitle: "A table for every moment",
+          diningLede: "The official restaurant and cafe directory covers quick bites, cafes, desserts, world cuisines, and terrace breaks.",
+          allDining: "All restaurants",
+        }
+      : locale === "ar"
+        ? {
+            expEyebrow: "أربع طرق لعيش منارة مول",
+            expTitle: "كل ما تحبه مراكش تحت سقف واحد",
+            expLede: "التسوق والمطاعم وكيدزو والسوق والخدمات الأساسية داخل وجهة مكيفة.",
+            browse: "تصفح الدليل",
+            featuredEyebrow: "علامات مميزة",
+            featuredTitle: "المتاجر والعلامات",
+            featuredLede: "يجمع دليل منارة مول الرسمي الأزياء والجمال والتقنية والخدمات والألعاب وكيدزو وكارفور ماركت.",
+            allShops: "كل المتاجر",
+            diningEyebrow: "مختارات المطاعم",
+            diningTitle: "طاولة لكل لحظة",
+            diningLede: "يضم الدليل الرسمي للمطاعم والمقاهي الوجبات السريعة والمقاهي والحلويات ومطابخ العالم واستراحات التراس.",
+            allDining: "كل المطاعم",
+          }
+        : {
+            expEyebrow: "Quatre facons de vivre Menara Mall",
+            expTitle: "Tout ce que Marrakech aime, sous un meme toit",
+            expLede: "Shopping, restaurants et cafes, Kidzo, Le Souk Al Madinah et services essentiels dans une destination climatisee.",
+            browse: "Parcourir l'annuaire",
+            featuredEyebrow: "Marques a la une",
+            featuredTitle: "Boutiques et enseignes",
+            featuredLede: "L'annuaire officiel Menara Mall rassemble mode, beaute, high-tech, services, jouets, Kidzo et Carrefour Market.",
+            allShops: "Toutes les boutiques",
+            diningEyebrow: "Coups de coeur restauration",
+            diningTitle: "Une table pour chaque moment",
+            diningLede: "L'annuaire officiel des restaurants et cafes propose restauration rapide, cafe, desserts, cuisines du monde et pauses en terrasse.",
+            allDining: "Tous les restaurants",
+          };
   const featuredBrands = brands.filter((b) => b.featured).slice(0, 6);
   const featuredDining = restaurants.filter((r) => r.featured).slice(0, 3);
 
   return (
     <>
       <ScrollProgress />
-      <Hero />
+      <Hero locale={locale} />
 
       {/* Experience cards */}
       <section className="bg-ivory pb-24 pt-16 sm:pt-20 lg:pt-24">
         <Container>
           <SectionHeader
-            eyebrow="Quatre facons de vivre Menara Mall"
-            title="Tout ce que Marrakech aime, sous un meme toit"
-            lede="Shopping, restaurants et cafes, Kidzo, Le Souk Al Madinah et services essentiels dans une destination climatisee."
+            eyebrow={copy.expEyebrow}
+            title={copy.expTitle}
+            lede={copy.expLede}
             action={
               <Button href="/shops" variant="outline" icon="arrow-right">
-                Parcourir l&apos;annuaire
+                {copy.browse}
               </Button>
             }
           />
@@ -99,12 +128,12 @@ export default function HomePage() {
       <section className="bg-cream py-24">
         <Container>
           <SectionHeader
-            eyebrow="Marques a la une"
-            title="Boutiques et enseignes"
-            lede="L'annuaire officiel Menara Mall rassemble mode, beaute, high-tech, services, jouets, Kidzo et Carrefour Market."
+            eyebrow={copy.featuredEyebrow}
+            title={copy.featuredTitle}
+            lede={copy.featuredLede}
             action={
               <Button href="/shops" variant="ghost" icon="arrow-right">
-                Toutes les boutiques
+                {copy.allShops}
               </Button>
             }
           />
@@ -125,12 +154,12 @@ export default function HomePage() {
       <section className="bg-ivory py-24">
         <Container>
           <SectionHeader
-            eyebrow="Coups de coeur restauration"
-            title="Une table pour chaque moment"
-            lede="L'annuaire officiel des restaurants et cafes propose restauration rapide, cafe, desserts, cuisines du monde et pauses en terrasse."
+            eyebrow={copy.diningEyebrow}
+            title={copy.diningTitle}
+            lede={copy.diningLede}
             action={
               <Button href="/dining" variant="ghost" icon="arrow-right">
-                Tous les restaurants
+                {copy.allDining}
               </Button>
             }
           />
@@ -163,25 +192,23 @@ export default function HomePage() {
               </Parallax>
             </Reveal>
             <Reveal delay={0.1}>
-              <Badge tone="brand">Kidzo · Univers enfants</Badge>
+              <Badge tone="brand">{pt.home.kidzo.badge}</Badge>
               <h2
                 className="mt-5 text-balance text-white"
                 style={{ fontSize: "var(--text-title)" }}
               >
-                La ou commencent les petites aventures et les grands sourires
+                {pt.home.kidzo.title}
               </h2>
               <p className="mt-5 max-w-lg text-white/70">
-                L&apos;univers magique des enfants vous attend à Kidzo - Menara
-                Mall: patinoire, cinéma 7D, jeux en réalité virtuelle et Petite
-                Crèche pour les plus jeunes.
+                {pt.home.kidzo.lede}
               </p>
               <ul className="mt-7 grid grid-cols-2 gap-4 text-sm">
                 {(
                   [
-                    { icon: "shield", text: "Jeux surveilles et securises" },
-                    { icon: "sparkles", text: "Attractions et arcade" },
-                    { icon: "heart", text: "Moments a partager en famille" },
-                    { icon: "baby", text: "Espaces adaptes aux tout-petits" },
+                    { icon: "shield", text: pt.home.kidzo.features[0] },
+                    { icon: "sparkles", text: pt.home.kidzo.features[1] },
+                    { icon: "heart", text: pt.home.kidzo.features[2] },
+                    { icon: "baby", text: pt.home.kidzo.features[3] },
                   ] as { icon: IconName; text: string }[]
                 ).map((f) => (
                   <li
@@ -196,11 +223,11 @@ export default function HomePage() {
                 ))}
               </ul>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Button href="/entertainment" variant="brand" icon="arrow-right">
-                  Decouvrir Kidzo
+                <Button href="/entertainment" locale={locale} variant="brand" icon="arrow-right">
+                  {pt.home.kidzo.discover}
                 </Button>
-                <Button href="/contact" variant="light" icon="mail">
-                  Nous contacter
+                <Button href="/contact" locale={locale} variant="light" icon="mail">
+                  {pt.common.contactUs}
                 </Button>
               </div>
             </Reveal>
@@ -213,38 +240,26 @@ export default function HomePage() {
         <Container>
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <Reveal className="order-2 lg:order-1">
-              <p className="eyebrow text-clay">Le Souk</p>
+              <p className="eyebrow text-clay">{pt.home.souk.eyebrow}</p>
               <h2
                 className="mt-4 text-balance text-charcoal"
                 style={{ fontSize: "var(--text-title)" }}
               >
-                Une experience marocaine au coeur du mall
+                {pt.home.souk.title}
               </h2>
               <p className="mt-5 max-w-lg text-stone">
-                Decouvrez un univers soigneusement compose de savoir-faire,
-                parfums, mode, beaute et details traditionnels inspires de
-                Marrakech. Le Souk rassemble l&apos;esprit artisanal de la ville,
-                entre textiles tisses main, laiton, cuir et senteurs de rose
-                et de fleur d&apos;oranger, dans une promenade elegante eclairee
-                aux lanternes.
+                {pt.home.souk.lede}
               </p>
               <div className="mt-8 flex flex-wrap gap-2">
-                {[
-                  "Artisanat",
-                  "Parfums",
-                  "Mode traditionnelle",
-                  "Rituels beaute",
-                  "Cadeaux",
-                  "Decoration",
-                ].map((t) => (
+                {pt.home.souk.tags.map((t) => (
                   <Badge key={t} tone="outline">
                     {t}
                   </Badge>
                 ))}
               </div>
               <div className="mt-8">
-                <Button href="/le-souk" variant="primary" icon="arrow-right">
-                  Decouvrir Le Souk
+                <Button href="/le-souk" locale={locale} variant="primary" icon="arrow-right">
+                  {pt.home.souk.discover}
                 </Button>
               </div>
             </Reveal>
@@ -287,9 +302,9 @@ export default function HomePage() {
         <Container>
           <SectionHeader
             align="center"
-            eyebrow="@menaramall"
-            title="Moments voles a Menara Mall"
-            lede="Identifiez votre visite avec #MenaraMall pour apparaitre dans notre selection."
+            eyebrow={pt.home.gallery.eyebrow}
+            title={pt.home.gallery.title}
+            lede={pt.home.gallery.lede}
           />
           <RevealGroup
             stagger={0.05}
@@ -321,7 +336,7 @@ export default function HomePage() {
               variant="outline"
               icon="instagram"
             >
-              Suivre @menaramall
+              {pt.home.gallery.follow}
             </Button>
           </div>
         </Container>

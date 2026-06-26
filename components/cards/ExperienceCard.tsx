@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArtImage } from "@/components/ui/ArtImage";
 import { Icon, type IconName } from "@/components/ui/Icon";
-import { getLocaleFromPathname, localizeHref } from "@/lib/i18n";
+import { getLocaleFromPathname, getUiText, localizeHref } from "@/lib/i18n";
 
 export interface Experience {
   title: string;
@@ -18,6 +18,7 @@ export interface Experience {
 
 export function ExperienceCard({ exp, large = false }: { exp: Experience; large?: boolean }) {
   const locale = getLocaleFromPathname(usePathname());
+  const t = getUiText(locale);
   const accentClass = exp.tone === "brand" ? "text-brand-soft" : "text-gold-soft";
   return (
     <Link
@@ -42,7 +43,7 @@ export function ExperienceCard({ exp, large = false }: { exp: Experience; large?
           {exp.description}
         </p>
         <span className={`mt-4 inline-flex items-center gap-1.5 text-sm font-medium ${accentClass}`}>
-          {locale === "en" ? "Explore" : locale === "ar" ? "استكشف" : "Explorer"}
+          {t.common.explore}
           <Icon name="arrow-right" size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
         </span>
       </div>

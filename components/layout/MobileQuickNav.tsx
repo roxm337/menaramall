@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Icon, type IconName } from "@/components/ui/Icon";
-import { getUiText, localizeHref, type Locale } from "@/lib/i18n";
+import { getLocaleFromPathname, getUiText, localizeHref, stripLocalePrefix, type Locale } from "@/lib/i18n";
 
 const items: { label: string; href: string; icon: IconName }[] = [
   { label: "Boutiques", href: "/shops", icon: "bag" },
@@ -14,15 +14,17 @@ const items: { label: string; href: string; icon: IconName }[] = [
 ];
 
 /** Sticky bottom quick-navigation for mobile. */
-export function MobileQuickNav({ locale = "fr" }: { locale?: Locale }) {
+export function MobileQuickNav({ locale }: { locale?: Locale }) {
   const pathname = usePathname();
-  const t = getUiText(locale);
+  const activeLocale = locale ?? getLocaleFromPathname(pathname);
+  const t = getUiText(activeLocale);
   const labels = {
     "/shops": t.nav.shops,
-    "/dining": locale === "en" ? "Food" : locale === "ar" ? "مطاعم" : "Resto",
+    "/dining": activeLocale === "en" ? "Food" : activeLocale === "ar" ? "مطاعم" : "Resto",
     "/entertainment": t.nav.entertainment,
-    "/le-souk": locale === "en" ? "Souk" : locale === "ar" ? "سوق" : "Souk",
+    "/le-souk": activeLocale === "en" ? "Souk" : activeLocale === "ar" ? "سوق" : "Souk",
   } as const;
+  const path = stripLocalePrefix(pathname);
   return (
     <nav
       aria-label={t.nav.quickNav}
@@ -31,11 +33,11 @@ export function MobileQuickNav({ locale = "fr" }: { locale?: Locale }) {
     >
       <ul className="mx-auto flex max-w-md items-stretch justify-around">
         {items.map((item) => {
-          const active = pathname.startsWith(item.href);
+          const active = path.startsWith(item.href);
           return (
             <li key={item.href} className="flex-1">
               <Link
-                href={localizeHref(item.href, locale)}
+                href={localizeHref(item.href, activeLocale)}
                 className={cn(
                   "flex flex-col items-center gap-1 py-2.5 text-[0.65rem] font-medium transition-colors",
                   active ? "text-clay" : "text-stone",

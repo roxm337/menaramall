@@ -11,30 +11,41 @@ import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { getLocaleFromPathname, getUiText, localizeHref } from "@/lib/i18n";
 
-const FILTERS = ["Tous", "Boutique", "Restaurant", "Offre"] as const;
-
 export function SearchResults() {
   const params = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
   const locale = getLocaleFromPathname(pathname);
   const t = getUiText(locale);
+  const filters = [
+    t.directory.all,
+    locale === "en" ? "Shop" : locale === "ar" ? "متجر" : "Boutique",
+    locale === "en" ? "Restaurant" : locale === "ar" ? "مطعم" : "Restaurant",
+    locale === "en" ? "Offer" : locale === "ar" ? "عرض" : "Offre",
+  ] as const;
   const initial = params.get("q") ?? "";
   const [query, setQuery] = useState(initial);
-  const [filter, setFilter] = useState<(typeof FILTERS)[number]>("Tous");
+  const [filter, setFilter] = useState<(typeof filters)[number]>(t.directory.all);
 
   // Keep the input in sync when the ?q= param changes (e.g. via the overlay).
   // eslint-disable-next-line react-hooks/set-state-in-effect -- mirror URL param into editable input
   useEffect(() => setQuery(initial), [initial]);
 
-  const all = useMemo(() => searchAll(query), [query]);
-  const results = filter === "Tous" ? all : all.filter((r) => r.type === filter);
+  const all = useMemo(() => searchAll(query, locale), [query, locale]);
+  const results =
+    filter === t.directory.all
+      ? all
+      : all.filter((r) =>
+          (filter === filters[1] && r.type === "Boutique") ||
+          (filter === filters[2] && r.type === "Restaurant") ||
+          (filter === filters[3] && r.type === "Offre"),
+        );
 
   const counts = useMemo(() => {
-    const c: Record<string, number> = { Tous: all.length };
+    const c: Record<string, number> = { [t.directory.all]: all.length };
     for (const r of all) c[r.type] = (c[r.type] ?? 0) + 1;
     return c;
-  }, [all]);
+  }, [all, t.directory.all]);
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,9 +69,10 @@ export function SearchResults() {
       {query && (
         <>
           <div className="mt-6 flex flex-wrap items-center gap-2">
-            {FILTERS.map((f) => {
-              const n = counts[f] ?? 0;
-              const disabled = f !== "Tous" && n === 0;
+            {filters.map((f, index) => {
+              const key = index === 0 ? t.directory.all : index === 1 ? "Boutique" : index === 2 ? "Restaurant" : "Offre";
+              const n = counts[key] ?? 0;
+              const disabled = f !== t.directory.all && n === 0;
               return (
                 <button
                   key={f}
@@ -81,8 +93,13 @@ export function SearchResults() {
           </div>
 
           <p className="mt-6 text-sm text-stone">
-            <span className="font-medium text-charcoal">{results.length}</span> resultat
-            {results.length === 1 ? "" : "s"} pour &ldquo;{query}&rdquo;
+            <span className="font-medium text-charcoal">{results.length}</span>{" "}
+            {locale === "en"
+              ? `result${results.length === 1 ? "" : "s"}`
+              : locale === "ar"
+                ? "نتيجة"
+                : `resultat${results.length === 1 ? "" : "s"}`}{" "}
+            {locale === "en" ? "for" : locale === "ar" ? "لـ" : "pour"} &ldquo;{query}&rdquo;
           </p>
 
           <div className="mt-6">
@@ -107,7 +124,13 @@ export function SearchResults() {
                         <span className="block truncate font-display text-lg text-charcoal">{r.title}</span>
                         <span className="block truncate text-sm text-stone">{r.subtitle}</span>
                       </span>
-                      <Badge tone="outline">{r.type}</Badge>
+                      <Badge tone="outline">
+                        {r.type === "Boutique"
+                          ? filters[1]
+                          : r.type === "Restaurant"
+                            ? filters[2]
+                            : filters[3]}
+                      </Badge>
                       <Icon name="arrow-right" size={18} className="text-clay" />
                     </Link>
                   </li>

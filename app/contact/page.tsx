@@ -6,6 +6,8 @@ import { ContactForm } from "@/components/forms/ContactForm";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { officialMedia } from "@/lib/data/official-media";
 import { site } from "@/lib/data/site";
+import { getPageText } from "@/lib/i18n-pages";
+import type { Locale } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: "Contact — Parlons de votre demande",
@@ -23,17 +25,22 @@ const socials: { name: IconName; href: string; label: string }[] = [
 
 const mapSrc = `https://www.google.com/maps?q=${site.geo.lat},${site.geo.lng}(${encodeURIComponent(site.name)})&z=15&output=embed`;
 
-export default function ContactPage() {
+export default function ContactPage({
+  locale = "fr",
+}: {
+  locale?: Locale;
+}) {
+  const ct = getPageText(locale).contact;
   return (
     <>
       <PageHero
-        eyebrow="Contact"
-        title="Nous sommes a votre ecoute"
-        lede="Que vous prepariez une visite, envisagiez un partenariat ou ayez une question, l'equipe Menara Mall est la pour vous aider."
+        eyebrow={ct.heroEyebrow}
+        title={ct.heroTitle}
+        lede={ct.heroLede}
         art="Entree chaleureuse du mall a l'heure doree, detail de conciergerie"
         imageSrc={officialMedia.homeHero}
         tone="clay"
-        crumbs={[{ label: "Contact" }]}
+        crumbs={[{ label: ct.crumb }]}
       />
 
       <section className="bg-ivory py-16 sm:py-20">
@@ -42,17 +49,17 @@ export default function ContactPage() {
             {/* Info column */}
             <div className="lg:col-span-2">
               <Reveal>
-                <p className="eyebrow text-clay">Entrer en contact</p>
-                <h2 className="mt-3 text-3xl text-charcoal">Joignez directement notre equipe</h2>
+                <p className="eyebrow text-clay">{ct.infoEyebrow}</p>
+                <h2 className="mt-3 text-3xl text-charcoal">{ct.infoTitle}</h2>
                 <p className="mt-4 text-stone">
-                  Choisissez le type de demande adapte ou utilisez les coordonnees ci-dessous. Nous repondons generalement sous deux jours ouvrables.
+                  {ct.infoPara}
                 </p>
 
                 <ul className="mt-8 space-y-5">
                   <li className="flex gap-4">
                     <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-clay/10 text-clay"><Icon name="map-pin" size={20} /></span>
                     <div>
-                      <p className="text-sm text-stone">Adresse</p>
+                      <p className="text-sm text-stone">{ct.address}</p>
                       <address className="not-italic font-medium text-charcoal">
                         {site.address.street}, {site.address.city}
                       </address>
@@ -62,7 +69,7 @@ export default function ContactPage() {
                     <li className="flex gap-4">
                       <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-clay/10 text-clay"><Icon name="phone" size={20} /></span>
                       <div>
-                        <p className="text-sm text-stone">Telephone</p>
+                        <p className="text-sm text-stone">{ct.phone}</p>
                         <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="font-medium text-charcoal link-underline">{site.phone}</a>
                       </div>
                     </li>
@@ -70,14 +77,14 @@ export default function ContactPage() {
                   <li className="flex gap-4">
                     <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-clay/10 text-clay"><Icon name="mail" size={20} /></span>
                     <div>
-                      <p className="text-sm text-stone">E-mail</p>
+                      <p className="text-sm text-stone">{ct.email}</p>
                       <a href={`mailto:${site.email}`} className="font-medium text-charcoal link-underline">{site.email}</a>
                     </div>
                   </li>
                 </ul>
 
                 <div className="mt-8">
-                  <p className="text-sm text-stone">Suivez-nous</p>
+                  <p className="text-sm text-stone">{ct.follow}</p>
                   <div className="mt-3 flex gap-2">
                     {socials.map((s) => (
                       <a
@@ -97,7 +104,7 @@ export default function ContactPage() {
                 <div className="mt-8 overflow-hidden rounded-[var(--radius-xl2)] ring-1 ring-charcoal/10">
                   <iframe
                     src={mapSrc}
-                    title={`Carte montrant ${site.name}`}
+                    title={`${ct.mapTitle} ${site.name}`}
                     className="aspect-video w-full"
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
